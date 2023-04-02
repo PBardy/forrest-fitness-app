@@ -1,1 +1,72 @@
-<p>settings works!</p>
+<ion-content class="ion-padding" fullscreen>
+  <header class="flex flex-col items-center gap-4 py-8">
+    <ion-thumbnail class="w-16 h-16 rounded-full">
+      <fa-icon class="text-primary text-2xl" icon="cog"></fa-icon>
+    </ion-thumbnail>
+    <div clas="flex flex-col items-center text-center ">
+      <h5 class="font-bold mb-1">Settings</h5>
+    </div>
+  </header>
+  <main class="max-h-[62vh] overflow-hidden">
+    <article class="flex flex-col gap-4">
+      <ion-list class="rounded-3xl">
+        <ion-list-header>
+          <div class="text-primary w-full px-4">Events</div>
+        </ion-list-header>
+        <ion-item button detail>
+          <ion-label>
+            <span class="text-sm">Alert</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">5 mins before</span>
+          </ion-label>
+        </ion-item>
+        <ion-item button detail>
+          <ion-label>
+            <span class="text-sm">Repeat</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">Weekly</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-list class="rounded-3xl" lines="none">
+        <ion-list-header>
+          <div class="text-primary w-full px-4">Units</div>
+        </ion-list-header>
+        <ion-item button detail>
+          <ion-label>
+            <span class="text-sm">Height</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">Centimetres</span>
+          </ion-label>
+        </ion-item>
+        <ion-item button detail>
+          <ion-label>
+            <span class="text-sm">Weight</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">Kilograms</span>
+          </ion-label>
+        </ion-item>
+        <ion-item button detail>
+          <ion-label>
+            <span class="text-sm">Distance</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">Kilometres</span>
+          </ion-label>
+        </ion-item>
+        <ion-item button detail>
+          <ion-label>
+            <span class="text-sm">Energy</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">Cal</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </article>
+  </main>
+</ion-content>

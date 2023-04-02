@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IonicModule, RouterModule, FontAwesomeModule],
   templateUrl: './settings.component.html',
-  styles: [
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsComponent {
-
-}
+export class SettingsComponent {}

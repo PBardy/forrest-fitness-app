@@ -60,6 +60,7 @@ export const routes: Route[] = [
       },
       {
         path: 'settings',
+        component: TabsComponent,
         children: [{ path: 'view', component: SettingsComponent }],
       },
     ],
@@ -81,5 +82,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/app/profile/view', pathMatch: 'full' },
+  { path: '', redirectTo: '/app/settings/view', pathMatch: 'full' },
 ];
