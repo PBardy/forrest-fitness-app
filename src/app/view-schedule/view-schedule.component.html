@@ -7,10 +7,7 @@
 <ion-content fullscreen>
   <main class="relative">
     <aside>
-      <ion-datetime
-        value="2023-04-02T19:22:45.865Z"
-        presentation="date"
-      ></ion-datetime>
+      <ion-datetime presentation="date"></ion-datetime>
     </aside>
     <article>
       <ion-modal
@@ -103,4 +100,9 @@
       </ion-modal>
     </article>
   </main>
+  <ion-fab class="bottom-4" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" routerLink="/app/events/new">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
