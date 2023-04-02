@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-view-schedule',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IonicModule, FontAwesomeModule, RouterModule],
   templateUrl: './view-schedule.component.html',
-  styles: [
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ViewScheduleComponent {
-
-}
+export class ViewScheduleComponent {}
