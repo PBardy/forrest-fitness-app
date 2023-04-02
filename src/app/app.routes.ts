@@ -34,6 +34,7 @@ export const routes: Route[] = [
       },
       {
         path: 'activities',
+        component: TabsComponent,
         children: [
           { path: 'new', component: AddActivityComponent },
           { path: 'record', component: RecordActivityComponent },
@@ -82,5 +83,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/app/settings/view', pathMatch: 'full' },
+  { path: '', redirectTo: '/app/activities/all', pathMatch: 'full' },
 ];

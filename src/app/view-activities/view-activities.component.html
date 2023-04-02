@@ -1,1 +1,172 @@
-<p>view-activities works!</p>
+<ion-header class="ion-no-border" translucent>
+  <ion-toolbar class="bg-transparent">
+    <ion-title class="text-center">Activities</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <main class="max-h-[80.5vh] overflow-hidden">
+    <article class="flex flex-col gap-4">
+      <ion-list class="py-0 bg-transparent" lines="none">
+        <ion-list-header class="px-4 mb-2 bg-step100">
+          <fa-icon class="text-primary" icon="calendar"></fa-icon>
+          <span class="font-bold pl-2">
+            {{ "2023-04-01T23:00:00.000Z" | date }}
+          </span>
+        </ion-list-header>
+        <ion-item class="bg-transparent">
+          <ion-thumbnail class="rounded-full h-12 w-12">
+            <fa-icon class="text-primary" icon="dumbbell"></fa-icon>
+          </ion-thumbnail>
+          <ion-label class="px-4 py-2">
+            <span class="font-bold text-sm">Weight Lifting</span>
+            <div class="flex gap-2">
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="heart"></fa-icon>
+                <span class="text-medium">10 pts</span>
+              </div>
+              <div class="text-medium">&middot;</div>
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="fire"></fa-icon>
+                <span class="text-medium">75 cal</span>
+              </div>
+            </div>
+          </ion-label>
+          <ion-label slot="end">
+            <div class="text-primary text-xs">17:15</div>
+            <div class="text-medium text-xs">17:45</div>
+          </ion-label>
+        </ion-item>
+        <ion-item class="bg-transparent">
+          <ion-thumbnail class="rounded-full h-12 w-12">
+            <fa-icon class="text-primary" icon="water"></fa-icon>
+          </ion-thumbnail>
+          <ion-label class="px-4 py-2">
+            <span class="font-bold text-sm">Rowing at the Gym</span>
+            <div class="flex gap-2">
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="heart"></fa-icon>
+                <span class="text-medium">15 pts</span>
+              </div>
+              <div class="text-medium">&middot;</div>
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="fire"></fa-icon>
+                <span class="text-medium">150 cal</span>
+              </div>
+            </div>
+          </ion-label>
+          <ion-label slot="end">
+            <div class="text-primary text-xs">17:45</div>
+            <div class="text-medium text-xs">18:02</div>
+          </ion-label>
+        </ion-item>
+        <ion-item class="bg-transparent">
+          <ion-thumbnail class="rounded-full h-12 w-12">
+            <fa-icon class="text-primary" icon="walking"></fa-icon>
+          </ion-thumbnail>
+          <ion-label class="px-4 py-2">
+            <span class="font-bold text-sm">Walking Home</span>
+            <div class="flex gap-2">
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="heart"></fa-icon>
+                <span class="text-medium">40 pts</span>
+              </div>
+              <div class="text-medium">&middot;</div>
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="fire"></fa-icon>
+                <span class="text-medium">150 cal</span>
+              </div>
+            </div>
+          </ion-label>
+          <ion-label slot="end">
+            <div class="text-primary text-xs">18:05</div>
+            <div class="text-medium text-xs">19:00</div>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list class="py-0 bg-transparent" lines="none">
+        <ion-list-header class="px-4 mb-2 bg-step100">
+          <fa-icon class="text-primary" icon="calendar"></fa-icon>
+          <span class="font-bold pl-2">
+            {{ "2023-03-25T23:00:00.000Z" | date }}
+          </span>
+        </ion-list-header>
+        <ion-item class="bg-transparent">
+          <ion-thumbnail class="rounded-full h-12 w-12">
+            <fa-icon class="text-primary" icon="dumbbell"></fa-icon>
+          </ion-thumbnail>
+          <ion-label class="px-4 py-2">
+            <span class="font-bold text-sm">Weight Lifting</span>
+            <div class="flex gap-2">
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="heart"></fa-icon>
+                <span class="text-medium">10 pts</span>
+              </div>
+              <div class="text-medium">&middot;</div>
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="fire"></fa-icon>
+                <span class="text-medium">75 cal</span>
+              </div>
+            </div>
+          </ion-label>
+          <ion-label slot="end">
+            <div class="text-primary text-xs">17:15</div>
+            <div class="text-medium text-xs">17:45</div>
+          </ion-label>
+        </ion-item>
+        <ion-item class="bg-transparent">
+          <ion-thumbnail class="rounded-full h-12 w-12">
+            <fa-icon class="text-primary" icon="water"></fa-icon>
+          </ion-thumbnail>
+          <ion-label class="px-4 py-2">
+            <span class="font-bold text-sm">Rowing at the Gym</span>
+            <div class="flex gap-2">
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="heart"></fa-icon>
+                <span class="text-medium">15 pts</span>
+              </div>
+              <div class="text-medium">&middot;</div>
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="fire"></fa-icon>
+                <span class="text-medium">150 cal</span>
+              </div>
+            </div>
+          </ion-label>
+          <ion-label slot="end">
+            <div class="text-primary text-xs">17:45</div>
+            <div class="text-medium text-xs">18:02</div>
+          </ion-label>
+        </ion-item>
+        <ion-item class="bg-transparent">
+          <ion-thumbnail class="rounded-full h-12 w-12">
+            <fa-icon class="text-primary" icon="walking"></fa-icon>
+          </ion-thumbnail>
+          <ion-label class="px-4 py-2">
+            <span class="font-bold text-sm">Walking Home</span>
+            <div class="flex gap-2">
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="heart"></fa-icon>
+                <span class="text-medium">40 pts</span>
+              </div>
+              <div class="text-medium">&middot;</div>
+              <div class="flex items-center gap-1 text-xs">
+                <fa-icon class="text-primary" icon="fire"></fa-icon>
+                <span class="text-medium">150 cal</span>
+              </div>
+            </div>
+          </ion-label>
+          <ion-label slot="end">
+            <div class="text-primary text-xs">18:05</div>
+            <div class="text-medium text-xs">19:00</div>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </article>
+  </main>
+  <ion-fab class="bottom-4" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" routerLink="/app/activities/new">
+      <ion-icon class="text-light" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
