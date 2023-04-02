@@ -1,1 +1,151 @@
-<p>add-event works!</p>
+<ion-content class="ion-padding" fullscreen>
+  <header class="flex flex-col items-center gap-3 py-8">
+    <ion-thumbnail class="w-16 h-16 rounded-full">
+      <fa-icon class="text-primary text-2xl" icon="calendar-plus"></fa-icon>
+    </ion-thumbnail>
+    <h5 class="font-bold">Add Event</h5>
+  </header>
+  <main>
+    <form class="flex flex-col gap-4">
+      <ion-list class="rounded-3xl">
+        <ion-item>
+          <ion-input class="text-xl" placeholder="Title"></ion-input>
+        </ion-item>
+        <ion-accordion-group>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>
+                <span class="text-medium">Activity</span>
+              </ion-label>
+            </ion-item>
+            <ion-radio-group slot="content">
+              <ion-item>
+                <ion-label>
+                  <span>Aerobics</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <span>Calisthenics</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <span>Circuit Training</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <span>Rowing</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <span>Weight Lifting</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <span>Yoga</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-accordion>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>
+                <span class="text-medium">Start</span>
+              </ion-label>
+            </ion-item>
+            <div slot="content">
+              <ion-datetime presentation="time" preferWheel></ion-datetime>
+            </div>
+          </ion-accordion>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>
+                <span class="text-medium">End</span>
+              </ion-label>
+            </ion-item>
+            <div slot="content">
+              <ion-datetime presentation="time" preferWheel></ion-datetime>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-list>
+      <ion-list class="rounded-3xl">
+        <ion-accordion-group>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>
+                <span class="text-medium">Alert</span>
+              </ion-label>
+            </ion-item>
+            <ion-radio-group slot="content">
+              <ion-item>
+                <ion-label>
+                  <span>No alert</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <span>5 mins before</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <span>10 mins before</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <span>30 mins before</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>
+                  <span>1 hour before</span>
+                </ion-label>
+                <ion-radio></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-accordion>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>
+                <span class="text-medium">Repeat</span>
+              </ion-label>
+            </ion-item>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-list>
+    </form>
+  </main>
+</ion-content>
+
+<ion-footer class="ion-padding bg-[#222428aa]">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button color="danger" fill="clear" expand="full" shape="round">
+          <span>Cancel</span>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="primary" fill="clear" expand="full" shape="round">
+          <span>Confirm</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

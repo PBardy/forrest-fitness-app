@@ -26,10 +26,10 @@ import { TabsComponent } from './tabs/tabs.component';
 export const routes: Route[] = [
   {
     path: 'app',
-    component: TabsComponent,
     children: [
       {
         path: 'summary',
+        component: TabsComponent,
         children: [{ path: 'view', component: ViewSummaryComponent }],
       },
       {
@@ -46,7 +46,11 @@ export const routes: Route[] = [
         children: [
           { path: 'new', component: AddEventComponent },
           { path: 'view', component: ViewEventComponent },
-          { path: 'schedule', component: ViewScheduleComponent },
+          {
+            path: 'schedule',
+            component: TabsComponent,
+            children: [{ path: '', component: ViewScheduleComponent }],
+          },
         ],
       },
       {
@@ -76,5 +80,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/app/events/schedule', pathMatch: 'full' },
+  { path: '', redirectTo: '/app/events/new', pathMatch: 'full' },
 ];
