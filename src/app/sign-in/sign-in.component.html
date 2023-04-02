@@ -1,1 +1,44 @@
-<p>sign-in works!</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sign In</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" fullscreen>
+  <main class="flex flex-col h-full">
+    <aside class="flex items-center justify-center flex-1">
+      <fa-icon class="text-primary text-7xl" icon="lock"></fa-icon>
+    </aside>
+    <article class="flex flex-col">
+      <h6 class="font-bold text-center">Sign In with Email</h6>
+      <form class="flex flex-col gap-4 py-4">
+        <ion-item class="rounded-full">
+          <ion-input class="text-sm" placeholder="Email"></ion-input>
+          <fa-icon slot="end" icon="envelope"></fa-icon>
+        </ion-item>
+        <ion-item class="rounded-full">
+          <ion-input placeholder="Password"></ion-input>
+          <fa-icon slot="end" icon="lock"></fa-icon>
+        </ion-item>
+      </form>
+      <ion-button shape="round" expand="full">Continue</ion-button>
+      <section class="text-center py-4">
+        <a>Forgot password?</a>
+      </section>
+      <ion-button color="dark" shape="round" expand="full">
+        <fa-icon [icon]="['fab', 'google']"></fa-icon>
+        <span class="pl-2">Continue with Google</span>
+      </ion-button>
+    </article>
+  </main>
+</ion-content>
+
+<ion-footer class="ion-padding">
+  <p class="text-center leading-relaxed text-sm">
+    By continuing you agree to the <a>Terms of Service</a> and the
+    <a>Privacy Policy</a>.
+  </p>
+</ion-footer>
