@@ -1,1 +1,87 @@
-<p>view-summary works!</p>
+<ion-header class="ion-no-border" translucent>
+  <ion-toolbar class="bg-transparent">
+    <ion-title class="text-center">Summary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <main class="max-h-[80.5vh] overflow-hidden">
+    <article class="flex flex-col gap-8">
+      <section class="ion-padding">
+        <ion-item class="p-0 text-sm text-primary" color="none" lines="none">
+          <ion-select value="week" interface="action-sheet">
+            <ion-select-option value="today">
+              <span>Today</span>
+            </ion-select-option>
+            <ion-select-option value="week">
+              <span>This week</span>
+            </ion-select-option>
+            <ion-select-option value="month">
+              <span>This month</span>
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="flex items-center justify-center">
+          <div class="rounded-full w-36 h-36 border-4 border-primary">
+            <div class="grid place-items-center w-full h-full">
+              <span class="font-bold text-2xl text-primary">100%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="ion-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="flex flex-col items-center">
+              <h4 class="font-bold text-primary">300</h4>
+              <span class="text-medium text-sm">mins</span>
+            </ion-col>
+            <ion-col class="flex flex-col items-center">
+              <h4 class="font-bold text-primary">10.50</h4>
+              <span class="text-medium text-sm">km</span>
+            </ion-col>
+            <ion-col class="flex flex-col items-center">
+              <h4 class="font-bold text-primary">500</h4>
+              <span class="text-medium text-sm">cal</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </section>
+      <section>
+        <ion-list class="py-0 rounded-t-3xl" color="none">
+          <ion-list-header>
+            <ion-label class="px-4 text-center">
+              <span class="font-semibold text-primary">Alerts</span>
+            </ion-label>
+          </ion-list-header>
+          <ion-item button detail>
+            <ion-thumbnail class="rounded-full">
+              <fa-icon class="text-2xl text-primary" icon="thumbs-up"></fa-icon>
+            </ion-thumbnail>
+            <ion-label class="ion-text-wrap pl-4 py-2">
+              <span class="font-bold text-sm text-dark">Weekly target</span>
+              <p>
+                <span class="leading-tight text-xs">
+                  You successfully met the WHO recommendation this week.
+                </span>
+              </p>
+            </ion-label>
+          </ion-item>
+          <ion-item button detail>
+            <ion-thumbnail class="rounded-full">
+              <fa-icon class="text-2xl text-primary" icon="bell"></fa-icon>
+            </ion-thumbnail>
+            <ion-label class="ion-text-wrap py-2 pl-4">
+              <span class="font-bold text-sm text-dark">Rowing (12:45pm)</span>
+              <p>
+                <span class="leading-tight text-xs">
+                  Don't forget to bring a towel!
+                </span>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </section>
+    </article>
+  </main>
+</ion-content>

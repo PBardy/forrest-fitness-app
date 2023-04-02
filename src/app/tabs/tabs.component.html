@@ -1,1 +1,23 @@
-<p>tabs works!</p>
+<ion-content fullscreen>
+  <ion-router-outlet></ion-router-outlet>
+  <ion-tabs>
+    <ion-tab-bar class="border-t border-step100" slot="bottom">
+      <ion-tab-button tab="summary">
+        <ion-icon name="home"></ion-icon>
+        <span>Home</span>
+      </ion-tab-button>
+      <ion-tab-button tab="activities">
+        <ion-icon name="list"></ion-icon>
+        <span>Journal</span>
+      </ion-tab-button>
+      <ion-tab-button tab="events">
+        <ion-icon name="calendar"></ion-icon>
+        <span>Schedule</span>
+      </ion-tab-button>
+      <ion-tab-button tab="profile">
+        <ion-icon name="person"></ion-icon>
+        <span>Profile</span>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

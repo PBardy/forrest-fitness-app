@@ -21,10 +21,12 @@ import { ViewEventComponent } from './view-event/view-event.component';
 import { ViewScheduleComponent } from './view-schedule/view-schedule.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
+import { TabsComponent } from './tabs/tabs.component';
 
 export const routes: Route[] = [
   {
     path: 'app',
+    component: TabsComponent,
     children: [
       {
         path: 'summary',
@@ -74,5 +76,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/onboarding/step1', pathMatch: 'full' },
+  { path: '', redirectTo: '/app/summary/view', pathMatch: 'full' },
 ];
