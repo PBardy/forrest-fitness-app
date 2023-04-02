@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         primary: "var(--ion-color-primary)",
+        primary_tint: "var(--ion-color-primary-tint)",
         secondary: "var(--ion-color-secondary)",
         tertiary: "var(--ion-color-tertiary)",
         success: "var(--ion-color-success)",

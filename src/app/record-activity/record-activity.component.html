@@ -1,1 +1,51 @@
-<p>record-activity works!</p>
+<ion-content class="ion-padding" fullscreen>
+  <header class="flex flex-col items-center gap-3 py-8">
+    <ion-thumbnail class="w-16 h-16 rounded-full">
+      <fa-icon class="text-primary text-2xl" icon="check"></fa-icon>
+    </ion-thumbnail>
+    <h5 class="font-bold">Recorded Workout</h5>
+  </header>
+  <main class="flex h-full items-center justify-center max-h-[61vh]">
+    <article class="flex flex-col items-center gap-8">
+      <section class="flex flex-col items-center gap-2">
+        <h5 class="text-medium">Rowing</h5>
+        <h1 class="text-primary text-4xl font-semibold">17:34.09</h1>
+      </section>
+      <section>
+        <ion-grid>
+          <ion-row>
+            <ion-col class="flex flex-col items-center px-4">
+              <span class="text-primary_tint font-semibold text-xl">15.0</span>
+              <span class="text-medium text-xs">pts</span>
+            </ion-col>
+            <ion-col class="flex flex-col items-center px-4">
+              <span class="text-primary_tint font-semibold text-xl">5.50</span>
+              <span class="text-medium text-xs">km</span>
+            </ion-col>
+            <ion-col class="flex flex-col items-center px-4">
+              <span class="text-primary_tint font-semibold text-xl">250</span>
+              <span class="text-medium text-xs">cal</span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </section>
+    </article>
+  </main>
+</ion-content>
+
+<ion-footer class="ion-padding bg-[#222428aa]">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button color="danger" fill="clear" expand="full" shape="round">
+          <span>Discard</span>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="primary" fill="clear" expand="full" shape="round">
+          <span>Save</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
