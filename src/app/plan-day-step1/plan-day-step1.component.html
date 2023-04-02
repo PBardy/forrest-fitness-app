@@ -1,0 +1,28 @@
+<ion-content class="ion-padding" fullscreen>
+  <header class="flex flex-col items-center gap-3 py-8">
+    <ion-thumbnail class="w-16 h-16 rounded-full">
+      <fa-icon class="text-primary text-2xl" icon="calendar-day"></fa-icon>
+    </ion-thumbnail>
+    <h5 class="font-bold">Plan a Day</h5>
+  </header>
+  <main>
+    <ion-datetime presentation="date"></ion-datetime>
+  </main>
+</ion-content>
+
+<ion-footer class="ion-padding bg-[#222428aa]">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button color="danger" fill="clear" expand="full" shape="round">
+          <span>Cancel</span>
+        </ion-button>
+      </ion-col>
+      <ion-col routerLink="/app/events/plan/day/step2">
+        <ion-button color="primary" fill="clear" expand="full" shape="round">
+          <span>Next</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

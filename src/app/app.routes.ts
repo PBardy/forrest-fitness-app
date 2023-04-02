@@ -22,6 +22,9 @@ import { ViewScheduleComponent } from './view-schedule/view-schedule.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TabsComponent } from './tabs/tabs.component';
+import { PlanDayComponent } from './plan-day/plan-day.component';
+import { PlanDayStep1Component } from './plan-day-step1/plan-day-step1.component';
+import { PlanDayStep2Component } from './plan-day-step2/plan-day-step2.component';
 
 export const routes: Route[] = [
   {
@@ -47,6 +50,19 @@ export const routes: Route[] = [
         children: [
           { path: 'new', component: AddEventComponent },
           { path: 'view', component: ViewEventComponent },
+          {
+            path: 'plan',
+            children: [
+              {
+                path: 'day',
+                children: [
+                  { path: 'step1', component: PlanDayStep1Component },
+                  { path: 'step2', component: PlanDayStep2Component },
+                  { path: '', component: PlanDayComponent },
+                ],
+              },
+            ],
+          },
           {
             path: 'schedule',
             component: TabsComponent,
@@ -83,5 +99,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/app/activities/all', pathMatch: 'full' },
+  { path: '', redirectTo: '/app/events/plan/day/step2', pathMatch: 'full' },
 ];

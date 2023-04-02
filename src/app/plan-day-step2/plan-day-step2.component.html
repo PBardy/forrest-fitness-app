@@ -1,0 +1,158 @@
+<ion-content fullscreen>
+  <header class="flex flex-col items-center gap-3 py-12 relative">
+    <ion-thumbnail class="w-16 h-16 rounded-full">
+      <fa-icon class="text-primary text-2xl" icon="calendar-day"></fa-icon>
+    </ion-thumbnail>
+    <h5 class="font-bold">{{ "2023-04-02T22:53:23.931Z" | date }}</h5>
+    <div class="absolute top-8 right-4">
+      <button class="ion-activatable relative rounded-full overflow-hidden">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon class="text-2xl" name="add-outline"></ion-icon>
+      </button>
+    </div>
+  </header>
+  <main class="max-h-[61.6vh] overflow-hidden">
+    <ion-list class="rounded-t-3xl relative">
+      <div class="absolute top-14 left-0 right-0 h-36 z-10">
+        <div class="flex gap-4 h-full p-4 bg-step200">
+          <div class="flex flex-col items-center gap-2 text-xs">
+            <div class="text-primary">08:15</div>
+            <div class="border-l border-primary flex-1"></div>
+            <div class="text-medium">08:45</div>
+          </div>
+          <div class="flex flex-col flex-1">
+            <div class="flex justify-between flex-1">
+              <span class="text-xs text-medium font-semibold">Walk to gym</span>
+              <fa-icon class="text-medium" icon="chevron-right"></fa-icon>
+            </div>
+            <div class="flex items-center justify-end gap-2 text-xs">
+              <div class="flex items-center gap-1">
+                <fa-icon class="text-primary" icon="bell"></fa-icon>
+                <span class="text-medium">5 mins</span>
+              </div>
+              <div>&middot;</div>
+              <div class="flex items-center gap-1">
+                <fa-icon class="text-primary" icon="repeat"></fa-icon>
+                <span class="text-medium">Weekly</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ion-item class="relative overflow-visible" button detail>
+        <ion-label>
+          <span class="text-primary text-xs">08:00</span>
+        </ion-label>
+      </ion-item>
+      <ion-item button detail>
+        <ion-label>
+          <span class="text-medium text-xs">08:15</span>
+        </ion-label>
+      </ion-item>
+      <ion-item button detail>
+        <ion-label>
+          <span class="text-medium text-xs">08:30</span>
+        </ion-label>
+      </ion-item>
+      <ion-item button detail>
+        <ion-label>
+          <span class="text-medium text-xs">08:45</span>
+        </ion-label>
+      </ion-item>
+      <ion-item button detail>
+        <ion-label>
+          <span class="text-primary text-xs">09:00</span>
+        </ion-label>
+      </ion-item>
+      <ion-item button detail>
+        <ion-label>
+          <span class="text-medium text-xs">09:15</span>
+        </ion-label>
+      </ion-item>
+      <ion-item button detail>
+        <ion-label>
+          <span class="text-medium text-xs">09:30</span>
+        </ion-label>
+      </ion-item>
+      <ion-item button detail>
+        <ion-label>
+          <span class="text-medium text-xs">09:45</span>
+        </ion-label>
+      </ion-item>
+      <ion-item button detail>
+        <ion-label>
+          <span class="text-primary text-xs">10:00</span>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-modal
+      [isOpen]="false"
+      [initialBreakpoint]="0.45"
+      [breakpoints]="[0, 0.25, 0.45, 0.65]"
+    >
+      <ng-template>
+        <ion-content>
+          <ion-list class="h-full bg-transparent" lines="none">
+            <ion-list-header>
+              <ion-label class="text-center">
+                <div class="pt-4 pb-2">
+                  <span class="text-primary">08:00</span> -
+                  <span class="text-secondary">08:30</span>
+                </div>
+              </ion-label>
+            </ion-list-header>
+            <ion-item class="bg-transparent" button detail>
+              <ion-thumbnail class="rounded-full w-10 h-10">
+                <fa-icon class="text-primary text-sm" icon="a"></fa-icon>
+              </ion-thumbnail>
+              <ion-label class="px-3">
+                <span class="text-sm">Aerobics</span>
+              </ion-label>
+            </ion-item>
+            <ion-item class="bg-transparent" button detail>
+              <ion-thumbnail class="rounded-full w-10 h-10">
+                <fa-icon class="text-primary text-sm" icon="c"></fa-icon>
+              </ion-thumbnail>
+              <ion-label class="px-3">
+                <span class="text-sm">Calisthenics</span>
+              </ion-label>
+            </ion-item>
+            <ion-item class="bg-transparent" button detail>
+              <ion-thumbnail class="rounded-full w-10 h-10">
+                <fa-icon class="text-primary text-sm" icon="t"></fa-icon>
+              </ion-thumbnail>
+              <ion-label class="px-3">
+                <span class="text-sm">Circuit Training</span>
+              </ion-label>
+            </ion-item>
+            <ion-item class="bg-transparent" button detail>
+              <ion-thumbnail class="rounded-full w-10 h-10">
+                <fa-icon class="text-primary text-sm" icon="r"></fa-icon>
+              </ion-thumbnail>
+              <ion-label class="px-3">
+                <span class="text-sm">Rowing</span>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </main>
+</ion-content>
+
+<ion-footer class="ion-padding bg-[#222428aa]">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button color="danger" fill="clear" expand="full" shape="round">
+          <span>Discard</span>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="primary" fill="clear" expand="full" shape="round">
+          <span>Save</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
