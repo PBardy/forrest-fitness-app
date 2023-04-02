@@ -1,1 +1,67 @@
-<p>view-activity works!</p>
+<ion-content class="ion-padding" fullscreen>
+  <header class="flex flex-col items-center gap-4 py-8">
+    <ion-thumbnail class="w-16 h-16 rounded-full">
+      <fa-icon class="text-primary text-2xl" icon="water"></fa-icon>
+    </ion-thumbnail>
+    <div class="flex flex-col items-center gap-2">
+      <h5 class="text-xl font-bold">Rowing</h5>
+      <h6 class="text-sm text-medium">02 Apr 2023</h6>
+      <h6 class="text-xs text-medium">17:45-18:02</h6>
+    </div>
+  </header>
+  <main>
+    <article class="flex flex-col gap-4">
+      <ion-list class="rounded-3xl">
+        <ion-item>
+          <ion-label>
+            <span class="text-sm text-dark">Intensity</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">15 pts</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-sm text-dark">Distance</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">5.50 km</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-sm text-dark">Calories</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">250 cal</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-sm text-dark">Duration</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">17 mins 34 secs</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </article>
+  </main>
+</ion-content>
+
+<ion-footer class="ion-padding bg-[#222428aa]">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button color="danger" fill="clear" expand="full" shape="round">
+          <span>Close</span>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="secondary" fill="clear" expand="full" shape="round">
+          <span>Edit</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
