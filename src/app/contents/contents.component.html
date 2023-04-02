@@ -1,1 +1,204 @@
-<p>contents works!</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <span>Contents</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-accordion-group>
+    <ion-accordion>
+      <ion-item slot="header">
+        <ion-label>
+          <span>Sign In Flow</span>
+        </ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-item routerLink="/landing" button detail>
+          <ion-label>
+            <span>Landing screen</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/sign-in" button detail>
+          <ion-label>
+            <span>Sign In</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/forgot-password" button detail>
+          <ion-label>
+            <span>Forgot Password</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/terms-of-service" button detail>
+          <ion-label>
+            <span>Terms of Service</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/privacy-policy" button detail>
+          <ion-label>
+            <span>Privacy Policy</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+    <ion-accordion>
+      <ion-item slot="header">
+        <ion-label>
+          <span>Sign Up Flow</span>
+        </ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-item routerLink="/landing" button detail>
+          <ion-label>
+            <span>Landing screen</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/sign-in" button detail>
+          <ion-label>
+            <span>Sign Up</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/terms-of-service" button detail>
+          <ion-label>
+            <span>Terms of Service</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/privacy-policy" button detail>
+          <ion-label>
+            <span>Privacy Policy</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+    <ion-accordion>
+      <ion-item slot="header">
+        <ion-label>
+          <span>Onboarding Flow</span>
+        </ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-item routerLink="/onboarding/step1" button detail>
+          <ion-label>
+            <span>Onboarding: height</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/onboarding/step2" button detail>
+          <ion-label>
+            <span>Onboarding: weight</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/onboarding/step3" button detail>
+          <ion-label>
+            <span>Onboarding: sex</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/onboarding/step4" button detail>
+          <ion-label>
+            <span>Onboarding: age</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/onboarding/step5" button detail>
+          <ion-label>
+            <span>Onboarding: activity level</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+    <ion-accordion>
+      <ion-item slot="header">
+        <ion-label>
+          <span>Summary</span>
+        </ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-item routerLink="/app/summary/view" button detail>
+          <ion-label>
+            <span>View Summary</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+    <ion-accordion>
+      <ion-item slot="header">
+        <ion-label>
+          <span>Activities</span>
+        </ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-item routerLink="/app/activities/new" button detail>
+          <ion-label>
+            <span>Add Activity</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/app/activities/view" button detail>
+          <ion-label>
+            <span>View Activity</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/app/activities/all" button detail>
+          <ion-label>
+            <span>View All Activities</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/app/activities/record" button detail>
+          <ion-label>
+            <span>Record Activity</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+    <ion-accordion>
+      <ion-item slot="header">
+        <ion-label>
+          <span>Schedule</span>
+        </ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-item routerLink="/app/events/new" button detail>
+          <ion-label>
+            <span>Add Event</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/app/events/view" button detail>
+          <ion-label>
+            <span>View Event</span>
+          </ion-label>
+        </ion-item>
+        <ion-item routerLink="/app/events/schedule" button detail>
+          <ion-label>
+            <span>View Schedule</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+    <ion-accordion>
+      <ion-item slot="header">
+        <ion-label>
+          <span>Profile</span>
+        </ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-item routerLink="/app/profile/view" button detail>
+          <ion-label>
+            <span>View Profile</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+    <ion-accordion>
+      <ion-item slot="header">
+        <ion-label>
+          <span>Settings</span>
+        </ion-label>
+      </ion-item>
+      <ion-list slot="content">
+        <ion-item routerLink="/app/settings/view" button detail>
+          <ion-label>
+            <span>View Settings</span>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+  </ion-accordion-group>
+</ion-content>
