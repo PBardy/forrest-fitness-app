@@ -80,5 +80,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/app/activities/view', pathMatch: 'full' },
+  { path: '', redirectTo: '/app/events/view', pathMatch: 'full' },
 ];
