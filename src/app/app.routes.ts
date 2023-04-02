@@ -55,6 +55,7 @@ export const routes: Route[] = [
       },
       {
         path: 'profile',
+        component: TabsComponent,
         children: [{ path: 'view', component: ProfileComponent }],
       },
       {
@@ -80,5 +81,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/app/events/view', pathMatch: 'full' },
+  { path: '', redirectTo: '/app/profile/view', pathMatch: 'full' },
 ];

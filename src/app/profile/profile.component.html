@@ -1,1 +1,85 @@
-<p>profile works!</p>
+<ion-content class="ion-padding" fullscreen>
+  <header class="flex flex-col items-center gap-4 py-8">
+    <ion-thumbnail class="w-16 h-16 rounded-full">
+      <fa-icon class="text-primary text-2xl" icon="user"></fa-icon>
+    </ion-thumbnail>
+    <div clas="flex flex-col items-center text-center ">
+      <h5 class="font-bold mb-1">Philip Bardy</h5>
+      <h6 class="text-medium text-sm text-center">
+        {{ "2000-10-26T00:00:00.000Z" | date }}
+      </h6>
+    </div>
+  </header>
+  <main>
+    <article>
+      <ion-list class="rounded-3xl" lines="none">
+        <ion-item>
+          <ion-label>
+            <span class="text-sm">Height</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">1.89 m</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-sm">Weight</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">100 kg</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-sm">Sex</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">Male</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-sm">Age</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">22 yr</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-sm">Activity Level</span>
+          </ion-label>
+          <ion-label slot="end">
+            <span class="text-xs text-medium">Moderate</span>
+          </ion-label>
+        </ion-item>
+        <ion-item class="mt-4">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button
+                  shape="round"
+                  color="secondary"
+                  fill="clear"
+                  expand="full"
+                >
+                  <span>Edit</span>
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button
+                  shape="round"
+                  color="primary"
+                  fill="clear"
+                  expand="full"
+                >
+                  <span>Settings</span>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </article>
+  </main>
+</ion-content>
