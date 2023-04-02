@@ -1,0 +1,7 @@
+{
+  "name": "forrest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
