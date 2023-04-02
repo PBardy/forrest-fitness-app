@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sex</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" fullscreen>
+  <main class="flex flex-col h-full">
+    <ion-item class="rounded-xl p-0">
+      <ion-avatar class="bg-step100 grid place-items-center" slot="start">
+        <fa-icon class="text-warning" icon="info"></fa-icon>
+      </ion-avatar>
+      <ion-label class="ion-text-wrap ml-4 py-2">
+        <p class="text-xs">This is used to tune recommended exercise levels.</p>
+      </ion-label>
+    </ion-item>
+    <aside class="flex items-center justify-center flex-1">
+      <fa-icon class="text-primary text-7xl" icon="venus-mars"></fa-icon>
+    </aside>
+    <article class="flex flex-col">
+      <h6 class="font-bold text-center">Enter Sex</h6>
+      <form class="flex flex-col gap-4 py-4">
+        <ion-radio-group>
+          <ion-item class="rounded-full mb-3" button>
+            <fa-icon class="text-primary" slot="start" icon="mars"></fa-icon>
+            <ion-label class="px-2"> Male </ion-label>
+            <ion-radio></ion-radio>
+          </ion-item>
+          <ion-item class="rounded-full" button>
+            <fa-icon class="text-primary" slot="start" icon="venus"></fa-icon>
+            <ion-label class="px-2"> Female </ion-label>
+            <ion-radio></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <ion-button routerLink="/onboarding/step4" shape="round" expand="full">
+          Continue
+        </ion-button>
+      </form>
+    </article>
+  </main>
+</ion-content>

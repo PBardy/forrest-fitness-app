@@ -6,11 +6,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { OnboardingStep1Component } from './onboarding-step1/onboarding-step1.component';
-import { OnboardingStep2Component } from './onboarding-step2/onboarding-step2.component';
-import { OnboardingStep3Component } from './onboarding-step3/onboarding-step3.component';
-import { OnboardingStep4Component } from './onboarding-step4/onboarding-step4.component';
-import { OnboardingStep5Component } from './onboarding-step5/onboarding-step5.component';
+import { OnboardingStep1Component } from './onboarding/onboarding-step1/onboarding-step1.component';
+import { OnboardingStep2Component } from './onboarding/onboarding-step2/onboarding-step2.component';
+import { OnboardingStep3Component } from './onboarding/onboarding-step3/onboarding-step3.component';
+import { OnboardingStep4Component } from './onboarding/onboarding-step4/onboarding-step4.component';
+import { OnboardingStep5Component } from './onboarding/onboarding-step5/onboarding-step5.component';
 import { ViewSummaryComponent } from './view-summary/view-summary.component';
 import { AddActivityComponent } from './add-activity/add-activity.component';
 import { RecordActivityComponent } from './record-activity/record-activity.component';
@@ -74,5 +74,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/privacy-policy', pathMatch: 'full' },
+  { path: '', redirectTo: '/onboarding/step1', pathMatch: 'full' },
 ];

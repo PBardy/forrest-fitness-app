@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Activity Level</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" fullscreen>
+  <main class="flex flex-col h-full">
+    <ion-item class="rounded-xl p-0">
+      <ion-avatar class="bg-step100 grid place-items-center" slot="start">
+        <fa-icon class="text-warning" icon="info"></fa-icon>
+      </ion-avatar>
+      <ion-label class="ion-text-wrap ml-4 py-2">
+        <p class="text-xs">
+          This will scale your exercise goals to something achievable.
+        </p>
+      </ion-label>
+    </ion-item>
+    <aside class="flex items-center justify-center flex-1"></aside>
+    <article class="flex flex-col">
+      <h6 class="font-bold text-center mb-4">Enter Activity Level</h6>
+      <ion-radio-group>
+        <ion-item class="rounded-full mb-3" button>
+          <fa-icon class="text-primary" slot="start" icon="0"></fa-icon>
+          <ion-label class="py-2 px-4">
+            <span class="font-bold text-sm mb-1">Physically Inactive</span>
+            <p class="text-xs">Less than 5000 steps per day</p>
+          </ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+        <ion-item class="rounded-full mb-3" button>
+          <fa-icon class="text-primary" slot="start" icon="1"></fa-icon>
+          <ion-label class="py-2 px-4">
+            <span class="font-bold text-sm mb-1">Moderately Active</span>
+            <p class="text-xs">5000 to 7500 steps per day</p>
+          </ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+        <ion-item class="rounded-full mb-3" button>
+          <fa-icon class="text-primary" slot="start" icon="2"></fa-icon>
+          <ion-label class="py-2 px-4">
+            <span class="font-bold text-sm mb-1">Physically Active</span>
+            <p class="text-xs">7500 to 10000 steps per day</p>
+          </ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+        <ion-item class="rounded-full mb-3" button>
+          <fa-icon class="text-primary" slot="start" icon="3"></fa-icon>
+          <ion-label class="py-2 px-4">
+            <span class="font-bold text-sm mb-1">Very Active</span>
+            <p class="text-xs">More than 10000 step per day</p>
+          </ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <form class="flex flex-col gap-4 py-4">
+        <ion-button routerLink="/app/summary/view" shape="round" expand="full">
+          Finish
+        </ion-button>
+      </form>
+    </article>
+  </main>
+</ion-content>
