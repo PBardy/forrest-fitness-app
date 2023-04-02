@@ -1,13 +1,7 @@
-import { Routes } from '@angular/router';
+import { Route } from '@angular/router';
+import { ContentsComponent } from './contents/contents.component';
 
-export const routes: Routes = [
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
+export const routes: Route[] = [
+  { path: 'contents', component: ContentsComponent },
+  { path: '', redirectTo: '/contents', pathMatch: 'full' },
 ];

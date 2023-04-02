@@ -6,9 +6,12 @@
     "app": {
       "projectType": "application",
       "schematics": {
-        "@ionic/angular-toolkit:page": {
-          "styleext": "scss",
-          "standalone": true
+        "@schematics/angular:component": {
+          "inlineStyle": true,
+          "skipTests": true,
+          "changeDetection": "OnPush",
+          "standalone": true,
+          "style": "scss"
         }
       },
       "root": "",
@@ -133,23 +136,6 @@
           }
         }
       }
-    }
-  },
-  "cli": {
-    "schematicCollections": ["@ionic/angular-toolkit"]
-  },
-  "schematics": {
-    "@ionic/angular-toolkit:component": {
-      "styleext": "scss"
-    },
-    "@ionic/angular-toolkit:page": {
-      "styleext": "scss"
-    },
-    "@angular-eslint/schematics:application": {
-      "setParserOptionsProject": true
-    },
-    "@angular-eslint/schematics:library": {
-      "setParserOptionsProject": true
     }
   }
 }
