@@ -74,5 +74,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/terms-of-service', pathMatch: 'full' },
+  { path: '', redirectTo: '/privacy-policy', pathMatch: 'full' },
 ];
