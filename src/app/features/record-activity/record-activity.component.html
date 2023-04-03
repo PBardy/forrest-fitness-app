@@ -1,51 +1,145 @@
-<ion-content class="ion-padding" fullscreen>
-  <header class="flex flex-col items-center gap-3 py-8">
-    <ion-thumbnail class="w-16 h-16 rounded-full">
-      <fa-icon class="text-primary text-2xl" icon="check"></fa-icon>
-    </ion-thumbnail>
-    <h5 class="font-bold">Recorded Workout</h5>
-  </header>
-  <main class="flex h-full items-center justify-center max-h-[61vh]">
-    <article class="flex flex-col items-center gap-8">
-      <section class="flex flex-col items-center gap-2">
-        <h5 class="text-medium">Rowing</h5>
-        <h1 class="text-primary text-4xl font-semibold">17:34.09</h1>
-      </section>
-      <section>
-        <ion-grid>
-          <ion-row>
-            <ion-col class="flex flex-col items-center px-4">
-              <span class="text-primary_tint font-semibold text-xl">15.0</span>
-              <span class="text-medium text-xs">pts</span>
-            </ion-col>
-            <ion-col class="flex flex-col items-center px-4">
-              <span class="text-primary_tint font-semibold text-xl">5.50</span>
-              <span class="text-medium text-xs">km</span>
-            </ion-col>
-            <ion-col class="flex flex-col items-center px-4">
-              <span class="text-primary_tint font-semibold text-xl">250</span>
-              <span class="text-medium text-xs">cal</span>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </section>
-    </article>
-  </main>
-</ion-content>
+<ng-container
+  *ngrxLet="{
+    started: started$,
+    paused: paused$,
+    stopped: stopped$,
+    energy: energy$,
+    distance: distance$,
+    intensity: intensity$,
+    stopwatch: stopwatch$
+  } as vm"
+>
+  <ion-content fullscreen>
+    <header class="flex flex-col items-center gap-4 py-8">
+      <ng-container *ngIf="!vm.started">
+        <ion-thumbnail class="w-20 h-20 rounded-full">
+          <fa-icon class="text-primary text-3xl" icon="record-vinyl"></fa-icon>
+        </ion-thumbnail>
+        <h5 class="font-bold text-xl">Record Workout</h5>
+      </ng-container>
+      <ng-container *ngIf="vm.started && !vm.stopped">
+        <ion-thumbnail class="w-20 h-20 rounded-full">
+          <fa-icon class="text-primary text-3xl" icon="refresh"></fa-icon>
+        </ion-thumbnail>
+        <h5 class="font-bold text-xl">Recording Workout</h5>
+      </ng-container>
+      <ng-container *ngIf="vm.stopped">
+        <ion-thumbnail class="w-20 h-20 rounded-full">
+          <fa-icon class="text-primary text-3xl" icon="check"></fa-icon>
+        </ion-thumbnail>
+        <h5 class="font-bold text-xl">Recorded Workout</h5>
+      </ng-container>
+    </header>
+    <main class="flex items-center justify-center">
+      <form class="flex flex-col items-center gap-8">
+        <section class="flex flex-col items-center gap-2">
+          <ng-container *ngIf="workout.value as workout">
+            <h5 class="text-medium">{{ workout.label }}</h5>
+          </ng-container>
+          <h1 class="text-primary text-4xl font-semibold">
+            {{ vm.stopwatch | stopwatch }}
+          </h1>
+        </section>
+        <section>
+          <ion-grid>
+            <ion-row>
+              <ion-col class="flex flex-col items-center px-4">
+                <span class="text-primary_tint font-semibold text-xl">
+                  {{ vm.intensity }}
+                </span>
+                <span class="text-medium text-xs">pts</span>
+              </ion-col>
+              <ion-col class="flex flex-col items-center px-4">
+                <span class="text-primary_tint font-semibold text-xl">
+                  {{ vm.distance }}
+                </span>
+                <span class="text-medium text-xs">km</span>
+              </ion-col>
+              <ion-col class="flex flex-col items-center px-4">
+                <span class="text-primary_tint font-semibold text-xl">
+                  {{ vm.energy }}
+                </span>
+                <span class="text-medium text-xs">cal</span>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </section>
+      </form>
+    </main>
+  </ion-content>
 
-<ion-footer class="ion-padding">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-button color="danger" fill="clear" expand="full" shape="round">
-          <span>Discard</span>
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button color="primary" fill="clear" expand="full" shape="round">
-          <span>Save</span>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-footer>
+  <ion-modal
+    #modal
+    [isOpen]="workout.value === null"
+    [initialBreakpoint]="0.65"
+    [breakpoints]="[0, 0.25, 0.45, 0.65]"
+  >
+    <ng-template>
+      <ion-content>
+        <ion-list class="h-full" lines="none">
+          <ion-list-header class="bg-step50">
+            <ion-label class="text-center text-lg font-bold py-2">
+              Choose Workout
+            </ion-label>
+          </ion-list-header>
+          <ng-container *ngFor="let item of workouts$">
+            <ion-item button detail (click)="onChooseWorkout(modal, item)">
+              <ion-thumbnail class="rounded-full my-2" slot="start">
+                <fa-icon class="text-primary" [icon]="item.icon"></fa-icon>
+              </ion-thumbnail>
+              <ion-label class="px-4">
+                {{ item.label }}
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-footer class="ion-padding">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ng-container *ngIf="vm.stopped && !vm.paused">
+            <ion-button fill="clear" expand="full" (click)="onCancel()">
+              <span class="text-danger">Cancel</span>
+            </ion-button>
+          </ng-container>
+          <ng-container *ngIf="!vm.stopped && vm.paused">
+            <ion-button fill="clear" expand="full" (click)="onResume()">
+              <span class="text-secondary">Resume</span>
+            </ion-button>
+          </ng-container>
+          <ng-container *ngIf="!vm.stopped && !vm.paused">
+            <ion-button fill="clear" expand="full" (click)="onPause()">
+              <span class="text-secondary">Pause</span>
+            </ion-button>
+          </ng-container>
+          <ng-container *ngIf="vm.stopped && vm.paused">
+            <ion-button fill="clear" expand="full" (click)="onCancel()">
+              <span class="text-danger">Discard</span>
+            </ion-button>
+          </ng-container>
+        </ion-col>
+        <ion-col>
+          <ng-container *ngIf="vm.stopped && !vm.paused">
+            <ion-button fill="clear" expand="full" (click)="onStart()">
+              <span class="text-primary">Start</span>
+            </ion-button>
+          </ng-container>
+          <ng-container *ngIf="!vm.stopped">
+            <ion-button fill="clear" expand="full" (click)="onFinish()">
+              <span class="text-warning">Finish</span>
+            </ion-button>
+          </ng-container>
+          <ng-container *ngIf="vm.stopped && vm.paused">
+            <ion-button fill="clear" expand="full" (click)="onSave()">
+              <span class="text-primary">Save</span>
+            </ion-button>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-footer>
+</ng-container>

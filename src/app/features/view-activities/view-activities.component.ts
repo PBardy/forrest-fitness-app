@@ -11,6 +11,7 @@ import {
   selectActivitiesByDay,
 } from '@app/store/activity/activity.selectors';
 import { LetModule } from '@ngrx/component';
+import { ActivityEndPipe } from '@pipes/activity-end.pipe';
 
 @Component({
   selector: 'app-view-activities',
@@ -21,6 +22,7 @@ import { LetModule } from '@ngrx/component';
     FontAwesomeModule,
     LetModule,
     RouterModule,
+    ActivityEndPipe,
   ],
   templateUrl: './view-activities.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,14 +1,146 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { IonModal, IonicModule } from '@ionic/angular';
+import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  BehaviorSubject,
+  NEVER,
+  dematerialize,
+  interval,
+  materialize,
+  switchMap,
+  tap,
+} from 'rxjs';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Activity, WithId, Workout } from '@types';
+import { LetModule } from '@ngrx/component';
+import { initialWorkouts } from '@app/store/workout/workout.reducer';
+import { StopwatchPipe } from '@pipes/stopwatch.pipe';
+import { Store } from '@ngrx/store';
+import { ActivityActions } from '@app/store/activity/activity.actions';
 
 @Component({
   selector: 'app-record-activity',
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+    RouterModule,
+    LetModule,
+    FontAwesomeModule,
+    StopwatchPipe,
+  ],
   templateUrl: './record-activity.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecordActivityComponent {}
+export class RecordActivityComponent {
+  public workouts$ = initialWorkouts;
+
+  public readonly form = this.fb.nonNullable.group({
+    title: this.fb.nonNullable.control<string>('', [Validators.required]),
+    workout: this.fb.nonNullable.control<WithId<Workout> | null>(null, [
+      Validators.required,
+    ]),
+    start: this.fb.nonNullable.control<string>('', [Validators.required]),
+    distance: this.fb.nonNullable.control<number | undefined>(undefined),
+    duration: this.fb.nonNullable.control<number | undefined>(undefined),
+    intensity: this.fb.nonNullable.control<number | undefined>(undefined),
+    energy: this.fb.nonNullable.control<number | undefined>(undefined),
+    notes: this.fb.nonNullable.control<string>(''),
+  });
+
+  // State
+
+  public source$ = interval(1000);
+  public started$ = new BehaviorSubject<boolean>(false);
+  public paused$ = new BehaviorSubject<boolean>(false);
+  public stopped$ = new BehaviorSubject<boolean>(true);
+  public count$ = new BehaviorSubject<number>(0);
+  public energy$ = new BehaviorSubject<number>(0);
+  public distance$ = new BehaviorSubject<number>(0);
+  public intensity$ = new BehaviorSubject<number>(0);
+
+  // Stopwatch
+
+  public stopwatch$ = this.paused$.pipe(
+    switchMap((p) => (p ? NEVER : this.source$.pipe(materialize()))),
+    dematerialize(),
+    tap((_) => {
+      if (this.paused$.getValue()) return;
+      if (this.stopped$.getValue()) return;
+
+      // Update count
+      this.count$.next(this.count$.getValue() + 1);
+
+      // Update workout values
+      const workout = this.workout.value;
+      if (workout) {
+        this.energy$.next(this.energy$.getValue() + workout.energy);
+        this.intensity$.next(this.intensity$.getValue() + workout.intensity);
+      }
+    }),
+    switchMap((_) => this.count$)
+  );
+
+  public constructor(
+    private readonly fb: FormBuilder,
+    private readonly router: Router,
+    private readonly store: Store
+  ) {}
+
+  public get start() {
+    return this.form.controls.start;
+  }
+
+  public get title() {
+    return this.form.controls.title;
+  }
+
+  public get workout() {
+    return this.form.controls.workout;
+  }
+
+  public onStart() {
+    this.started$.next(true);
+    this.stopped$.next(false);
+    this.start.patchValue(new Date().toISOString());
+  }
+
+  public onPause() {
+    this.paused$.next(true);
+    this.stopped$.next(false);
+  }
+
+  public onResume() {
+    this.paused$.next(false);
+    this.stopped$.next(false);
+  }
+
+  public onCancel() {
+    this.router.navigate(['app', 'activities']);
+  }
+
+  public onFinish() {
+    this.paused$.next(true);
+    this.stopped$.next(true);
+
+    this.form.patchValue({
+      energy: this.energy$.getValue(),
+      duration: this.count$.getValue(),
+      intensity: this.intensity$.getValue(),
+    });
+  }
+
+  public onSave() {
+    const payload = this.form.getRawValue() as NonNullable<Activity>;
+
+    this.store.dispatch(ActivityActions.addone({ payload }));
+  }
+
+  public onChooseWorkout(modal: IonModal, workout: WithId<Workout>) {
+    modal.dismiss();
+    this.title.patchValue(workout.label);
+    this.workout.patchValue(workout);
+  }
+}
