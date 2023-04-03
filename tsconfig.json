@@ -21,6 +21,7 @@
     "lib": ["es2018", "dom"],
     "useDefineForClassFields": false,
     "paths": {
+      "@animations/*": ["./src/app/animations/*"],
       "@features/*": ["./src/app/features/*"],
       "@app/*": ["./src/app/*"],
       "@/*": ["./src/*"]
