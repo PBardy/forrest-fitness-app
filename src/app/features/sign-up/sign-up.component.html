@@ -14,30 +14,61 @@
     </aside>
     <article class="flex flex-col">
       <h6 class="font-bold text-center">Sign Up with Email</h6>
-      <form class="flex flex-col gap-3 py-4 mb-2">
+      <form
+        class="flex flex-col gap-3 py-4 mb-2"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        #ngForm="ngForm"
+      >
         <ion-item class="rounded-full">
-          <ion-input class="text-sm" placeholder="Email"></ion-input>
+          <ion-input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            autocapitalize="never"
+            placeholder="Email"
+            formControlName="email"
+            required
+          ></ion-input>
           <fa-icon slot="end" icon="envelope"></fa-icon>
         </ion-item>
         <ion-item class="rounded-full">
-          <ion-input placeholder="Password"></ion-input>
+          <ion-input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="password"
+            autocapitalize="never"
+            placeholder="Password"
+            formControlName="password"
+            clearOnEdit
+            required
+          ></ion-input>
           <fa-icon slot="end" icon="lock"></fa-icon>
         </ion-item>
       </form>
-      <section class="flex flex-col gap-3">
-        <ion-button shape="round" expand="full">Continue</ion-button>
-        <ion-button color="dark" shape="round" expand="full">
-          <fa-icon [icon]="['fab', 'google']"></fa-icon>
-          <span class="pl-2">Register with Google</span>
+      <section class="pb-4">
+        <ion-button
+          type="submit"
+          shape="round"
+          expand="full"
+          (click)="onSubmit()"
+        >
+          Continue
         </ion-button>
       </section>
+      <p class="text-center leading-relaxed text-sm">
+        By continuing you agree to the
+        <a routerDirection="forward" routerLink="/terms-of-service">
+          Terms of Service
+        </a>
+        and the
+        <a routerDirection="forward" routerLink="/privacy-policy">
+          Privacy Policy
+        </a>
+        .
+      </p>
     </article>
   </main>
 </ion-content>
-
-<ion-footer class="ion-padding">
-  <p class="text-center leading-relaxed text-sm">
-    By continuing you agree to the <a>Terms of Service</a> and the
-    <a>Privacy Policy</a>.
-  </p>
-</ion-footer>

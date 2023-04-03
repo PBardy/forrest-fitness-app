@@ -1,0 +1,45 @@
+<ion-content fullscreen>
+  <main class="flex flex-col min-h-full">
+    <form
+      class="flex flex-col flex-1"
+      [formGroup]="form"
+      [ngSwitch]="step$ | async"
+    >
+      <ng-container *ngSwitchCase="1">
+        <app-onboarding-step1
+          [form]="form"
+          (onPrev)="step$.next(1)"
+          (onNext)="step$.next(2)"
+        ></app-onboarding-step1>
+      </ng-container>
+      <ng-container *ngSwitchCase="2">
+        <app-onboarding-step2
+          [form]="form"
+          (onPrev)="step$.next(1)"
+          (onNext)="step$.next(3)"
+        ></app-onboarding-step2>
+      </ng-container>
+      <ng-container *ngSwitchCase="3">
+        <app-onboarding-step3
+          [form]="form"
+          (onPrev)="step$.next(2)"
+          (onNext)="step$.next(4)"
+        ></app-onboarding-step3>
+      </ng-container>
+      <ng-container *ngSwitchCase="4">
+        <app-onboarding-step4
+          [form]="form"
+          (onPrev)="step$.next(3)"
+          (onNext)="step$.next(5)"
+        ></app-onboarding-step4>
+      </ng-container>
+      <ng-container *ngSwitchCase="5">
+        <app-onboarding-step5
+          [form]="form"
+          (onPrev)="step$.next(4)"
+          (onNext)="onSubmit()"
+        ></app-onboarding-step5>
+      </ng-container>
+    </form>
+  </main>
+</ion-content>

@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { take, tap } from 'rxjs';
+import { catchError, of, take, tap } from 'rxjs';
 import { AuthService } from '@services/auth.service';
 
 @Component({
@@ -54,10 +54,12 @@ export class SignInComponent {
     this.auth
       .signInWithEmailAndPassword(this.form.getRawValue())
       .pipe(
-        take(1),
         tap((x) =>
-          x ? this.router.navigate(['app']) : this.router.navigate(['profile'])
-        )
+          x
+            ? this.router.navigate(['app'])
+            : this.router.navigate(['onboarding'])
+        ),
+        catchError((x) => of(alert('An error occurred')))
       )
       .subscribe();
   }

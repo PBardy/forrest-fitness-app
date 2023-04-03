@@ -25,6 +25,7 @@ import { TabsComponent } from './features//tabs/tabs.component';
 import { PlanDayComponent } from './features/plan-day/plan-day.component';
 import { PlanDayStep1Component } from './features/plan-day//plan-day-step1/plan-day-step1.component';
 import { PlanDayStep2Component } from './features/plan-day//plan-day-step2/plan-day-step2.component';
+import { OnboardingComponent } from '@features/onboarding/onboarding.component';
 
 export const routes: Route[] = [
   {
@@ -80,6 +81,7 @@ export const routes: Route[] = [
         component: TabsComponent,
         children: [{ path: 'view', component: SettingsComponent }],
       },
+      { path: '', pathMatch: 'full', redirectTo: '/app/summary/view' },
     ],
   },
   {
@@ -90,6 +92,7 @@ export const routes: Route[] = [
       { path: 'step3', component: OnboardingStep3Component },
       { path: 'step4', component: OnboardingStep4Component },
       { path: 'step5', component: OnboardingStep5Component },
+      { path: '', component: OnboardingComponent },
     ],
   },
   { path: 'sign-up', component: SignUpComponent },
@@ -99,5 +102,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
 ];

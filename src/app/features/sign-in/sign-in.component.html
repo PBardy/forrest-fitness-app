@@ -49,7 +49,14 @@
           <fa-icon slot="end" icon="lock"></fa-icon>
         </ion-item>
       </form>
-      <ion-button shape="round" expand="full">Continue</ion-button>
+      <ion-button
+        shape="round"
+        expand="full"
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Continue
+      </ion-button>
       <section class="text-center py-4">
         <a>Forgot password?</a>
       </section>

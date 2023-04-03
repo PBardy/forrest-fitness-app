@@ -36,9 +36,23 @@ export class AuthService {
       switchMap((_) => this.store.select(selectProfile))
     );
   }
+
+  public createUserWithEmailAndPassword(payload: SignUp) {
+    return from(
+      this.auth.createUserWithEmailAndPassword(payload.email, payload.password)
+    ).pipe(
+      take(1),
+      switchMap((_) => this.store.select(selectProfile))
+    );
+  }
 }
 
 type SignIn = {
+  email: string;
+  password: string;
+};
+
+type SignUp = {
   email: string;
   password: string;
 };

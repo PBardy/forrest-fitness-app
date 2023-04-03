@@ -6,11 +6,11 @@
     "app": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:pipes": {
+        "@schematics/angular:pipe": {
           "skipTests": true,
           "standalone": true
         },
-        "@schematics/angular:services": {
+        "@schematics/angular:service": {
           "skipTests": true
         },
         "@schematics/angular:component": {
