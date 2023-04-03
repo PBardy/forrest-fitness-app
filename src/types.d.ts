@@ -10,6 +10,25 @@ export type WithUser<T> = T & {
 
 export type Model<T> = WithId<WithUser<T>>;
 
+export type Workout = {
+  icon: IconProp;
+  label: string;
+  energy: number;
+  intensity: number;
+};
+
+export type Activity = {
+  title: string;
+  workout: WithId<Workout>;
+  start: string;
+  steps?: number;
+  energy?: number;
+  duration?: number;
+  intensity?: number;
+  distance?: number;
+  notes?: string;
+};
+
 export type Sex = {
   icon: IconProp;
   label: SexEnum;

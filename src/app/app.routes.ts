@@ -42,12 +42,16 @@ export const routes: Route[] = [
       },
       {
         path: 'activities',
-        component: TabsComponent,
         children: [
           { path: 'new', component: AddActivityComponent },
           { path: 'record', component: RecordActivityComponent },
           { path: 'view', component: ViewActivityComponent },
-          { path: 'all', component: ViewActivitiesComponent },
+          {
+            path: 'all',
+            component: TabsComponent,
+            children: [{ path: '', component: ViewActivitiesComponent }],
+          },
+          { path: ':id', component: ViewActivityComponent },
           { path: '', pathMatch: 'full', redirectTo: '/app/activities/all' },
         ],
       },

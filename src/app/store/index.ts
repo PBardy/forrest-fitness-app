@@ -7,16 +7,22 @@ import {
   ActivityLevelState,
   activityLevelReducer,
 } from './activity-level/activity-level.reducer';
+import { WorkoutState, workoutReducer } from './workout/workout.reducer';
+import { ActivityState, activityReducer } from './activity/activity.reducer';
 
 export interface AppState {
   sex: SexState;
+  workout: WorkoutState;
   profile: ProfileState;
+  activity: ActivityState;
   activityLevel: ActivityLevelState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   sex: sexReducer,
+  workout: workoutReducer,
   profile: profileReducer,
+  activity: activityReducer,
   activityLevel: activityLevelReducer,
 };
 

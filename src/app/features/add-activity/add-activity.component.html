@@ -1,60 +1,40 @@
 <ion-content class="ion-padding" fullscreen>
-  <header class="flex flex-col items-center gap-3 py-8">
-    <ion-thumbnail class="w-16 h-16 rounded-full">
-      <fa-icon class="text-primary text-2xl" icon="walking"></fa-icon>
+  <header class="flex flex-col items-center gap-4 py-8">
+    <ion-thumbnail class="w-20 h-20 rounded-full">
+      <fa-icon class="text-primary text-3xl" icon="walking"></fa-icon>
     </ion-thumbnail>
-    <h5 class="font-bold">Add Workout</h5>
+    <h5 class="font-bold text-xl">Add Activity</h5>
   </header>
   <main>
-    <form class="flex flex-col gap-4">
+    <form class="flex flex-col gap-4" [formGroup]="form" #ngForm="ngForm">
       <ion-list class="rounded-3xl">
         <ion-item>
-          <ion-input class="text-xl" placeholder="Title"></ion-input>
+          <ion-input
+            id="title"
+            name="title"
+            type="text"
+            placeholder="Title"
+            formControlName="title"
+            class="text-xl"
+            required
+          ></ion-input>
         </ion-item>
         <ion-accordion-group>
           <ion-accordion>
             <ion-item slot="header">
               <ion-label>
-                <span class="text-medium">Activity</span>
+                <span class="text-medium">Workout</span>
               </ion-label>
             </ion-item>
-            <ion-radio-group slot="content">
-              <ion-item>
-                <ion-label>
-                  <span>Aerobics</span>
-                </ion-label>
-                <ion-radio></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>
-                  <span>Calisthenics</span>
-                </ion-label>
-                <ion-radio></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>
-                  <span>Circuit Training</span>
-                </ion-label>
-                <ion-radio></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>
-                  <span>Rowing</span>
-                </ion-label>
-                <ion-radio></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>
-                  <span>Weight Lifting</span>
-                </ion-label>
-                <ion-radio></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>
-                  <span>Yoga</span>
-                </ion-label>
-                <ion-radio></ion-radio>
-              </ion-item>
+            <ion-radio-group formControlName="workout" slot="content">
+              <ng-container *ngFor="let workout of workouts$">
+                <ion-item>
+                  <ion-label>
+                    <span>{{ workout.label }}</span>
+                  </ion-label>
+                  <ion-radio [value]="workout"></ion-radio>
+                </ion-item>
+              </ng-container>
             </ion-radio-group>
           </ion-accordion>
           <ion-accordion>
@@ -64,7 +44,11 @@
               </ion-label>
             </ion-item>
             <div slot="content">
-              <ion-datetime presentation="time" preferWheel></ion-datetime>
+              <ion-datetime
+                presentation="time"
+                formControlName="start"
+                preferWheel
+              ></ion-datetime>
             </div>
           </ion-accordion>
         </ion-accordion-group>
@@ -85,9 +69,13 @@
             <span class="text-medium">Intensity</span>
           </ion-label>
           <ion-input
-            class="text-right"
+            id="intensity"
+            name="intensity"
+            type="number"
+            placeholder="Add Heart Pts"
+            formControlName="intensity"
+            class="text-right font-sans"
             slot="end"
-            placeholder="10 pts"
           ></ion-input>
         </ion-item>
         <ion-item>
@@ -95,9 +83,13 @@
             <span class="text-medium">Energy</span>
           </ion-label>
           <ion-input
-            class="text-right"
+            id="energy"
+            name="energy"
+            type="number"
+            placeholder="Add Cal"
+            formControlName="energy"
+            class="text-right font-sans"
             slot="end"
-            placeholder="150 cal"
           ></ion-input>
         </ion-item>
         <ion-item>
@@ -105,9 +97,13 @@
             <span class="text-medium">Distance</span>
           </ion-label>
           <ion-input
-            class="text-right"
+            id="distance"
+            name="distance"
+            type="number"
+            placeholder="Add km"
+            formControlName="distance"
+            class="text-right font-sans"
             slot="end"
-            placeholder="10 km"
           ></ion-input>
         </ion-item>
       </ion-list>
@@ -119,13 +115,25 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button color="danger" fill="clear" expand="full" shape="round">
+        <ion-button
+          color="danger"
+          fill="clear"
+          expand="full"
+          shape="round"
+          (click)="onCancel()"
+        >
           <span>Cancel</span>
         </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button color="primary" fill="clear" expand="full" shape="round">
-          <span>Confirm</span>
+        <ion-button
+          color="primary"
+          fill="clear"
+          expand="full"
+          shape="round"
+          (click)="onSave()"
+        >
+          <span>Save</span>
         </ion-button>
       </ion-col>
     </ion-row>
