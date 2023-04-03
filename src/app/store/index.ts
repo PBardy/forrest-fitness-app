@@ -9,6 +9,16 @@ import {
 } from './activity-level/activity-level.reducer';
 import { WorkoutState, workoutReducer } from './workout/workout.reducer';
 import { ActivityState, activityReducer } from './activity/activity.reducer';
+import {
+  EventDelayState,
+  eventDelayReducer,
+} from './event-delay/event-delay.reducer';
+import { EventRepeat } from '@types';
+import {
+  EventRepeatState,
+  eventRepeatReducer,
+} from './event-repeat/event-repeat.reducer';
+import { EventState, eventReducer } from './event/event.reducer';
 
 export interface AppState {
   sex: SexState;
@@ -16,6 +26,9 @@ export interface AppState {
   profile: ProfileState;
   activity: ActivityState;
   activityLevel: ActivityLevelState;
+  event: EventState;
+  eventDelay: EventDelayState;
+  eventRepeat: EventRepeatState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -24,6 +37,9 @@ export const reducers: ActionReducerMap<AppState> = {
   profile: profileReducer,
   activity: activityReducer,
   activityLevel: activityLevelReducer,
+  event: eventReducer,
+  eventDelay: eventDelayReducer,
+  eventRepeat: eventRepeatReducer,
 };
 
 export const metaReducers: MetaReducer<AppState>[] = !environment.production

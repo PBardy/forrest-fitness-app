@@ -29,6 +29,26 @@ export type Activity = {
   notes?: string;
 };
 
+export type Event = {
+  title: string;
+  end: string;
+  start: string;
+  delay: WithId<EventDelay>;
+  repeat: WithId<EventRepeat>;
+  workout: WithId<Workout>;
+  completed: boolean;
+};
+
+export type EventDelay = {
+  label: string;
+  by: number | null;
+};
+
+export type EventRepeat = {
+  label: string;
+  frequency: number | null;
+};
+
 export type Sex = {
   icon: IconProp;
   label: SexEnum;

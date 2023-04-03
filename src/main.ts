@@ -18,6 +18,7 @@ import { customAnimation } from '@animations/custom.animation';
 import { reducers, metaReducers } from '@app/store';
 import { ProfileEffects } from '@app/store/profile/profile.effects';
 import { ActivityEfffects } from '@app/store/activity/activity.effects';
+import { EventEfffects } from '@app/store/event/event.effects';
 
 if (environment.production) {
   enableProdMode();
@@ -35,7 +36,7 @@ bootstrapApplication(AppComponent, {
       IonicModule.forRoot({ navAnimation: customAnimation }),
       IonicStorageModule.forRoot(),
       StoreModule.forRoot(reducers, { metaReducers }),
-      EffectsModule.forRoot([ProfileEffects, ActivityEfffects])
+      EffectsModule.forRoot([ProfileEffects, ActivityEfffects, EventEfffects])
     ),
     provideRouter(routes),
   ],
