@@ -1,30 +1,30 @@
 import { Route } from '@angular/router';
-import { ContentsComponent } from './contents/contents.component';
-import { LandingComponent } from './landing/landing.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { OnboardingStep1Component } from './onboarding/onboarding-step1/onboarding-step1.component';
-import { OnboardingStep2Component } from './onboarding/onboarding-step2/onboarding-step2.component';
-import { OnboardingStep3Component } from './onboarding/onboarding-step3/onboarding-step3.component';
-import { OnboardingStep4Component } from './onboarding/onboarding-step4/onboarding-step4.component';
-import { OnboardingStep5Component } from './onboarding/onboarding-step5/onboarding-step5.component';
-import { ViewSummaryComponent } from './view-summary/view-summary.component';
-import { AddActivityComponent } from './add-activity/add-activity.component';
-import { RecordActivityComponent } from './record-activity/record-activity.component';
-import { ViewActivitiesComponent } from './view-activities/view-activities.component';
-import { ViewActivityComponent } from './view-activity/view-activity.component';
-import { AddEventComponent } from './add-event/add-event.component';
-import { ViewEventComponent } from './view-event/view-event.component';
-import { ViewScheduleComponent } from './view-schedule/view-schedule.component';
-import { ProfileComponent } from './profile/profile.component';
-import { SettingsComponent } from './settings/settings.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { PlanDayComponent } from './plan-day/plan-day.component';
-import { PlanDayStep1Component } from './plan-day-step1/plan-day-step1.component';
-import { PlanDayStep2Component } from './plan-day-step2/plan-day-step2.component';
+import { ContentsComponent } from './features/contents/contents.component';
+import { LandingComponent } from './features//landing/landing.component';
+import { SignInComponent } from './features//sign-in/sign-in.component';
+import { ForgotPasswordComponent } from './features//forgot-password/forgot-password.component';
+import { TermsOfServiceComponent } from './features//terms-of-service/terms-of-service.component';
+import { PrivacyPolicyComponent } from './features//privacy-policy/privacy-policy.component';
+import { SignUpComponent } from './features//sign-up/sign-up.component';
+import { OnboardingStep1Component } from './features//onboarding/onboarding-step1/onboarding-step1.component';
+import { OnboardingStep2Component } from './features//onboarding/onboarding-step2/onboarding-step2.component';
+import { OnboardingStep3Component } from './features//onboarding/onboarding-step3/onboarding-step3.component';
+import { OnboardingStep4Component } from './features//onboarding/onboarding-step4/onboarding-step4.component';
+import { OnboardingStep5Component } from './features//onboarding/onboarding-step5/onboarding-step5.component';
+import { ViewSummaryComponent } from './features//view-summary/view-summary.component';
+import { AddActivityComponent } from './features//add-activity/add-activity.component';
+import { RecordActivityComponent } from './features//record-activity/record-activity.component';
+import { ViewActivitiesComponent } from './features//view-activities/view-activities.component';
+import { ViewActivityComponent } from './features//view-activity/view-activity.component';
+import { AddEventComponent } from './features//add-event/add-event.component';
+import { ViewEventComponent } from './features//view-event/view-event.component';
+import { ViewScheduleComponent } from './features//view-schedule/view-schedule.component';
+import { ProfileComponent } from './features//profile/profile.component';
+import { SettingsComponent } from './features//settings/settings.component';
+import { TabsComponent } from './features//tabs/tabs.component';
+import { PlanDayComponent } from './features/plan-day/plan-day.component';
+import { PlanDayStep1Component } from './features/plan-day//plan-day-step1/plan-day-step1.component';
+import { PlanDayStep2Component } from './features/plan-day//plan-day-step2/plan-day-step2.component';
 
 export const routes: Route[] = [
   {
@@ -99,5 +99,5 @@ export const routes: Route[] = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'contents', component: ContentsComponent },
-  { path: '', redirectTo: '/app/events/plan/day/step2', pathMatch: 'full' },
+  { path: '', redirectTo: '/landing', pathMatch: 'full' },
 ];
