@@ -70,6 +70,8 @@ export class AddEventComponent {
       return;
     }
 
+    alert(JSON.stringify(payload));
+
     this.store.dispatch(EventActions.addone({ payload }));
   }
 }
