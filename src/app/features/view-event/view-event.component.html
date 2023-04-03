@@ -6,8 +6,11 @@
           <fa-icon class="text-primary text-3xl" icon="bell"></fa-icon>
         </ion-thumbnail>
         <div class="flex flex-col items-center gap-2">
-          <h5 class="text-xl font-bold">Rowing at the Gym</h5>
-          <h6 class="text-base text-medium">02 Apr 2023 @ 17:45-18:00</h6>
+          <h5 class="text-xl font-bold">{{ event.title }}</h5>
+          <h6 class="text-base text-medium">
+            {{ event.start | date }} @ {{ event.start | date : "HH:MM" }} -
+            {{ event.end | date : "HH:MM" }}
+          </h6>
         </div>
       </header>
       <main>
@@ -18,7 +21,9 @@
                 <span class="text-base text-dark">Activity</span>
               </ion-label>
               <ion-label slot="end">
-                <span class="text-sm text-medium">Rowing</span>
+                <span class="text-sm text-medium">{{
+                  event.workout.label
+                }}</span>
               </ion-label>
             </ion-item>
             <ion-item>
@@ -26,7 +31,7 @@
                 <span class="text-base text-dark">Alert</span>
               </ion-label>
               <ion-label slot="end">
-                <span class="text-sm text-medium">5 minutes before</span>
+                <span class="text-sm text-medium">{{ event.delay.label }}</span>
               </ion-label>
             </ion-item>
             <ion-item>
@@ -34,7 +39,9 @@
                 <span class="text-base text-dark">Reminder</span>
               </ion-label>
               <ion-label slot="end">
-                <span class="text-sm text-medium">Weekly</span>
+                <span class="text-sm text-medium">
+                  {{ event.repeat.label }}
+                </span>
               </ion-label>
             </ion-item>
           </ion-list>
