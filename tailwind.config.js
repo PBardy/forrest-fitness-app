@@ -2,10 +2,10 @@
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
-    fontFamily: {
-      sans: ["FigTree", "Arial", "sans-serif"],
-    },
     extend: {
+      fontFamily: {
+        sans: ["FigTree", "Arial", "sans-serif"],
+      },
       colors: {
         primary: "var(--ion-color-primary)",
         primary_tint: "var(--ion-color-primary-tint)",
