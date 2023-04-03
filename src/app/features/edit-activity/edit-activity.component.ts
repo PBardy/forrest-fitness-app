@@ -18,9 +18,9 @@ import {
 } from '@angular/forms';
 import { Activity, Workout } from '@types';
 import { ActivityActions } from '@app/store/activity/activity.actions';
-import { initialWorkouts } from '@app/store/workout/workout.reducer';
 import { ReplaySubject, filter, map, switchMap, takeUntil, tap } from 'rxjs';
 import { selectActivitiesById } from '@app/store/activity/activity.selectors';
+import { selectWorkouts } from '@app/store/workout/workout.selectors';
 
 @Component({
   selector: 'app-edit-activity',
@@ -38,8 +38,8 @@ import { selectActivitiesById } from '@app/store/activity/activity.selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditActivityComponent implements OnInit, OnDestroy {
-  public workouts$ = initialWorkouts;
   public destroy$ = new ReplaySubject<boolean>(1);
+  public workouts$ = this.store.select(selectWorkouts);
 
   public activity$ = this.route.paramMap.pipe(
     map((x) => x.get('id') as string),

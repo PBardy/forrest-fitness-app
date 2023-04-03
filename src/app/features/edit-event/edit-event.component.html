@@ -1,1 +1,132 @@
-<p>edit-event works!</p>
+<ng-container
+  *ngrxLet="{
+    event: event$,
+    workouts: workouts$,
+    eventDelays: eventDelays$,
+    eventRepeats: eventRepeats$
+  } as vm"
+>
+  <ng-container *ngIf="vm.event">
+    <ion-content class="ion-padding" fullscreen>
+      <header class="flex flex-col items-center gap-3 py-8">
+        <ion-thumbnail class="w-20 h-20 rounded-full">
+          <fa-icon class="text-primary text-3xl" icon="calendar-plus"></fa-icon>
+        </ion-thumbnail>
+        <h5 class="font-bold text-xl">Add Event</h5>
+      </header>
+      <main>
+        <form class="flex flex-col gap-4" [formGroup]="form">
+          <ion-list class="rounded-3xl" lines="none">
+            <ion-item>
+              <ion-input
+                class="text-xl"
+                placeholder="Title"
+                formControlName="title"
+              ></ion-input>
+            </ion-item>
+            <ion-accordion-group>
+              <ion-accordion>
+                <ion-item slot="header">
+                  <ion-label>
+                    <span class="text-medium">Workout</span>
+                  </ion-label>
+                </ion-item>
+                <ion-radio-group slot="content" formControlName="workout">
+                  <ng-container *ngFor="let workout of vm.workouts">
+                    <ion-item>
+                      <ion-label>{{ workout.label }} </ion-label>
+                      <ion-radio [value]="workout"></ion-radio>
+                    </ion-item>
+                  </ng-container>
+                </ion-radio-group>
+              </ion-accordion>
+              <ion-accordion>
+                <ion-item slot="header">
+                  <ion-label>
+                    <span class="text-medium">Start</span>
+                  </ion-label>
+                </ion-item>
+                <div slot="content">
+                  <ion-datetime
+                    formControlName="start"
+                    presentation="time"
+                    preferWheel
+                  ></ion-datetime>
+                </div>
+              </ion-accordion>
+              <ion-accordion>
+                <ion-item slot="header">
+                  <ion-label>
+                    <span class="text-medium">End</span>
+                  </ion-label>
+                </ion-item>
+                <div slot="content">
+                  <ion-datetime
+                    formControlName="end"
+                    presentation="time"
+                    preferWheel
+                  ></ion-datetime>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </ion-list>
+          <ion-list class="rounded-3xl" lines="none">
+            <ion-accordion-group>
+              <ion-accordion>
+                <ion-item slot="header">
+                  <ion-label>
+                    <span class="text-medium">Alert</span>
+                  </ion-label>
+                </ion-item>
+                <ion-radio-group slot="content" formControlName="delay">
+                  <ng-container *ngFor="let delay of vm.eventDelays">
+                    <ion-item>
+                      <ion-label>{{ delay.label }} </ion-label>
+                      <ion-radio [value]="delay"></ion-radio>
+                    </ion-item>
+                  </ng-container>
+                </ion-radio-group>
+              </ion-accordion>
+              <ion-accordion>
+                <ion-item slot="header">
+                  <ion-label>
+                    <span class="text-medium">Repeat</span>
+                  </ion-label>
+                </ion-item>
+                <ion-radio-group slot="content" formControlName="repeat">
+                  <ng-container *ngFor="let repeat of vm.eventRepeats">
+                    <ion-item>
+                      <ion-label>{{ repeat.label }} </ion-label>
+                      <ion-radio [value]="repeat"></ion-radio>
+                    </ion-item>
+                  </ng-container>
+                </ion-radio-group>
+              </ion-accordion>
+            </ion-accordion-group>
+          </ion-list>
+        </form>
+      </main>
+    </ion-content>
+
+    <ion-footer class="ion-padding">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button fill="clear" expand="full" (click)="onCancel()">
+              <span class="text-danger">Cancel</span>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button
+              fill="clear"
+              expand="full"
+              (click)="onSave(vm.event.id)"
+            >
+              <span class="text-primary">Save</span>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-footer>
+  </ng-container>
+</ng-container>

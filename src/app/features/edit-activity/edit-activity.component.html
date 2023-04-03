@@ -1,5 +1,5 @@
-<ng-container *ngrxLet="activity$ as activity">
-  <ng-container *ngIf="activity">
+<ng-container *ngrxLet="{ activity: activity$, workouts: workouts$ } as vm">
+  <ng-container *ngIf="vm.activity">
     <ion-content fullscreen>
       <header class="flex flex-col items-center gap-4 py-8">
         <ion-thumbnail class="w-20 h-20 rounded-full">
@@ -32,7 +32,7 @@
                 </ion-label>
               </ion-item>
               <ion-radio-group formControlName="workout" slot="content">
-                <ng-container *ngFor="let workout of workouts$">
+                <ng-container *ngFor="let workout of vm.workouts">
                   <ion-item>
                     <ion-label>
                       <span>{{ workout.label }}</span>
@@ -133,7 +133,7 @@
           class="flex-1"
           fill="clear"
           expand="full"
-          (click)="onSave(activity.id)"
+          (click)="onSave(vm.activity.id)"
         >
           <span class="text-primary">Save</span>
         </ion-button>
