@@ -21,6 +21,9 @@
     "lib": ["es2018", "dom"],
     "useDefineForClassFields": false,
     "paths": {
+      "@types": ["./src/types"],
+      "@enums": ["./src/enums"],
+      "@services/*": ["./src/app/services/*"],
       "@animations/*": ["./src/app/animations/*"],
       "@features/*": ["./src/app/features/*"],
       "@app/*": ["./src/app/*"],
