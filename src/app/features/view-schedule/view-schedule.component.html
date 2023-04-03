@@ -1,112 +1,103 @@
-<ion-header class="ion-no-border" translucent>
-  <ion-toolbar class="bg-transparent">
-    <ion-title class="text-center">Schedule</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content fullscreen>
-  <main class="relative">
-    <aside>
-      <ion-datetime presentation="date"></ion-datetime>
-    </aside>
-    <article>
-      <ion-modal
-        isOpen
-        [initialBreakpoint]="0.45"
-        [breakpoints]="[0, 0.25, 0.45, 0.65]"
+<ng-container
+  *ngrxLet="{
+    current: current$,
+    events: events$,
+    eventDates: eventDates$
+  } as vm"
+>
+  <ion-content fullscreen>
+    <main class="relative">
+      <header class="flex flex-col items-center gap-3 py-8">
+        <ion-thumbnail class="w-20 h-20 rounded-full">
+          <fa-icon class="text-primary text-3xl" icon="calendar"></fa-icon>
+        </ion-thumbnail>
+        <h5 class="font-bold text-xl">Schedule</h5>
+      </header>
+      <aside>
+        <ion-datetime
+          presentation="date"
+          (ionChange)="onChange($any($event))"
+          [highlightedDates]="vm.eventDates"
+        ></ion-datetime>
+      </aside>
+      <article>
+        <ion-modal
+          #modal
+          isOpen
+          [initialBreakpoint]="0.45"
+          [breakpoints]="[0, 0.25, 0.45, 0.65]"
+        >
+          <ng-template>
+            <ion-content>
+              <ion-list class="rounded-t-3xl h-full" lines="none">
+                <ion-list-header>
+                  <ion-label class="text-center">
+                    <span class="text-medium font-bold">
+                      {{ vm.current | date }}
+                    </span>
+                  </ion-label>
+                </ion-list-header>
+                <ng-container *ngIf="vm.events.length; else noEvents">
+                  <ng-container *ngFor="let item of vm.events">
+                    <ng-container
+                      *ngTemplateOutlet="event; context: { item }"
+                    ></ng-container>
+                  </ng-container>
+                </ng-container>
+                <ng-template #noEvents>
+                  <ion-item>
+                    <ion-label class="text-center py-4">
+                      <span class="text-warning">No events today</span>
+                    </ion-label>
+                  </ion-item>
+                </ng-template>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+      </article>
+    </main>
+    <ion-fab class="bottom-4" slot="fixed" vertical="bottom" horizontal="end">
+      <ion-fab-button
+        color="primary"
+        routerDirection="forward"
+        routerLink="/app/events/new"
       >
-        <ng-template>
-          <ion-content>
-            <ion-list class="rounded-t-3xl h-full" lines="none">
-              <ion-list-header>
-                <ion-label class="text-center">
-                  <span class="text-medium font-bold">
-                    {{ "2023-04-02T19:22:45.865Z" | date }}
-                  </span>
-                </ion-label>
-              </ion-list-header>
-              <ion-item class="py-2" button>
-                <ion-thumbnail class="rounded-full">
-                  <fa-icon class="text-primary" icon="dumbbell"></fa-icon>
-                </ion-thumbnail>
-                <ion-label class="py-2 px-4">
-                  <div class="font-bold text-sm mb-1">Weight Lifting</div>
-                  <div class="flex items-center text-xs gap-2">
-                    <div class="flex items-center gap-1">
-                      <fa-icon class="text-primary" icon="bell"></fa-icon>
-                      <span class="text-medium">5 mins</span>
-                    </div>
-                    <div class="text-dark">&middot;</div>
-                    <div class="flex items-center gap-2">
-                      <fa-icon class="text-primary" icon="repeat"></fa-icon>
-                      <span class="text-medium">Weekly</span>
-                    </div>
-                  </div>
-                </ion-label>
-                <ion-label slot="end">
-                  <div class="text-primary text-xs">17:30</div>
-                  <div class="text-medium text-xs">18:15</div>
-                </ion-label>
-              </ion-item>
-              <ion-item class="py-2" button>
-                <ion-thumbnail class="rounded-full">
-                  <fa-icon class="text-primary" icon="water"></fa-icon>
-                </ion-thumbnail>
-                <ion-label class="py-2 px-4">
-                  <div class="font-bold text-sm mb-1">Rowing at the Gym</div>
-                  <div class="flex items-center text-xs gap-2">
-                    <div class="flex items-center gap-1">
-                      <fa-icon class="text-primary" icon="bell"></fa-icon>
-                      <span class="text-medium">5 mins</span>
-                    </div>
-                    <div class="text-dark">&middot;</div>
-                    <div class="flex items-center gap-2">
-                      <fa-icon class="text-primary" icon="repeat"></fa-icon>
-                      <span class="text-medium">Weekly</span>
-                    </div>
-                  </div>
-                </ion-label>
-                <ion-label slot="end">
-                  <div class="text-primary text-xs">18:15</div>
-                  <div class="text-medium text-xs">19:15</div>
-                </ion-label>
-              </ion-item>
-              <ion-item class="py-2" button>
-                <ion-thumbnail class="rounded-full">
-                  <fa-icon class="text-primary" icon="walking"></fa-icon>
-                </ion-thumbnail>
-                <ion-label class="py-2 px-4">
-                  <div class="font-bold text-sm mb-1">Walking Home</div>
-                  <div class="flex items-center text-xs gap-2">
-                    <div class="flex items-center gap-1">
-                      <fa-icon class="text-primary" icon="bell"></fa-icon>
-                      <span class="text-medium">5 mins</span>
-                    </div>
-                    <div class="text-dark">&middot;</div>
-                    <div class="flex items-center gap-2">
-                      <fa-icon class="text-primary" icon="repeat"></fa-icon>
-                      <span class="text-medium">Weekly</span>
-                    </div>
-                  </div>
-                </ion-label>
-                <ion-label slot="end">
-                  <div class="text-primary text-xs">19:15</div>
-                  <div class="text-medium text-xs">19:45</div>
-                </ion-label>
-              </ion-item>
-            </ion-list>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-    </article>
-  </main>
-  <ion-fab class="bottom-4" slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button
-      color="primary"
-      routerDirection="forward"
-      routerLink="/app/events/new"
-    >
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-</ion-content>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
+</ng-container>
+
+<!-- Event item -->
+<ng-template let-item="item" #event>
+  <ion-item button (click)="onClick(item)">
+    <ion-thumbnail class="rounded-full my-2">
+      <fa-icon class="text-primary" [icon]="item.workout.icon"></fa-icon>
+    </ion-thumbnail>
+    <ion-label class="py-2 px-4">
+      <div class="font-bold text-sm mb-1">{{ item.title }}</div>
+      <div class="flex items-center text-xs gap-2">
+        <ng-container *ngIf="item.delay.by">
+          <div class="flex items-center gap-1">
+            <fa-icon class="text-primary" icon="bell"></fa-icon>
+            <span class="text-medium">{{ item.delay.by }} mins</span>
+          </div>
+        </ng-container>
+        <div class="text-dark">&middot;</div>
+        <ng-container *ngIf="item.repeat.frequency">
+          <div class="flex items-center gap-2">
+            <fa-icon class="text-primary" icon="repeat"></fa-icon>
+            <span class="text-medium">
+              Every {{ item.repeat.frequency }} days
+            </span>
+          </div>
+        </ng-container>
+      </div>
+    </ion-label>
+    <ion-label slot="end">
+      <div class="text-primary text-xs">{{ item.start | date : "HH:MM" }}</div>
+      <div class="text-medium text-xs">{{ item.end | date : "HH:MM" }}</div>
+    </ion-label>
+  </ion-item>
+</ng-template>

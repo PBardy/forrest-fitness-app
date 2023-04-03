@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, exhaustMap } from 'rxjs/operators';
+import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastService } from '@services/toast.service';
-import { tap } from 'rxjs';
+import { EMPTY, of, tap } from 'rxjs';
 import { switchMap } from 'rxjs';
 import { EventActions } from './event.actions';
 import { EventService } from '@services/event.service';
@@ -30,7 +30,7 @@ export class EventEfffects {
           switchMap((x) => this.event.getOne(x.id)),
           map((payload) => EventActions.onaddone({ payload })),
           tap(({ payload }) =>
-            this.router.navigate(['app', 'activities', payload.id])
+            this.router.navigate(['app', 'events', payload.id])
           )
         )
       )
@@ -44,7 +44,7 @@ export class EventEfffects {
       exhaustMap((payload) =>
         this.event.updateOne(payload.id, payload).pipe(
           map(() => EventActions.onupdateone({ payload })),
-          tap(() => this.router.navigate(['app', 'activities', payload.id]))
+          tap(() => this.router.navigate(['app', 'events', payload.id]))
         )
       )
     )
@@ -54,7 +54,7 @@ export class EventEfffects {
     () =>
       this.actions$.pipe(
         ofType(EventActions.onaddone),
-        exhaustMap(() => this.toast.present({ message: 'Activity Added' }))
+        exhaustMap(() => this.toast.present({ message: 'Event Added' }))
       ),
     { dispatch: false }
   );
@@ -63,7 +63,7 @@ export class EventEfffects {
     () =>
       this.actions$.pipe(
         ofType(EventActions.onupdateone),
-        exhaustMap(() => this.toast.present({ message: 'Activity Updated' }))
+        exhaustMap(() => this.toast.present({ message: 'Event Updated' }))
       ),
     { dispatch: false }
   );
@@ -72,7 +72,7 @@ export class EventEfffects {
     () =>
       this.actions$.pipe(
         ofType(EventActions.ondeleteone),
-        exhaustMap(() => this.toast.present({ message: 'Activity Delete' }))
+        exhaustMap(() => this.toast.present({ message: 'Event Deleted' }))
       ),
     { dispatch: false }
   );
@@ -83,7 +83,7 @@ export class EventEfffects {
       map((x) => x.payload),
       exhaustMap((payload) =>
         this.event.deleteOne(payload).pipe(
-          tap((_) => this.router.navigate(['app', 'activities'])),
+          tap((_) => this.router.navigate(['app', 'events'])),
           map(() => EventActions.ondeleteone({ payload }))
         )
       )

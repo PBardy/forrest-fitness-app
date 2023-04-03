@@ -28,6 +28,7 @@ import { PlanDayStep2Component } from './features/plan-day//plan-day-step2/plan-
 import { OnboardingComponent } from '@features/onboarding/onboarding.component';
 import { EditProfileComponent } from '@features/profile/edit-profile/edit-profile.component';
 import { EditActivityComponent } from '@features/edit-activity/edit-activity.component';
+import { EditEventComponent } from '@features/edit-event/edit-event.component';
 
 export const routes: Route[] = [
   {
@@ -70,7 +71,6 @@ export const routes: Route[] = [
         path: 'events',
         children: [
           { path: 'new', component: AddEventComponent },
-          { path: 'view', component: ViewEventComponent },
           {
             path: 'plan',
             children: [
@@ -88,6 +88,13 @@ export const routes: Route[] = [
             path: 'schedule',
             component: TabsComponent,
             children: [{ path: '', component: ViewScheduleComponent }],
+          },
+          {
+            path: ':id',
+            children: [
+              { path: 'edit', component: EditEventComponent },
+              { path: '', component: ViewEventComponent },
+            ],
           },
           { path: '', pathMatch: 'full', redirectTo: '/app/events/schedule' },
         ],
