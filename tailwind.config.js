@@ -2,6 +2,9 @@
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
   theme: {
+    fontFamily: {
+      sans: ["FigTree", "Arial", "sans-serif"],
+    },
     extend: {
       colors: {
         primary: "var(--ion-color-primary)",
