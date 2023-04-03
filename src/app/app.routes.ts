@@ -27,6 +27,7 @@ import { PlanDayStep1Component } from './features/plan-day//plan-day-step1/plan-
 import { PlanDayStep2Component } from './features/plan-day//plan-day-step2/plan-day-step2.component';
 import { OnboardingComponent } from '@features/onboarding/onboarding.component';
 import { EditProfileComponent } from '@features/profile/edit-profile/edit-profile.component';
+import { EditActivityComponent } from '@features/edit-activity/edit-activity.component';
 
 export const routes: Route[] = [
   {
@@ -45,13 +46,23 @@ export const routes: Route[] = [
         children: [
           { path: 'new', component: AddActivityComponent },
           { path: 'record', component: RecordActivityComponent },
-          { path: 'view', component: ViewActivityComponent },
           {
             path: 'all',
             component: TabsComponent,
-            children: [{ path: '', component: ViewActivitiesComponent }],
+            children: [
+              {
+                path: '',
+                component: ViewActivitiesComponent,
+              },
+            ],
           },
-          { path: ':id', component: ViewActivityComponent },
+          {
+            path: ':id',
+            children: [
+              { path: 'edit', component: EditActivityComponent },
+              { path: '', component: ViewActivityComponent },
+            ],
+          },
           { path: '', pathMatch: 'full', redirectTo: '/app/activities/all' },
         ],
       },

@@ -4,7 +4,6 @@ import { IonicModule } from '@ionic/angular';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Store } from '@ngrx/store';
-import { selectWorkouts } from '@app/store/workout/workout.selectors';
 import { LetModule } from '@ngrx/component';
 import {
   FormBuilder,
@@ -14,7 +13,6 @@ import {
 } from '@angular/forms';
 import { Activity, Workout } from '@types';
 import { ActivityActions } from '@app/store/activity/activity.actions';
-import { startWith, tap } from 'rxjs';
 import { initialWorkouts } from '@app/store/workout/workout.reducer';
 
 @Component({
@@ -42,6 +40,7 @@ export class AddActivityComponent {
     ]),
     start: this.fb.nonNullable.control<string>('', [Validators.required]),
     intensity: this.fb.nonNullable.control<number | undefined>(undefined),
+    duration: this.fb.nonNullable.control<number | undefined>(undefined),
     distance: this.fb.nonNullable.control<number | undefined>(undefined),
     energy: this.fb.nonNullable.control<number | undefined>(undefined),
     steps: this.fb.nonNullable.control<number | undefined>(undefined),
@@ -55,7 +54,7 @@ export class AddActivityComponent {
   ) {}
 
   public onCancel() {
-    this.router.navigate(['app', 'activities']);
+    this.router.navigate(['app', 'activities', 'all']);
   }
 
   public onSave() {
