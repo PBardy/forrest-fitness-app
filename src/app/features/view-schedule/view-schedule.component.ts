@@ -11,7 +11,8 @@ import {
 } from '@app/store/event/event.selectors';
 import { BehaviorSubject, map, switchMap } from 'rxjs';
 import { LetModule } from '@ngrx/component';
-import { Event, WithId } from '@types';
+import { Event, Model, WithId } from '@types';
+import { EventActions } from '@app/store/event/event.actions';
 
 @Component({
   selector: 'app-view-schedule',
@@ -61,5 +62,9 @@ export class ViewScheduleComponent {
 
     this.current$.next(parseISO(value));
     this.modal.present();
+  }
+
+  public onDelete(payload: Model<Event>) {
+    this.store.dispatch(EventActions.deleteone({ payload }));
   }
 }
