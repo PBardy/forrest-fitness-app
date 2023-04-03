@@ -14,5 +14,8 @@ export const profileReducer = createReducer(
   initialProfileState,
   on(ProfileActions.set, (state, { payload }) => {
     return { ...state, profile: payload };
+  }),
+  on(ProfileActions.update, (state, { payload }) => {
+    return { ...state, profile: payload };
   })
 );

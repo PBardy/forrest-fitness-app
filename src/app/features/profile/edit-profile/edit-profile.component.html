@@ -1,0 +1,120 @@
+<ion-content class="ion-padding" fullscreen>
+  <header class="flex flex-col items-center gap-4 py-8">
+    <ion-thumbnail class="w-20 h-20 rounded-full">
+      <fa-icon class="text-primary text-3xl" icon="pen"></fa-icon>
+    </ion-thumbnail>
+    <div clas="flex flex-col items-center text-center">
+      <h5 class="font-bold mb-1 text-xl">Edit profile</h5>
+    </div>
+  </header>
+  <main>
+    <form [formGroup]="form" #ngForm="ngForm">
+      <ion-list class="rounded-3xl" lines="none">
+        <ion-item>
+          <ion-label>
+            <span class="text-base">Height</span>
+          </ion-label>
+          <ion-input
+            id="height"
+            name="height"
+            type="number"
+            placeholder="Height (cm)"
+            formControlName="height"
+            class="text-right"
+            slot="end"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-base">Weight</span>
+          </ion-label>
+          <ion-label slot="end">
+            <ion-input
+              id="weight"
+              name="weight"
+              type="number"
+              placeholder="Weight (kg)"
+              formControlName="weight"
+              class="text-right"
+              slot="end"
+              required
+            ></ion-input>
+          </ion-label>
+        </ion-item>
+        <ion-accordion-group>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>Sex</ion-label>
+            </ion-item>
+            <ng-container *ngrxLet="sexes$ as sexes">
+              <ion-radio-group formControlName="sex" slot="content">
+                <ng-container *ngFor="let sex of sexes">
+                  <ion-item>
+                    <ion-label>{{ sex.label }}</ion-label>
+                    <ion-radio [value]="sex"></ion-radio>
+                  </ion-item>
+                </ng-container>
+              </ion-radio-group>
+            </ng-container>
+          </ion-accordion>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>Activity Level</ion-label>
+            </ion-item>
+            <ng-container *ngrxLet="activityLevels$ as levels">
+              <ion-radio-group formControlName="activityLevel" slot="content">
+                <ng-container *ngFor="let level of levels">
+                  <ion-item>
+                    <ion-label>{{ level.label }}</ion-label>
+                    <ion-radio [value]="level"></ion-radio>
+                  </ion-item>
+                </ng-container>
+              </ion-radio-group>
+            </ng-container>
+          </ion-accordion>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>Date of Birth</ion-label>
+            </ion-item>
+            <div slot="content">
+              <ion-datetime
+                formControlName="dob"
+                presentation="date"
+              ></ion-datetime>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-list>
+    </form>
+  </main>
+</ion-content>
+
+<ion-footer class="ion-padding bg-[#222428aa]">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          color="danger"
+          fill="clear"
+          expand="full"
+          shape="round"
+          (click)="onCancel()"
+        >
+          <span>Cancel</span>
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button
+          color="primary"
+          fill="clear"
+          expand="full"
+          shape="round"
+          (click)="onSave()"
+        >
+          <span>Save</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

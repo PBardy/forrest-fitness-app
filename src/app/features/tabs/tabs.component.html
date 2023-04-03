@@ -2,20 +2,20 @@
   <ion-router-outlet></ion-router-outlet>
   <ion-tabs>
     <ion-tab-bar class="border-t border-step100" slot="bottom">
-      <ion-tab-button tab="summary">
-        <ion-icon name="home"></ion-icon>
+      <ion-tab-button tab="summary" routerLink="/app/summary">
+        <fa-icon icon="home"></fa-icon>
         <span>Home</span>
       </ion-tab-button>
-      <ion-tab-button tab="activities">
-        <ion-icon name="list"></ion-icon>
+      <ion-tab-button tab="activities" routerLink="/app/activities">
+        <fa-icon icon="rectangle-list"></fa-icon>
         <span>Journal</span>
       </ion-tab-button>
-      <ion-tab-button tab="events">
-        <ion-icon name="calendar"></ion-icon>
+      <ion-tab-button tab="events" routerLink="/app/events">
+        <fa-icon icon="calendar"></fa-icon>
         <span>Schedule</span>
       </ion-tab-button>
-      <ion-tab-button tab="profile">
-        <ion-icon name="person"></ion-icon>
+      <ion-tab-button tab="profile" routerLink="/app/profile">
+        <fa-icon icon="user"></fa-icon>
         <span>Profile</span>
       </ion-tab-button>
     </ion-tab-bar>

@@ -3,12 +3,27 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Store } from '@ngrx/store';
+import { selectProfile } from '@app/store/profile/profile.selectors';
+import { LetModule } from '@ngrx/component';
+import { AgePipe } from '@pipes/age.pipe';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterModule, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    IonicModule,
+    RouterModule,
+    FontAwesomeModule,
+    LetModule,
+    AgePipe,
+  ],
   templateUrl: './profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileComponent {}
+export class ProfileComponent {
+  public profile$ = this.store.select(selectProfile);
+
+  public constructor(private readonly store: Store) {}
+}

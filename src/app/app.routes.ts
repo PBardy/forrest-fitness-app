@@ -26,6 +26,7 @@ import { PlanDayComponent } from './features/plan-day/plan-day.component';
 import { PlanDayStep1Component } from './features/plan-day//plan-day-step1/plan-day-step1.component';
 import { PlanDayStep2Component } from './features/plan-day//plan-day-step2/plan-day-step2.component';
 import { OnboardingComponent } from '@features/onboarding/onboarding.component';
+import { EditProfileComponent } from '@features/profile/edit-profile/edit-profile.component';
 
 export const routes: Route[] = [
   {
@@ -34,7 +35,10 @@ export const routes: Route[] = [
       {
         path: 'summary',
         component: TabsComponent,
-        children: [{ path: 'view', component: ViewSummaryComponent }],
+        children: [
+          { path: 'view', component: ViewSummaryComponent },
+          { path: '', pathMatch: 'full', redirectTo: '/app/summary/view' },
+        ],
       },
       {
         path: 'activities',
@@ -44,6 +48,7 @@ export const routes: Route[] = [
           { path: 'record', component: RecordActivityComponent },
           { path: 'view', component: ViewActivityComponent },
           { path: 'all', component: ViewActivitiesComponent },
+          { path: '', pathMatch: 'full', redirectTo: '/app/activities/all' },
         ],
       },
       {
@@ -69,17 +74,28 @@ export const routes: Route[] = [
             component: TabsComponent,
             children: [{ path: '', component: ViewScheduleComponent }],
           },
+          { path: '', pathMatch: 'full', redirectTo: '/app/events/schedule' },
         ],
       },
       {
         path: 'profile',
-        component: TabsComponent,
-        children: [{ path: 'view', component: ProfileComponent }],
+        children: [
+          {
+            path: 'view',
+            component: TabsComponent,
+            children: [{ path: '', component: ProfileComponent }],
+          },
+          { path: 'edit', component: EditProfileComponent },
+          { path: '', pathMatch: 'full', redirectTo: '/app/profile/view' },
+        ],
       },
       {
         path: 'settings',
         component: TabsComponent,
-        children: [{ path: 'view', component: SettingsComponent }],
+        children: [
+          { path: 'view', component: SettingsComponent },
+          { path: '', pathMatch: 'full', redirectTo: '/app/settings/view' },
+        ],
       },
       { path: '', pathMatch: 'full', redirectTo: '/app/summary/view' },
     ],

@@ -5,5 +5,6 @@ export const ProfileActions = createActionGroup({
   source: 'Profile',
   events: {
     Set: props<{ payload: Profile }>(),
+    Update: props<{ payload: Profile }>(),
   },
 });
