@@ -125,7 +125,26 @@
                           [icon]="workout.icon"
                         ></fa-icon>
                       </ion-thumbnail>
-                      <ion-label class="px-4">{{ workout.label }}</ion-label>
+                      <ion-label class="px-4">
+                        <div class="mb-1">{{ workout.label }}</div>
+                        <div class="flex items-center gap-4 text-xs">
+                          <div class="flex items-center gap-1">
+                            <fa-icon
+                              class="text-primary"
+                              icon="heart"
+                            ></fa-icon>
+                            <span class="text-medium">
+                              {{ workout.intensity }} pts/min
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-1">
+                            <fa-icon class="text-primary" icon="fire"></fa-icon>
+                            <span class="text-medium">
+                              {{ workout.energy }} cal/min
+                            </span>
+                          </div>
+                        </div>
+                      </ion-label>
                     </ion-item>
                     <ion-item-options>
                       <ion-item-option class="bg-step50">

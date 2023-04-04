@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         sans: ["FigTree", "Arial", "sans-serif"],
       },
+
       colors: {
         primary: "var(--ion-color-primary)",
         primary_tint: "var(--ion-color-primary-tint)",
@@ -36,6 +37,15 @@ module.exports = {
         step850: "#dbdbdb",
         step900: "#e7e7e7",
         step950: "#f3f3f3",
+      },
+      keyframes: {
+        grow: {
+          "0%": { opacity: 0, transform: "scale(0)" },
+          "100%": { opacity: 1, transform: "scale(1)" },
+        },
+      },
+      animation: {
+        grow: "grow 0.25s ease-in-out",
       },
     },
   },

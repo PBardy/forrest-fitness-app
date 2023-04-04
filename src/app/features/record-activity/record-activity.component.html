@@ -21,17 +21,26 @@
       <ng-container *ngIf="vm.started && !vm.stopped">
         <ion-thumbnail class="w-20 h-20 rounded-full">
           <ng-container *ngIf="vm.paused">
-            <fa-icon class="text-secondary text-3xl" icon="pause"></fa-icon>
+            <fa-icon
+              class="text-secondary text-3xl animate-grow"
+              icon="pause"
+            ></fa-icon>
           </ng-container>
           <ng-container *ngIf="!vm.paused">
-            <fa-icon class="text-primary text-3xl" icon="refresh"></fa-icon>
+            <fa-icon
+              class="text-primary text-3xl animate-spin"
+              icon="refresh"
+            ></fa-icon>
           </ng-container>
         </ion-thumbnail>
         <h5 class="font-bold text-xl">Recording Workout</h5>
       </ng-container>
       <ng-container *ngIf="vm.started && vm.stopped">
         <ion-thumbnail class="w-20 h-20 rounded-full">
-          <fa-icon class="text-primary text-3xl" icon="check"></fa-icon>
+          <fa-icon
+            class="text-primary text-3xl animate-grow"
+            icon="check"
+          ></fa-icon>
         </ion-thumbnail>
         <h5 class="font-bold text-xl">Recorded Workout</h5>
       </ng-container>
@@ -44,7 +53,11 @@
               <h5 class="text-medium">{{ workout.label }}</h5>
             </ion-button>
           </ng-container>
-          <h1 class="text-primary text-4xl font-semibold">
+          <h1
+            class="text-primary text-4xl font-semibold"
+            [class.text-warning]="!vm.started"
+            [class.text-secondary]="vm.paused && !vm.stopped"
+          >
             {{ vm.stopwatch | stopwatch }}
           </h1>
         </section>
@@ -52,19 +65,31 @@
           <ion-grid>
             <ion-row>
               <ion-col class="flex flex-col items-center px-4">
-                <span class="text-primary_tint font-semibold text-xl">
+                <span
+                  class="text-primary_tint font-semibold text-xl"
+                  [class.text-warning]="!vm.started"
+                  [class.text-secondary]="vm.paused && !vm.stopped"
+                >
                   {{ vm.intensity }}
                 </span>
                 <span class="text-medium text-xs">pts</span>
               </ion-col>
               <ion-col class="flex flex-col items-center px-4">
-                <span class="text-primary_tint font-semibold text-xl">
+                <span
+                  class="text-primary_tint font-semibold text-xl"
+                  [class.text-warning]="!vm.started"
+                  [class.text-secondary]="vm.paused && !vm.stopped"
+                >
                   {{ vm.distance }}
                 </span>
                 <span class="text-medium text-xs">km</span>
               </ion-col>
               <ion-col class="flex flex-col items-center px-4">
-                <span class="text-primary_tint font-semibold text-xl">
+                <span
+                  class="text-primary_tint font-semibold text-xl"
+                  [class.text-warning]="!vm.started"
+                  [class.text-secondary]="vm.paused && !vm.stopped"
+                >
                   {{ vm.energy }}
                 </span>
                 <span class="text-medium text-xs">cal</span>
