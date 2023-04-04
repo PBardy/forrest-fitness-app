@@ -15,9 +15,12 @@ export const eventRepeatAdapter: EntityAdapter<WithId<EventRepeat>> =
 
 export const initialEventRepeatState = eventRepeatAdapter.setAll(
   [
-    { id: '1', label: 'No repeat', frequency: null },
-    { id: '2', label: 'Daily', frequency: 1 },
-    { id: '3', label: 'Weekly', frequency: 7 },
+    { id: '1', label: 'No repeat' },
+    { id: '2', label: 'Daily', every: 'day' },
+    { id: '3', label: 'Weekly', every: 'week' },
+    { id: '4', label: 'Bi-weekly', every: 'two-weeks' },
+    { id: '5', label: 'Monthly', every: 'month' },
+    { id: '6', label: 'Yearly', every: 'year' },
   ],
   eventRepeatAdapter.getInitialState()
 );
