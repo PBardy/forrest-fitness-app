@@ -1,3 +1,4 @@
+import { ScheduleEvery } from '@capacitor/local-notifications';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export type WithId<T> = T & {
@@ -46,7 +47,7 @@ export type EventDelay = {
 
 export type EventRepeat = {
   label: string;
-  frequency: number | null;
+  every?: ScheduleEvery;
 };
 
 export type Sex = {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonDatetime, IonModal, IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router, RouterModule } from '@angular/router';
-import { parseISO } from 'date-fns';
+import { isAfter, isBefore, parseISO } from 'date-fns';
 import { Store } from '@ngrx/store';
 import {
   selectEventfulDays,
@@ -66,5 +66,17 @@ export class ViewScheduleComponent {
 
   public onDelete(payload: Model<Event>) {
     this.store.dispatch(EventActions.deleteone({ payload }));
+  }
+
+  public isComplete(item: Model<Event>) {
+    return item.completed;
+  }
+
+  public isIncomplete(item: Model<Event>) {
+    return !item.completed && isAfter(parseISO(item.start), new Date());
+  }
+
+  public isIndeterminate(item: Model<Event>) {
+    return !item.completed && isBefore(parseISO(item.start), new Date());
   }
 }

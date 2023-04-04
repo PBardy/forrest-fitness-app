@@ -12,11 +12,6 @@ export class NotificationsService {
   public ln = registerPlugin<LocalNotificationsPlugin>('LocalNotifications');
 
   public schedule(event: WithId<Event>) {
-    alert('Scheduling event');
-    const start = parseISO(event.start);
-    const at = addMinutes(start, -(event.delay.by ?? 0));
-    alert(JSON.stringify(at));
-
     return from(
       this.ln.schedule({
         notifications: [
@@ -25,7 +20,8 @@ export class NotificationsService {
             title: `Upcoming: ${event.title}`,
             body: `${event.workout.label}`,
             schedule: {
-              at,
+              at: addMinutes(parseISO(event.start), -(event.delay.by ?? 0)),
+              every: event.repeat.every,
             },
             extra: event,
           },
