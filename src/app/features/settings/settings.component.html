@@ -17,7 +17,7 @@
     <main>
       <form class="flex flex-col gap-4" [formGroup]="form">
         <!-- Event Settings -->
-        <ion-list class="rounded-3xl" formGroupName="events">
+        <ion-list class="rounded-3xl" formGroupName="events" lines="none">
           <ion-list-header>
             <div class="font-bold text-primary text-base w-full px-4">
               Event
@@ -80,6 +80,55 @@
                   </ion-item>
                 </ng-container>
               </ion-radio-group>
+            </ion-accordion>
+          </ion-accordion-group>
+        </ion-list>
+        <!-- Event Settings -->
+        <ion-list class="rounded-3xl" lines="none">
+          <ion-list-header>
+            <div class="font-bold text-primary text-base w-full px-4">
+              Activities
+            </div>
+            <ion-button fill="clear" shape="rounded" slot="end">
+              <fa-icon icon="add"></fa-icon>
+            </ion-button>
+          </ion-list-header>
+          <ion-accordion-group>
+            <ion-accordion>
+              <ion-item slot="header">
+                <ion-label>Manage workouts</ion-label>
+              </ion-item>
+              <ion-list slot="content" lines="none">
+                <ion-item color="none" class="bg-step100" button detail>
+                  <ion-thumbnail class="bg-step200 rounded-full my-2">
+                    <fa-icon class="text-warning" icon="add"></fa-icon>
+                  </ion-thumbnail>
+                  <ion-label class="px-4">Add custom workout</ion-label>
+                </ion-item>
+                <ng-container *ngFor="let workout of vm.workouts">
+                  <ion-item-sliding>
+                    <ion-item button detail>
+                      <ion-thumbnail class="rounded-full my-2">
+                        <fa-icon
+                          class="text-primary"
+                          [icon]="workout.icon"
+                        ></fa-icon>
+                      </ion-thumbnail>
+                      <ion-label class="px-4">{{ workout.label }}</ion-label>
+                    </ion-item>
+                    <ion-item-options>
+                      <ion-item-option class="bg-step50">
+                        <button class="px-8" (click)="onDeleteWorkout(workout)">
+                          <fa-icon
+                            class="text-danger text-lg"
+                            icon="trash"
+                          ></fa-icon>
+                        </button>
+                      </ion-item-option>
+                    </ion-item-options>
+                  </ion-item-sliding>
+                </ng-container>
+              </ion-list>
             </ion-accordion>
           </ion-accordion-group>
         </ion-list>

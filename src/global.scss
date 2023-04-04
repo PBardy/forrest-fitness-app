@@ -58,6 +58,10 @@ ion-thumbnail {
   background: var(--ion-color-step-100);
 }
 
+ion-thumbnail.bg-step200 {
+  background: var(--ion-color-step-200);
+}
+
 ion-fab-button[data-desc] {
   position: relative;
 }

@@ -1,6 +1,7 @@
-import { createReducer } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { Workout, WithId } from '@types';
+import { WorkoutActions } from './workout.actions';
 
 export const selectId = (a: WithId<Workout>): string => {
   return String(a.id);
@@ -75,4 +76,16 @@ export const initialWorkoutState = workoutAdapter.setAll(
   workoutAdapter.getInitialState()
 );
 
-export const workoutReducer = createReducer(initialWorkoutState);
+export const workoutReducer = createReducer(
+  initialWorkoutState,
+  on(WorkoutActions.onaddone, (state, { payload }) => {
+    return workoutAdapter.addOne(payload, state);
+  }),
+  on(WorkoutActions.onupdateone, (state, { payload }) => {
+    const id = payload.id;
+    return workoutAdapter.updateOne({ id, changes: payload }, state);
+  }),
+  on(WorkoutActions.ondeleteone, (state, { payload }) => {
+    return workoutAdapter.removeOne(payload.id, state);
+  })
+);

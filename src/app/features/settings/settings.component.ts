@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -18,6 +18,7 @@ import { EventDelay, EventRepeat, Settings, WithId, Workout } from '@types';
 import { selectSettings } from '@app/store/settings/settings.selectors';
 import { ReplaySubject, takeUntil } from 'rxjs';
 import { SettingsActions } from '@app/store/settings/settings.actions';
+import { WorkoutActions } from '@app/store/workout/workout.actions';
 
 @Component({
   selector: 'app-settings',
@@ -52,7 +53,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   public constructor(
     private readonly store: Store,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -72,5 +74,17 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.complete();
+  }
+
+  public onAddWorkout() {
+    this.router.navigate(['app', 'workouts', 'new']);
+  }
+
+  public onEditWorkout(payload: WithId<Workout>) {
+    this.router.navigate(['app', 'workouts', payload.id, 'edit']);
+  }
+
+  public onDeleteWorkout(payload: WithId<Workout>) {
+    this.store.dispatch(WorkoutActions.deleteone({ payload }));
   }
 }

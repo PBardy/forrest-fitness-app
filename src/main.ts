@@ -8,8 +8,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { StoreModule, provideStore } from '@ngrx/store';
+import { EffectsModule, provideEffects } from '@ngrx/effects';
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
@@ -20,6 +20,7 @@ import { ProfileEffects } from '@app/store/profile/profile.effects';
 import { ActivityEfffects } from '@app/store/activity/activity.effects';
 import { EventEfffects } from '@app/store/event/event.effects';
 import { NotificationEffects } from '@app/store/notifications/notification.effects';
+import { WorkoutEffects } from '@app/store/workout/workout.effects';
 
 if (environment.production) {
   enableProdMode();
@@ -35,15 +36,16 @@ bootstrapApplication(AppComponent, {
       AngularFireDatabaseModule,
       AngularFireModule.initializeApp(environment.firebaseConfig),
       IonicModule.forRoot({ navAnimation: customAnimation }),
-      IonicStorageModule.forRoot(),
-      StoreModule.forRoot(reducers, { metaReducers }),
-      EffectsModule.forRoot([
-        ProfileEffects,
-        ActivityEfffects,
-        EventEfffects,
-        NotificationEffects,
-      ])
+      IonicStorageModule.forRoot()
     ),
     provideRouter(routes),
+    provideStore(reducers, { metaReducers }),
+    provideEffects([
+      ProfileEffects,
+      ActivityEfffects,
+      EventEfffects,
+      NotificationEffects,
+      WorkoutEffects,
+    ]),
   ],
 });
