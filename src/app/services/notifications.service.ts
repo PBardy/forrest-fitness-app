@@ -11,11 +11,9 @@ import { from } from 'rxjs';
 export class NotificationsService {
   public ln = registerPlugin<LocalNotificationsPlugin>('LocalNotifications');
 
-  public schedule(event: WithId<Event>) {
-    alert('Scheduling event');
+  public async schedule(event: WithId<Event>) {
     const start = parseISO(event.start);
     const at = addMinutes(start, -(event.delay.by ?? 0));
-    alert(JSON.stringify(at));
 
     return from(
       this.ln.schedule({

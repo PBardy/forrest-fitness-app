@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, exhaustMap, catchError } from 'rxjs/operators';
+import { map, exhaustMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastService } from '@services/toast.service';
-import { EMPTY, of, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { switchMap } from 'rxjs';
 import { EventActions } from './event.actions';
 import { EventService } from '@services/event.service';
