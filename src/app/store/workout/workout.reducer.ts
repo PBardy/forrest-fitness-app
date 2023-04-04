@@ -85,7 +85,7 @@ export const workoutReducer = createReducer(
     const id = payload.id;
     return workoutAdapter.updateOne({ id, changes: payload }, state);
   }),
-  on(WorkoutActions.ondeleteone, (state, { payload }) => {
+  on(WorkoutActions.deleteone, (state, { payload }) => {
     return workoutAdapter.removeOne(payload.id, state);
   })
 );

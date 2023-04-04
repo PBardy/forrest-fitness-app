@@ -97,9 +97,20 @@
             <ion-accordion>
               <ion-item slot="header">
                 <ion-label>Manage workouts</ion-label>
+                <ion-label slot="end">
+                  <span class="text-medium text-sm px-2">
+                    {{ vm.workouts.length }}
+                  </span>
+                </ion-label>
               </ion-item>
               <ion-list slot="content" lines="none">
-                <ion-item color="none" class="bg-step100" button detail>
+                <ion-item
+                  color="none"
+                  class="bg-step100"
+                  button
+                  detail
+                  (click)="onAddWorkout()"
+                >
                   <ion-thumbnail class="bg-step200 rounded-full my-2">
                     <fa-icon class="text-warning" icon="add"></fa-icon>
                   </ion-thumbnail>
@@ -107,7 +118,7 @@
                 </ion-item>
                 <ng-container *ngFor="let workout of vm.workouts">
                   <ion-item-sliding>
-                    <ion-item button detail>
+                    <ion-item button detail (click)="onEditWorkout(workout)">
                       <ion-thumbnail class="rounded-full my-2">
                         <fa-icon
                           class="text-primary"

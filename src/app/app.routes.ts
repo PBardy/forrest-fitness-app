@@ -29,6 +29,8 @@ import { OnboardingComponent } from '@features/onboarding/onboarding.component';
 import { EditProfileComponent } from '@features/profile/edit-profile/edit-profile.component';
 import { EditActivityComponent } from '@features/edit-activity/edit-activity.component';
 import { EditEventComponent } from '@features/edit-event/edit-event.component';
+import { AddWorkoutComponent } from '@features/add-workout/add-workout.component';
+import { EditWorkoutComponent } from '@features/edit-workout/edit-workout.component';
 
 export const routes: Route[] = [
   {
@@ -117,6 +119,16 @@ export const routes: Route[] = [
         children: [
           { path: 'view', component: SettingsComponent },
           { path: '', pathMatch: 'full', redirectTo: '/app/settings/view' },
+        ],
+      },
+      {
+        path: 'workouts',
+        children: [
+          { path: 'new', component: AddWorkoutComponent },
+          {
+            path: ':id',
+            children: [{ path: '', component: EditWorkoutComponent }],
+          },
         ],
       },
       { path: '', pathMatch: 'full', redirectTo: '/app/summary/view' },

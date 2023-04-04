@@ -9,6 +9,5 @@ export const WorkoutActions = createActionGroup({
     DeleteOne: props<{ payload: WithId<Workout> }>(),
     OnAddOne: props<{ payload: WithId<Workout> }>(),
     OnUpdateOne: props<{ payload: WithId<Workout> }>(),
-    OnDeleteOne: props<{ payload: WithId<Workout> }>(),
   },
 });
