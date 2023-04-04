@@ -67,16 +67,4 @@ export class ViewScheduleComponent {
   public onDelete(payload: Model<Event>) {
     this.store.dispatch(EventActions.deleteone({ payload }));
   }
-
-  public isComplete(item: Model<Event>) {
-    return item.completed;
-  }
-
-  public isIncomplete(item: Model<Event>) {
-    return !item.completed && isAfter(parseISO(item.start), new Date());
-  }
-
-  public isIndeterminate(item: Model<Event>) {
-    return !item.completed && isBefore(parseISO(item.start), new Date());
-  }
 }

@@ -1,15 +1,28 @@
 import { Injectable } from '@angular/core';
 import { registerPlugin } from '@capacitor/core';
-import { LocalNotificationsPlugin } from '@capacitor/local-notifications';
+import {
+  LocalNotificationsPlugin,
+  PendingLocalNotificationSchema,
+} from '@capacitor/local-notifications';
 import { Event, WithId } from '@types';
 import { addMinutes, parseISO } from 'date-fns';
-import { from } from 'rxjs';
+import { BehaviorSubject, from, map, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationsService {
   public ln = registerPlugin<LocalNotificationsPlugin>('LocalNotifications');
+  public pending$ = new BehaviorSubject<PendingLocalNotificationSchema[]>([]);
+
+  public constructor() {
+    this.setPending();
+  }
+
+  public async setPending() {
+    const pending = await this.ln.getPending();
+    this.pending$.next(pending.notifications);
+  }
 
   public schedule(event: WithId<Event>) {
     return from(
@@ -27,6 +40,14 @@ export class NotificationsService {
           },
         ],
       })
-    );
+    ).pipe(switchMap((_) => this.setPending()));
+  }
+
+  public unschedule(event: PendingLocalNotificationSchema) {
+    return from(
+      this.ln.cancel({
+        notifications: [{ id: event.id }],
+      })
+    ).pipe(switchMap((_) => this.setPending()));
   }
 }

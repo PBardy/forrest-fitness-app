@@ -76,3 +76,12 @@ export type ActivityLevelEnum =
   | 'Moderate'
   | 'Active'
   | 'Very Active';
+
+type Range = 'Daily' | 'Weekly' | 'Monthly';
+
+type Summary = {
+  energy: number;
+  distance: number;
+  intensity: number;
+  percentage: number;
+};
