@@ -85,6 +85,15 @@ export class AddEventComponent implements OnInit, OnDestroy {
     this.settings$
       .pipe(takeUntil(this.destroy$))
       .subscribe((x) => this.form.patchValue(x.events));
+
+    this.form.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (x) =>
+          x.workout &&
+          this.title.value == '' &&
+          this.title.patchValue(x.workout.label)
+      );
   }
 
   public ngOnDestroy(): void {

@@ -1,145 +1,152 @@
-<ion-content fullscreen>
-  <header class="flex flex-col items-center gap-4 py-8">
-    <ion-thumbnail class="w-20 h-20 rounded-full">
-      <fa-icon class="text-primary text-3xl" icon="walking"></fa-icon>
-    </ion-thumbnail>
-    <h5 class="font-bold text-xl">Add Activity</h5>
-  </header>
-  <form
-    class="flex flex-col gap-4 ion-padding"
-    [formGroup]="form"
-    #ngForm="ngForm"
-  >
-    <ion-list class="rounded-3xl" lines="none">
-      <ion-item>
-        <ion-input
-          id="title"
-          name="title"
-          type="text"
-          placeholder="Title"
-          formControlName="title"
-          class="text-xl"
-          required
-        ></ion-input>
-      </ion-item>
-      <ion-accordion-group>
-        <ion-accordion>
-          <ion-item slot="header">
-            <ion-label>
-              <span class="text-medium">Workout</span>
-            </ion-label>
-            <ng-container *ngIf="form.controls.workout.value">
+<ng-container *ngrxLet="{ workouts: workouts$ } as vm">
+  <ion-content fullscreen>
+    <header class="flex flex-col items-center gap-4 py-8">
+      <ion-thumbnail class="w-20 h-20 rounded-full">
+        <fa-icon class="text-primary text-3xl" icon="walking"></fa-icon>
+      </ion-thumbnail>
+      <h5 class="font-bold text-xl">Add Activity</h5>
+    </header>
+    <form
+      class="flex flex-col gap-4 ion-padding"
+      [formGroup]="form"
+      #ngForm="ngForm"
+    >
+      <ion-list class="rounded-3xl" lines="none">
+        <ion-item>
+          <ion-input
+            id="title"
+            name="title"
+            type="text"
+            placeholder="Title"
+            formControlName="title"
+            class="text-xl"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-accordion-group>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>
+                <span class="text-medium">Workout</span>
+              </ion-label>
+              <ng-container *ngIf="form.controls.workout.value">
+                <ion-label slot="end">
+                  <span class="text-medium text-sm px-2">
+                    {{ form.controls.workout.value.label }}
+                  </span>
+                </ion-label>
+              </ng-container>
+            </ion-item>
+            <ion-radio-group formControlName="workout" slot="content">
+              <ng-container *ngFor="let workout of vm.workouts">
+                <ion-item>
+                  <ion-label>
+                    <span>{{ workout.label }}</span>
+                  </ion-label>
+                  <ion-radio [value]="workout"></ion-radio>
+                </ion-item>
+              </ng-container>
+            </ion-radio-group>
+          </ion-accordion>
+          <ion-accordion>
+            <ion-item slot="header">
+              <ion-label>
+                <span class="text-medium">Start</span>
+              </ion-label>
               <ion-label slot="end">
                 <span class="text-medium text-sm px-2">
-                  {{ form.controls.workout.value.label }}
+                  {{ form.controls.start.value | date : "HH:mm" }}
                 </span>
               </ion-label>
-            </ng-container>
-          </ion-item>
-          <ion-radio-group formControlName="workout" slot="content">
-            <ng-container *ngFor="let workout of workouts$">
-              <ion-item>
-                <ion-label>
-                  <span>{{ workout.label }}</span>
-                </ion-label>
-                <ion-radio [value]="workout"></ion-radio>
-              </ion-item>
-            </ng-container>
-          </ion-radio-group>
-        </ion-accordion>
-        <ion-accordion>
-          <ion-item slot="header">
-            <ion-label>
-              <span class="text-medium">Start</span>
-            </ion-label>
-            <ion-label slot="end">
-              <span class="text-medium text-sm px-2">
-                {{ form.controls.start.value | date : "HH:mm" }}
-              </span>
-            </ion-label>
-          </ion-item>
-          <div slot="content">
-            <ion-datetime
-              presentation="time"
-              formControlName="start"
-              preferWheel
-            ></ion-datetime>
-          </div>
-        </ion-accordion>
-      </ion-accordion-group>
-    </ion-list>
-    <ion-list class="rounded-3xl" lines="none">
-      <ion-item>
-        <ion-label>
-          <span class="text-medium">Duration</span>
-        </ion-label>
-        <ion-input
-          id="duration"
-          name="duration"
-          type="number"
-          placeholder="Add Mins"
-          formControlName="duration"
-          class="text-right"
-          slot="end"
-          clearOnEdit
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <span class="text-medium">Intensity</span>
-        </ion-label>
-        <ion-input
-          id="intensity"
-          name="intensity"
-          type="number"
-          placeholder="Add Heart Pts"
-          formControlName="intensity"
-          class="text-right font-sans"
-          slot="end"
-          clearOnEdit
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <span class="text-medium">Energy</span>
-        </ion-label>
-        <ion-input
-          id="energy"
-          name="energy"
-          type="number"
-          clearOnEdit
-          placeholder="Add Cal"
-          formControlName="energy"
-          class="text-right font-sans"
-          slot="end"
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <span class="text-medium">Distance</span>
-        </ion-label>
-        <ion-input
-          id="distance"
-          name="distance"
-          type="number"
-          clearOnEdit
-          placeholder="Add km"
-          formControlName="distance"
-          class="text-right font-sans"
-          slot="end"
-        ></ion-input>
-      </ion-item>
-    </ion-list>
-  </form>
-</ion-content>
+            </ion-item>
+            <div slot="content">
+              <ion-datetime
+                presentation="time"
+                formControlName="start"
+                preferWheel
+              ></ion-datetime>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-list>
+      <ion-list class="rounded-3xl" lines="none">
+        <ion-item>
+          <ion-label>
+            <span class="text-medium">Duration</span>
+          </ion-label>
+          <ion-input
+            id="duration"
+            name="duration"
+            type="number"
+            placeholder="Add Mins"
+            formControlName="duration"
+            class="text-right"
+            slot="end"
+            clearOnEdit
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-medium">Intensity</span>
+          </ion-label>
+          <ion-input
+            id="intensity"
+            name="intensity"
+            type="number"
+            placeholder="Add Heart Pts"
+            formControlName="intensity"
+            class="text-right font-sans"
+            slot="end"
+            clearOnEdit
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-medium">Energy</span>
+          </ion-label>
+          <ion-input
+            id="energy"
+            name="energy"
+            type="number"
+            clearOnEdit
+            placeholder="Add Cal"
+            formControlName="energy"
+            class="text-right font-sans"
+            slot="end"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <span class="text-medium">Distance</span>
+          </ion-label>
+          <ion-input
+            id="distance"
+            name="distance"
+            type="number"
+            clearOnEdit
+            placeholder="Add km"
+            formControlName="distance"
+            class="text-right font-sans"
+            slot="end"
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ion-content>
 
-<ion-footer>
-  <footer class="flex items-center ion-padding w-full">
-    <ion-button class="flex-1" fill="clear" expand="full" (click)="onCancel()">
-      <span class="text-danger">Cancel</span>
-    </ion-button>
-    <ion-button class="flex-1" fill="clear" expand="full" (click)="onSave()">
-      <span class="text-primary">Save</span>
-    </ion-button>
-  </footer>
-</ion-footer>
+  <ion-footer>
+    <footer class="flex items-center ion-padding w-full">
+      <ion-button
+        class="flex-1"
+        fill="clear"
+        expand="full"
+        (click)="onCancel()"
+      >
+        <span class="text-danger">Cancel</span>
+      </ion-button>
+      <ion-button class="flex-1" fill="clear" expand="full" (click)="onSave()">
+        <span class="text-primary">Save</span>
+      </ion-button>
+    </footer>
+  </ion-footer>
+</ng-container>
