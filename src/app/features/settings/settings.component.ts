@@ -19,6 +19,7 @@ import { selectSettings } from '@app/store/settings/settings.selectors';
 import { ReplaySubject, takeUntil } from 'rxjs';
 import { SettingsActions } from '@app/store/settings/settings.actions';
 import { WorkoutActions } from '@app/store/workout/workout.actions';
+import { AuthService } from '@services/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -54,7 +55,8 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public constructor(
     private readonly store: Store,
     private readonly fb: FormBuilder,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly auth: AuthService
   ) {}
 
   public ngOnInit(): void {
@@ -87,4 +89,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
   public onDeleteWorkout(payload: WithId<Workout>) {
     this.store.dispatch(WorkoutActions.deleteone({ payload }));
   }
+
+  public onSignOut() {
+    this.auth.signOut().pipe(takeUntil(this.destroy$)).subscribe();
+  }
+
+  public onDeleteAccount() {}
 }

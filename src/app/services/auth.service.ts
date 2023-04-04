@@ -45,6 +45,12 @@ export class AuthService {
       switchMap((_) => this.store.select(selectProfile))
     );
   }
+
+  public signOut() {
+    return from(this.auth.signOut()).pipe(
+      tap((_) => this.router.navigate(['sign-in']))
+    );
+  }
 }
 
 type SignIn = {

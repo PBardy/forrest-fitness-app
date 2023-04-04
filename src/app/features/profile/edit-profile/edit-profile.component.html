@@ -48,6 +48,13 @@
           <ion-accordion>
             <ion-item slot="header">
               <ion-label>Sex</ion-label>
+              <ng-container *ngIf="form.controls.sex.value">
+                <ion-label slot="end">
+                  <span class="text-medium text-sm px-2">
+                    {{ form.controls.sex.value.label }}
+                  </span>
+                </ion-label>
+              </ng-container>
             </ion-item>
             <ng-container *ngrxLet="sexes$ as sexes">
               <ion-radio-group formControlName="sex" slot="content">
@@ -63,6 +70,13 @@
           <ion-accordion>
             <ion-item slot="header">
               <ion-label>Activity Level</ion-label>
+              <ng-container *ngIf="form.controls.activityLevel.value">
+                <ion-label slot="end">
+                  <span class="text-medium text-sm px-2">
+                    {{ form.controls.activityLevel.value.label }}
+                  </span>
+                </ion-label>
+              </ng-container>
             </ion-item>
             <ng-container *ngrxLet="activityLevels$ as levels">
               <ion-radio-group formControlName="activityLevel" slot="content">
@@ -78,6 +92,11 @@
           <ion-accordion>
             <ion-item slot="header">
               <ion-label>Date of Birth</ion-label>
+              <ion-label slot="end">
+                <span class="text-medium text-sm px-2">
+                  {{ form.controls.dob.value | date }}
+                </span>
+              </ion-label>
             </ion-item>
             <div slot="content">
               <ion-datetime
