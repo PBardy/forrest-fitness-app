@@ -13,12 +13,12 @@ import {
   EventDelayState,
   eventDelayReducer,
 } from './event-delay/event-delay.reducer';
-import { EventRepeat } from '@types';
 import {
   EventRepeatState,
   eventRepeatReducer,
 } from './event-repeat/event-repeat.reducer';
 import { EventState, eventReducer } from './event/event.reducer';
+import { SettingsState, settingsReducer } from './settings/settings.reducer';
 
 export interface AppState {
   sex: SexState;
@@ -29,6 +29,7 @@ export interface AppState {
   event: EventState;
   eventDelay: EventDelayState;
   eventRepeat: EventRepeatState;
+  settings: SettingsState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -40,6 +41,7 @@ export const reducers: ActionReducerMap<AppState> = {
   event: eventReducer,
   eventDelay: eventDelayReducer,
   eventRepeat: eventRepeatReducer,
+  settings: settingsReducer,
 };
 
 export const metaReducers: MetaReducer<AppState>[] = !environment.production

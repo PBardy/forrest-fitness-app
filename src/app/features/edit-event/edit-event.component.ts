@@ -23,6 +23,7 @@ import { Event, EventDelay, EventRepeat, WithId, Workout } from '@types';
 import { EventActions } from '@app/store/event/event.actions';
 import { ReplaySubject, filter, map, switchMap, takeUntil, tap } from 'rxjs';
 import { selectEventById } from '@app/store/event/event.selectors';
+import { selectSettings } from '@app/store/settings/settings.selectors';
 @Component({
   selector: 'app-edit-event',
   standalone: true,
@@ -46,6 +47,7 @@ export class EditEventComponent implements OnInit, OnDestroy {
     switchMap((x) => this.store.select(selectEventById(x)))
   );
 
+  public settings$ = this.store.select(selectSettings);
   public workouts$ = this.store.select(selectWorkouts);
   public eventDelays$ = this.store.select(selectEventDelays);
   public eventRepeats$ = this.store.select(selectEventRepeats);
@@ -81,6 +83,10 @@ export class EditEventComponent implements OnInit, OnDestroy {
         tap((x) => this.form.patchValue(x))
       )
       .subscribe();
+
+    this.settings$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((x) => this.form.patchValue(x.events));
   }
 
   public ngOnDestroy(): void {

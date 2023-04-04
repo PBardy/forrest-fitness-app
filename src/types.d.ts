@@ -77,11 +77,19 @@ export type ActivityLevelEnum =
   | 'Active'
   | 'Very Active';
 
-type Range = 'Daily' | 'Weekly' | 'Monthly';
+export type Range = 'Daily' | 'Weekly' | 'Monthly';
 
-type Summary = {
+export type Summary = {
   energy: number;
   distance: number;
   intensity: number;
   percentage: number;
+};
+
+export type Settings = {
+  events: {
+    delay: WithId<EventDelay>;
+    repeat: WithId<EventRepeat>;
+    workout: WithId<Workout>;
+  };
 };

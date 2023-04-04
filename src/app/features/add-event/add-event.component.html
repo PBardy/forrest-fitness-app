@@ -26,8 +26,15 @@
             <ion-accordion>
               <ion-item slot="header">
                 <ion-label>
-                  <span class="text-medium">Workout</span>
+                  <span>Workout</span>
                 </ion-label>
+                <ng-container *ngIf="workout.value">
+                  <ion-label slot="end">
+                    <span class="text-medium text-sm px-2">
+                      {{ workout.value.label }}
+                    </span>
+                  </ion-label>
+                </ng-container>
               </ion-item>
               <ion-radio-group slot="content" formControlName="workout">
                 <ng-container *ngFor="let workout of vm.workouts">
@@ -40,8 +47,13 @@
             </ion-accordion>
             <ion-accordion>
               <ion-item slot="header">
-                <ion-label>
-                  <span class="text-medium">Start</span>
+                <ion-label slot="start">
+                  <span>Start</span>
+                </ion-label>
+                <ion-label slot="end">
+                  <span class="text-medium text-sm px-2">
+                    {{ form.controls.start.value | date : "HH:mm" }}
+                  </span>
                 </ion-label>
               </ion-item>
               <div slot="content">
@@ -55,7 +67,12 @@
             <ion-accordion>
               <ion-item slot="header">
                 <ion-label>
-                  <span class="text-medium">End</span>
+                  <span>End</span>
+                </ion-label>
+                <ion-label slot="end">
+                  <span class="text-medium text-sm px-2">
+                    {{ form.controls.end.value | date : "HH:mm" }}
+                  </span>
                 </ion-label>
               </ion-item>
               <div slot="content">
@@ -73,8 +90,15 @@
             <ion-accordion>
               <ion-item slot="header">
                 <ion-label>
-                  <span class="text-medium">Alert</span>
+                  <span>Alert</span>
                 </ion-label>
+                <ng-container *ngIf="form.controls.delay.value">
+                  <ion-label slot="end">
+                    <span class="text-medium text-sm px-2">
+                      {{ form.controls.delay.value.label }}
+                    </span>
+                  </ion-label>
+                </ng-container>
               </ion-item>
               <ion-radio-group slot="content" formControlName="delay">
                 <ng-container *ngFor="let delay of vm.eventDelays">
@@ -88,8 +112,15 @@
             <ion-accordion>
               <ion-item slot="header">
                 <ion-label>
-                  <span class="text-medium">Repeat</span>
+                  <span>Repeat</span>
                 </ion-label>
+                <ng-container *ngIf="form.controls.repeat.value">
+                  <ion-label slot="end">
+                    <span class="text-medium text-sm px-2">
+                      {{ form.controls.repeat.value.label }}
+                    </span>
+                  </ion-label>
+                </ng-container>
               </ion-item>
               <ion-radio-group slot="content" formControlName="repeat">
                 <ng-container *ngFor="let repeat of vm.eventRepeats">

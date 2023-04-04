@@ -15,10 +15,10 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { Activity, WithId, Workout } from '@types';
 import { LetModule } from '@ngrx/component';
-import { initialWorkouts } from '@app/store/workout/workout.reducer';
 import { StopwatchPipe } from '@pipes/stopwatch.pipe';
 import { Store } from '@ngrx/store';
 import { ActivityActions } from '@app/store/activity/activity.actions';
+import { selectWorkouts } from '@app/store/workout/workout.selectors';
 
 @Component({
   selector: 'app-record-activity',
@@ -35,7 +35,7 @@ import { ActivityActions } from '@app/store/activity/activity.actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecordActivityComponent {
-  public workouts$ = initialWorkouts;
+  public workouts$ = this.store.select(selectWorkouts);
 
   public readonly form = this.fb.nonNullable.group({
     title: this.fb.nonNullable.control<string>('', [Validators.required]),

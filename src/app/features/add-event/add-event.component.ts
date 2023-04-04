@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -16,6 +21,8 @@ import {
 import { LetModule } from '@ngrx/component';
 import { Event, EventDelay, EventRepeat, WithId, Workout } from '@types';
 import { EventActions } from '@app/store/event/event.actions';
+import { ReplaySubject, takeUntil } from 'rxjs';
+import { selectSettings } from '@app/store/settings/settings.selectors';
 
 @Component({
   selector: 'app-add-event',
@@ -32,7 +39,10 @@ import { EventActions } from '@app/store/event/event.actions';
   templateUrl: './add-event.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddEventComponent {
+export class AddEventComponent implements OnInit, OnDestroy {
+  public destroy$ = new ReplaySubject<boolean>(1);
+
+  public settings$ = this.store.select(selectSettings);
   public workouts$ = this.store.select(selectWorkouts);
   public eventDelays$ = this.store.select(selectEventDelays);
   public eventRepeats$ = this.store.select(selectEventRepeats);
@@ -42,8 +52,12 @@ export class AddEventComponent {
     workout: this.fb.nonNullable.control<WithId<Workout> | null>(null, [
       Validators.required,
     ]),
-    end: this.fb.nonNullable.control<string>('', [Validators.required]),
-    start: this.fb.nonNullable.control<string>('', [Validators.required]),
+    end: this.fb.nonNullable.control<string>(new Date().toISOString(), [
+      Validators.required,
+    ]),
+    start: this.fb.nonNullable.control<string>(new Date().toISOString(), [
+      Validators.required,
+    ]),
     delay: this.fb.nonNullable.control<WithId<EventDelay> | null>(null, [
       Validators.required,
     ]),
@@ -58,6 +72,25 @@ export class AddEventComponent {
     private readonly router: Router,
     private readonly store: Store
   ) {}
+
+  public get title() {
+    return this.form.controls.title;
+  }
+
+  public get workout() {
+    return this.form.controls.workout;
+  }
+
+  public ngOnInit(): void {
+    this.settings$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((x) => this.form.patchValue(x.events));
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
 
   public onCancel() {
     this.router.navigate(['app', 'events', 'schedule']);

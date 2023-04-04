@@ -6,7 +6,8 @@
     energy: energy$,
     distance: distance$,
     intensity: intensity$,
-    stopwatch: stopwatch$
+    stopwatch: stopwatch$,
+    workouts: workouts$
   } as vm"
 >
   <ion-content fullscreen>
@@ -82,7 +83,7 @@
               Choose Workout
             </ion-label>
           </ion-list-header>
-          <ng-container *ngFor="let item of workouts$">
+          <ng-container *ngFor="let item of vm.workouts">
             <ion-item button detail (click)="onChooseWorkout(modal, item)">
               <ion-thumbnail class="rounded-full my-2" slot="start">
                 <fa-icon class="text-primary" [icon]="item.icon"></fa-icon>
