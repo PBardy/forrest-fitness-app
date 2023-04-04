@@ -11,7 +11,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "lab": "ionic serve --lab",
-    "android": "ionic capacitor run android -l --external"
+    "android": "ionic capacitor run android -l --external",
+    "resources": "capacitor-resources -p android"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +40,7 @@
     "@ngrx/effects": "^15.4.0",
     "@ngrx/entity": "^15.4.0",
     "@ngrx/store": "^15.4.0",
+    "capacitor-resources": "^2.0.5",
     "date-fns": "^2.29.3",
     "firebase": "^9.19.1",
     "ionicons": "^7.0.0",
