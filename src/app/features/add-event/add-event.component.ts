@@ -7,7 +7,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectEventDelays } from '@app/store/event-delay/event-delay.selectors';
 import { selectEventRepeats } from '@app/store/event-repeat/event-repeat.selectors';
@@ -21,8 +21,9 @@ import {
 import { LetModule } from '@ngrx/component';
 import { Event, EventDelay, EventRepeat, WithId, Workout } from '@types';
 import { EventActions } from '@app/store/event/event.actions';
-import { ReplaySubject, takeUntil } from 'rxjs';
+import { ReplaySubject, takeUntil, map } from 'rxjs';
 import { selectSettings } from '@app/store/settings/settings.selectors';
+import { getHours, getMinutes, parseISO, setHours, setMinutes } from 'date-fns';
 
 @Component({
   selector: 'app-add-event',
@@ -70,7 +71,8 @@ export class AddEventComponent implements OnInit, OnDestroy {
   public constructor(
     private readonly fb: FormBuilder,
     private readonly router: Router,
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly route: ActivatedRoute
   ) {}
 
   public get title() {
@@ -85,6 +87,20 @@ export class AddEventComponent implements OnInit, OnDestroy {
     this.settings$
       .pipe(takeUntil(this.destroy$))
       .subscribe((x) => this.form.patchValue(x.events));
+
+    this.route.paramMap
+      .pipe(
+        takeUntil(this.destroy$),
+        map((x) => x.get('date') as string)
+      )
+      .subscribe((x) => {
+        const now = new Date();
+        const date = x ? parseISO(x) : now;
+        const y = setHours(setMinutes(date, getMinutes(now)), getHours(now));
+        const z = y.toISOString();
+
+        this.form.patchValue({ start: z, end: z });
+      });
 
     this.form.valueChanges
       .pipe(takeUntil(this.destroy$))

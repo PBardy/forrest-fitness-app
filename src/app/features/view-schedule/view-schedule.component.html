@@ -58,11 +58,7 @@
       </article>
     </main>
     <ion-fab class="bottom-4" slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button
-        color="primary"
-        routerDirection="forward"
-        routerLink="/app/events/new"
-      >
+      <ion-fab-button color="primary" (click)="onAddEvent()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>

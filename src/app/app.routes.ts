@@ -72,7 +72,13 @@ export const routes: Route[] = [
       {
         path: 'events',
         children: [
-          { path: 'new', component: AddEventComponent },
+          {
+            path: 'new',
+            children: [
+              { path: ':date', component: AddEventComponent },
+              { path: '', component: AddEventComponent },
+            ],
+          },
           {
             path: 'plan',
             children: [

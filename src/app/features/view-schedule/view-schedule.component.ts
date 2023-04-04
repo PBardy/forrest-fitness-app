@@ -67,4 +67,9 @@ export class ViewScheduleComponent {
   public onDelete(payload: Model<Event>) {
     this.store.dispatch(EventActions.deleteone({ payload }));
   }
+
+  public onAddEvent() {
+    const date = this.current$.getValue().toISOString();
+    this.router.navigate(['app', 'events', 'new', date]);
+  }
 }
