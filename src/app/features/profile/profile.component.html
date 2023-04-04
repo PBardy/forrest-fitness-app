@@ -66,28 +66,14 @@
             <ion-item class="mt-4">
               <ion-grid>
                 <ion-row>
-                  <ion-col>
-                    <ion-button
-                      shape="round"
-                      color="secondary"
-                      fill="clear"
-                      expand="full"
-                      routerDirection="forward"
-                      routerLink="/app/profile/edit"
-                    >
-                      <span>Edit Profile</span>
+                  <ion-col routerLink="/app/profile/edit">
+                    <ion-button fill="clear" expand="full">
+                      <span class="text-secondary">Edit Profile</span>
                     </ion-button>
                   </ion-col>
-                  <ion-col>
-                    <ion-button
-                      shape="round"
-                      color="primary"
-                      fill="clear"
-                      expand="full"
-                      routerDirection="forward"
-                      routerLink="/app/settings"
-                    >
-                      <span>Settings</span>
+                  <ion-col routerLink="/app/settings">
+                    <ion-button fill="clear" expand="full">
+                      <span class="text-primary">Settings</span>
                     </ion-button>
                   </ion-col>
                 </ion-row>

@@ -25,7 +25,7 @@
             </div>
           </div>
           <ion-button
-            class="bg-step50 rounded-3xl"
+            class="bg-step50 rounded-full"
             fill="clear"
             shape="round"
             id="range"
@@ -131,7 +131,12 @@
             ></fa-icon>
             <span>{{ alert.extra.workout.label }}</span>
           </div>
-          <ng-container *ngIf="alert.schedule.every"></ng-container>
+          <ng-container *ngIf="alert.schedule.every">
+            <div class="flex items-center gap-2">
+              <fa-icon class="text-primary text-xs" icon="repeat"></fa-icon>
+              <span>{{ alert.schedule.every }}</span>
+            </div>
+          </ng-container>
         </div>
       </ion-label>
       <ion-label slot="end">
