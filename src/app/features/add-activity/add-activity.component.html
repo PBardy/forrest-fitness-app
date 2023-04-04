@@ -28,6 +28,13 @@
             <ion-label>
               <span class="text-medium">Workout</span>
             </ion-label>
+            <ng-container *ngIf="form.controls.workout.value">
+              <ion-label slot="end">
+                <span class="text-medium text-sm px-2">
+                  {{ form.controls.workout.value.label }}
+                </span>
+              </ion-label>
+            </ng-container>
           </ion-item>
           <ion-radio-group formControlName="workout" slot="content">
             <ng-container *ngFor="let workout of workouts$">
@@ -44,6 +51,11 @@
           <ion-item slot="header">
             <ion-label>
               <span class="text-medium">Start</span>
+            </ion-label>
+            <ion-label slot="end">
+              <span class="text-medium text-sm px-2">
+                {{ form.controls.start.value | date : "HH:mm" }}
+              </span>
             </ion-label>
           </ion-item>
           <div slot="content">
@@ -69,6 +81,7 @@
           formControlName="duration"
           class="text-right"
           slot="end"
+          clearOnEdit
         ></ion-input>
       </ion-item>
       <ion-item>
@@ -83,6 +96,7 @@
           formControlName="intensity"
           class="text-right font-sans"
           slot="end"
+          clearOnEdit
         ></ion-input>
       </ion-item>
       <ion-item>
@@ -93,6 +107,7 @@
           id="energy"
           name="energy"
           type="number"
+          clearOnEdit
           placeholder="Add Cal"
           formControlName="energy"
           class="text-right font-sans"
@@ -107,6 +122,7 @@
           id="distance"
           name="distance"
           type="number"
+          clearOnEdit
           placeholder="Add km"
           formControlName="distance"
           class="text-right font-sans"
