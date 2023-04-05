@@ -23,19 +23,10 @@
       <ion-icon class="text-light" name="add"></ion-icon>
     </ion-fab-button>
     <ion-fab-list class="bottom-16" side="top">
-      <ion-fab-button
-        data-desc="Record Workout"
-        routerDirection="forward"
-        routerLink="/app/activities/record"
-      >
+      <ion-fab-button data-desc="Record Workout" (click)="onRecord()">
         <fa-icon icon="record-vinyl"></fa-icon>
       </ion-fab-button>
-      <ion-fab-button
-        class="mb-2"
-        data-desc="Add Activity"
-        routerDirection="forward"
-        routerLink="/app/activities/new"
-      >
+      <ion-fab-button class="mb-2" data-desc="Add Activity" (click)="onAdd()">
         <fa-icon icon="pen"></fa-icon>
       </ion-fab-button>
     </ion-fab-list>

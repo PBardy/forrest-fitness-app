@@ -23,8 +23,6 @@ import { ProfileComponent } from './features//profile/profile.component';
 import { SettingsComponent } from './features//settings/settings.component';
 import { TabsComponent } from './features//tabs/tabs.component';
 import { PlanDayComponent } from './features/plan-day/plan-day.component';
-import { PlanDayStep1Component } from './features/plan-day//plan-day-step1/plan-day-step1.component';
-import { PlanDayStep2Component } from './features/plan-day//plan-day-step2/plan-day-step2.component';
 import { OnboardingComponent } from '@features/onboarding/onboarding.component';
 import { EditProfileComponent } from '@features/profile/edit-profile/edit-profile.component';
 import { EditActivityComponent } from '@features/edit-activity/edit-activity.component';
@@ -83,12 +81,8 @@ export const routes: Route[] = [
             path: 'plan',
             children: [
               {
-                path: 'day',
-                children: [
-                  { path: 'step1', component: PlanDayStep1Component },
-                  { path: 'step2', component: PlanDayStep2Component },
-                  { path: '', component: PlanDayComponent },
-                ],
+                path: ':date',
+                component: PlanDayComponent,
               },
             ],
           },

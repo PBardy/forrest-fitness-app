@@ -43,4 +43,12 @@ export class ViewActivitiesComponent {
   public onDelete(payload: Model<Activity>) {
     this.store.dispatch(ActivityActions.deleteone({ payload }));
   }
+
+  public onRecord() {
+    this.router.navigate(['app', 'activites', 'record']);
+  }
+
+  public onAdd() {
+    this.router.navigate(['app', 'activites', 'new']);
+  }
 }

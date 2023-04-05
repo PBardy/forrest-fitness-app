@@ -93,3 +93,8 @@ export type Settings = {
     workout: WithId<Workout>;
   };
 };
+
+export type Period = {
+  end: Date;
+  start: Date;
+};

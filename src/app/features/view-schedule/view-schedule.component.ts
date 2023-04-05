@@ -68,8 +68,13 @@ export class ViewScheduleComponent {
     this.store.dispatch(EventActions.deleteone({ payload }));
   }
 
-  public onAddEvent() {
+  public onAdd() {
     const date = this.current$.getValue().toISOString();
     this.router.navigate(['app', 'events', 'new', date]);
+  }
+
+  public onPlanDay() {
+    const date = this.current$.getValue().toISOString();
+    this.router.navigate(['app', 'events', 'plan', date]);
   }
 }
