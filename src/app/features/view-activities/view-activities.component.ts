@@ -15,7 +15,7 @@ import {
 import { LetModule } from '@ngrx/component';
 import { ActivityEndPipe } from '@pipes/activity-end.pipe';
 import { FormsModule } from '@angular/forms';
-import { Subject, startWith, switchMap } from 'rxjs';
+import { BehaviorSubject, Subject, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-view-activities',
@@ -34,9 +34,10 @@ import { Subject, startWith, switchMap } from 'rxjs';
 })
 export class ViewActivitiesComponent {
   public search = '';
-  public searchSub = new Subject<string>();
+  public searchSub$ = new Subject<string>();
+  public searchFocussed$ = new BehaviorSubject<boolean>(false);
 
-  public activitiesGrouped$ = this.searchSub.pipe(
+  public activities$ = this.searchSub$.pipe(
     startWith(''),
     switchMap((title) =>
       this.store.select(selectActivitiesByDayAndTitle(title))
