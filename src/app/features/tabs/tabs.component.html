@@ -11,7 +11,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="relative" fullscreen>
+<ion-content class="relative" id="main" fullscreen>
   <ion-router-outlet></ion-router-outlet>
   <ion-tabs>
     <ion-tab-bar class="border-t border-step100" slot="bottom">
@@ -34,3 +34,91 @@
     </ion-tab-bar>
   </ion-tabs>
 </ion-content>
+
+<ion-menu #menu contentId="main">
+  <main class="flex flex-col overflow-y-auto h-full bg-step50">
+    <ion-header class="ion-no-border" translucent>
+      <ion-toolbar>
+        <ion-title class="text-xl px-4">
+          <fa-icon class="text-primary w-4" icon="tree"></fa-icon>
+          <ion-label class="font-semibold px-2">Forrest</ion-label>
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label class="text-medium px-4">Summary </ion-label>
+      </ion-list-header>
+      <ion-item detail (click)="onClick('/app/summary')">
+        <fa-icon class="text-primary w-4" icon="home"></fa-icon>
+        <ion-label class="px-4">Summary </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label>
+          <span class="text-medium px-4">Journal</span>
+        </ion-label>
+      </ion-list-header>
+      <ion-item detail (click)="onClick('/app/activities')">
+        <fa-icon class="text-primary w-4" icon="rectangle-list"></fa-icon>
+        <ion-label class="px-4">All Activities </ion-label>
+      </ion-item>
+      <ion-item detail (click)="onClick('/app/activities/new')">
+        <fa-icon class="text-primary w-4" icon="add"></fa-icon>
+        <ion-label class="px-4">Add Activity </ion-label>
+      </ion-item>
+      <ion-item detail (click)="onClick('/app/activities/record')">
+        <fa-icon class="text-primary w-4" icon="record-vinyl"></fa-icon>
+        <ion-label class="px-4">Record Activity </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label class="text-medium px-4">Schedule </ion-label>
+      </ion-list-header>
+      <ion-item detail (click)="onClick('/app/events')">
+        <fa-icon class="text-primary w-4" icon="calendar"></fa-icon>
+        <ion-label class="px-4">Schedule </ion-label>
+      </ion-item>
+      <ion-item detail (click)="onClick('/app/events/new')">
+        <fa-icon class="text-primary w-4" icon="calendar-plus"></fa-icon>
+        <ion-label class="px-4">Add Event </ion-label>
+      </ion-item>
+      <ion-item detail (click)="onClick('/app/events/plan')">
+        <fa-icon class="text-primary w-4" icon="calendar-days"></fa-icon>
+        <ion-label class="px-4">Plan a day </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label class="text-medium px-4">About you </ion-label>
+      </ion-list-header>
+      <ion-item detail (click)="onClick('/app/profile')">
+        <fa-icon class="text-primary w-4" icon="person"></fa-icon>
+        <ion-label class="px-4">Profile </ion-label>
+      </ion-item>
+      <ion-item detail (click)="onClick('/app/settings')">
+        <fa-icon class="text-primary w-4" icon="cog"></fa-icon>
+        <ion-label class="px-4">Settings </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label class="text-medium px-4">About the app </ion-label>
+      </ion-list-header>
+      <ion-item detail (click)="onClick('/app/information')">
+        <fa-icon class="text-primary w-4" icon="info"></fa-icon>
+        <ion-label class="px-4">App info </ion-label>
+      </ion-item>
+      <ion-item detail (click)="onClick('/app/privacy-policy')">
+        <fa-icon class="text-primary w-4" icon="lock"></fa-icon>
+        <ion-label class="px-4">Privacy policy </ion-label>
+      </ion-item>
+      <ion-item detail (click)="onClick('/app/terms-of-service')">
+        <fa-icon class="text-primary w-4" icon="file"></fa-icon>
+        <ion-label class="px-4">Terms of Service </ion-label>
+      </ion-item>
+    </ion-list>
+  </main>
+</ion-menu>

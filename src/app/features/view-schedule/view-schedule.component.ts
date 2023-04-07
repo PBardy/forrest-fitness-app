@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonDatetime, IonModal, IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router, RouterModule } from '@angular/router';
-import { isAfter, isBefore, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 import { Store } from '@ngrx/store';
 import {
   selectEventfulDays,

@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonMenu, IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -11,4 +11,13 @@ import { RouterModule } from '@angular/router';
   templateUrl: './tabs.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsComponent {}
+export class TabsComponent {
+  @ViewChild('menu') public menu: IonMenu;
+
+  public constructor(private readonly router: Router) {}
+
+  public onClick(path: string) {
+    this.menu.toggle();
+    this.router.navigateByUrl(path);
+  }
+}

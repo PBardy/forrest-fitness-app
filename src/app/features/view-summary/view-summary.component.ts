@@ -3,15 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterModule } from '@angular/router';
-import {
-  BehaviorSubject,
-  Observable,
-  ReplaySubject,
-  catchError,
-  of,
-  switchMap,
-  takeUntil,
-} from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, switchMap } from 'rxjs';
 import { LetModule } from '@ngrx/component';
 import { Store } from '@ngrx/store';
 import {

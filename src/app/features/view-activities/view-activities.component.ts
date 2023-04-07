@@ -9,9 +9,13 @@ import { ActivityActions } from '@app/store/activity/activity.actions';
 import {
   selectActivities,
   selectActivitiesByDay,
+  selectActivitiesByDayAndTitle,
+  selectActivitiesByTitle,
 } from '@app/store/activity/activity.selectors';
 import { LetModule } from '@ngrx/component';
 import { ActivityEndPipe } from '@pipes/activity-end.pipe';
+import { FormsModule } from '@angular/forms';
+import { Subject, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-view-activities',
@@ -23,13 +27,21 @@ import { ActivityEndPipe } from '@pipes/activity-end.pipe';
     LetModule,
     RouterModule,
     ActivityEndPipe,
+    FormsModule,
   ],
   templateUrl: './view-activities.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewActivitiesComponent {
-  public activities$ = this.store.select(selectActivities);
-  public activitiesGrouped$ = this.store.select(selectActivitiesByDay);
+  public search = '';
+  public searchSub = new Subject<string>();
+
+  public activitiesGrouped$ = this.searchSub.pipe(
+    startWith(''),
+    switchMap((title) =>
+      this.store.select(selectActivitiesByDayAndTitle(title))
+    )
+  );
 
   public constructor(
     private readonly store: Store,
@@ -42,13 +54,5 @@ export class ViewActivitiesComponent {
 
   public onDelete(payload: Model<Activity>) {
     this.store.dispatch(ActivityActions.deleteone({ payload }));
-  }
-
-  public onRecord() {
-    this.router.navigate(['app', 'activites', 'record']);
-  }
-
-  public onAdd() {
-    this.router.navigate(['app', 'activites', 'new']);
   }
 }

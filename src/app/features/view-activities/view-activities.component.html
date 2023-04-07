@@ -1,12 +1,22 @@
 <ion-content fullscreen>
   <main>
-    <header class="flex flex-col items-center gap-4 py-8">
-      <ion-thumbnail class="w-20 h-20 rounded-full">
-        <fa-icon class="text-primary text-3xl" icon="walking"></fa-icon>
-      </ion-thumbnail>
-      <div clas="flex flex-col items-center text-center">
+    <header class="flex flex-col gap-4 px-4 py-8">
+      <div class="flex flex-col items-center gap-4">
+        <ion-thumbnail class="w-20 h-20 rounded-full">
+          <fa-icon class="text-primary text-3xl" icon="walking"></fa-icon>
+        </ion-thumbnail>
         <h5 class="font-bold mb-1 text-xl">Journal</h5>
       </div>
+      <ion-item class="rounded-full" lines="none">
+        <ion-input
+          id="search"
+          clearOnEdit
+          placeholder="Search"
+          [(ngModel)]="search"
+          (ngModelChange)="searchSub.next($event)"
+        ></ion-input>
+        <ion-icon name="search" slot="end"></ion-icon>
+      </ion-item>
     </header>
     <article class="flex flex-col gap-4">
       <ng-container *ngrxLet="activitiesGrouped$ as activities">
@@ -18,19 +28,6 @@
       </ng-container>
     </article>
   </main>
-  <ion-fab class="bottom-4" slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button color="primary">
-      <ion-icon class="text-light" name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list class="bottom-16" side="top">
-      <ion-fab-button data-desc="Record Workout" (click)="onRecord()">
-        <fa-icon icon="record-vinyl"></fa-icon>
-      </ion-fab-button>
-      <ion-fab-button class="mb-2" data-desc="Add Activity" (click)="onAdd()">
-        <fa-icon icon="pen"></fa-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
 </ion-content>
 
 <!-- Day -->

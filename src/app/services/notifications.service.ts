@@ -6,7 +6,7 @@ import {
 } from '@capacitor/local-notifications';
 import { Event, WithId } from '@types';
 import { addMinutes, parseISO } from 'date-fns';
-import { BehaviorSubject, from, map, switchMap } from 'rxjs';
+import { BehaviorSubject, from, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

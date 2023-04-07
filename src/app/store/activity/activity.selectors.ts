@@ -1,4 +1,4 @@
-import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector, select } from '@ngrx/store';
 import { ActivityState, activityAdapter } from './activity.reducer';
 import * as _ from 'underscore';
 import {
@@ -12,6 +12,7 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
+import { Activity, WithId } from '@types';
 
 const { selectAll } = activityAdapter.getSelectors();
 
@@ -23,9 +24,18 @@ export const selectActivities = createSelector(
   selectAll
 );
 
+export const matchesTitle = (a: WithId<Activity>, title: string) =>
+  a.title.toLowerCase().includes(title.toLowerCase()) ||
+  title.toLowerCase().includes(a.title.toLowerCase());
+
 export const selectActivitiesById = (id: string) =>
   createSelector(selectActivities, (activities) =>
     activities.find((activities) => activities.id === id)
+  );
+
+export const selectActivitiesByTitle = (title: string) =>
+  createSelector(selectActivities, (activities) =>
+    activities.filter((a) => matchesTitle(a, title))
   );
 
 export const selectActivitiesByDay = createSelector(
@@ -36,6 +46,15 @@ export const selectActivitiesByDay = createSelector(
       .groupBy((x) => startOfDay(parseISO(x.start)).toISOString())
       .value()
 );
+
+export const selectActivitiesByDayAndTitle = (title: string) =>
+  createSelector(selectActivities, (activities) =>
+    _.chain(activities)
+      .filter((a) => matchesTitle(a, title))
+      .sortBy((x) => getHours(parseISO(x.start)))
+      .groupBy((x) => startOfDay(parseISO(x.start)).toISOString())
+      .value()
+  );
 
 export const selectActivitiesByDate = (from: Date) =>
   createSelector(selectActivities, (activities) =>
