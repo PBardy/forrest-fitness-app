@@ -1,15 +1,26 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewChild,
+  OnInit,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonModal, IonicModule } from '@ionic/angular';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   BehaviorSubject,
   NEVER,
+  ReplaySubject,
   dematerialize,
+  filter,
   interval,
+  map,
   materialize,
   switchMap,
+  takeUntil,
   tap,
 } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -18,7 +29,10 @@ import { LetModule } from '@ngrx/component';
 import { StopwatchPipe } from '@pipes/stopwatch.pipe';
 import { Store } from '@ngrx/store';
 import { ActivityActions } from '@app/store/activity/activity.actions';
-import { selectWorkouts } from '@app/store/workout/workout.selectors';
+import {
+  selectWorkoutById,
+  selectWorkouts,
+} from '@app/store/workout/workout.selectors';
 
 @Component({
   selector: 'app-record-activity',
@@ -34,8 +48,10 @@ import { selectWorkouts } from '@app/store/workout/workout.selectors';
   templateUrl: './record-activity.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecordActivityComponent {
-  public workouts$ = this.store.select(selectWorkouts);
+export class RecordActivityComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
+  @ViewChild('modal') public modal: IonModal;
 
   public readonly form = this.fb.nonNullable.group({
     title: this.fb.nonNullable.control<string>('', [Validators.required]),
@@ -49,6 +65,11 @@ export class RecordActivityComponent {
     energy: this.fb.nonNullable.control<number | undefined>(undefined),
     notes: this.fb.nonNullable.control<string>(''),
   });
+
+  // Auto-fill
+  public id$ = this.route.paramMap.pipe(map((x) => x.get('id') as string));
+  public destroy$ = new ReplaySubject<boolean>(1);
+  public workouts$ = this.store.select(selectWorkouts);
 
   // State
 
@@ -86,6 +107,7 @@ export class RecordActivityComponent {
   public constructor(
     private readonly fb: FormBuilder,
     private readonly router: Router,
+    private readonly route: ActivatedRoute,
     private readonly store: Store
   ) {}
 
@@ -99,6 +121,25 @@ export class RecordActivityComponent {
 
   public get workout() {
     return this.form.controls.workout;
+  }
+
+  public ngOnInit(): void {}
+
+  public ngAfterViewInit(): void {
+    this.id$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(Boolean),
+        switchMap((x) => this.store.select(selectWorkoutById(x))),
+        filter(Boolean),
+        tap((x) => this.onChooseWorkout(x))
+      )
+      .subscribe();
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   public onStart() {
@@ -138,9 +179,10 @@ export class RecordActivityComponent {
     this.store.dispatch(ActivityActions.addone({ payload }));
   }
 
-  public onChooseWorkout(modal: IonModal, workout: WithId<Workout>) {
-    modal.dismiss();
+  public async onChooseWorkout(workout: WithId<Workout>) {
     this.title.patchValue(workout.label);
     this.workout.patchValue(workout);
+
+    await this.modal.dismiss();
   }
 }

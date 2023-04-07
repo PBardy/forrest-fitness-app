@@ -46,7 +46,13 @@ export const routes: Route[] = [
         path: 'activities',
         children: [
           { path: 'new', component: AddActivityComponent },
-          { path: 'record', component: RecordActivityComponent },
+          {
+            path: 'record',
+            children: [
+              { path: ':id', component: RecordActivityComponent },
+              { path: '', component: RecordActivityComponent },
+            ],
+          },
           {
             path: 'all',
             component: TabsComponent,

@@ -12,3 +12,8 @@ export const selectWorkoutsTotal = createSelector(
   selectWorkoutFeature,
   selectTotal
 );
+
+export const selectWorkoutById = (id: string) =>
+  createSelector(selectWorkouts, (workouts) =>
+    workouts.find((x) => x.id === id)
+  );
