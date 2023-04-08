@@ -7,7 +7,9 @@ export const selectId = (a: WithId<Activity>): string => {
   return String(a.id);
 };
 
-export type ActivityState = EntityState<WithId<Activity>>;
+export type ActivityState = EntityState<WithId<Activity>> & {
+  lastRefresh: string;
+};
 
 export const activityAdapter: EntityAdapter<WithId<Activity>> =
   createEntityAdapter<WithId<Activity>>({
@@ -16,7 +18,9 @@ export const activityAdapter: EntityAdapter<WithId<Activity>> =
 
 export const initialActivityState = activityAdapter.setAll(
   [],
-  activityAdapter.getInitialState()
+  activityAdapter.getInitialState({
+    lastRefresh: '',
+  })
 );
 
 export const activityReducer = createReducer(
@@ -30,6 +34,9 @@ export const activityReducer = createReducer(
   }),
   on(ActivityActions.ondeleteone, (state, { payload }) => {
     return activityAdapter.removeOne(payload.id, state);
+  }),
+  on(ActivityActions.setall, (state) => {
+    return { ...state, lastRefresh: new Date().toISOString() };
   }),
   on(ActivityActions.setall, (state, { payload }) => {
     return activityAdapter.setAll(payload, state);

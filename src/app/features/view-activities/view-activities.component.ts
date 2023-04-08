@@ -59,7 +59,11 @@ export class ViewActivitiesComponent {
     this.store.dispatch(ActivityActions.deleteone({ payload }));
   }
 
-  public onRefresh() {
-    this.store.dispatch(ActivityActions.loadall());
+  public onAdd() {
+    this.router.navigate(['app', 'activities', 'new']);
+  }
+
+  public onRecord() {
+    this.router.navigate(['app', 'activities', 'record']);
   }
 }

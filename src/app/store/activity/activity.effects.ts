@@ -1,7 +1,13 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, exhaustMap, catchError } from 'rxjs/operators';
+import {
+  map,
+  exhaustMap,
+  catchError,
+  withLatestFrom,
+  filter,
+} from 'rxjs/operators';
 import { AppState } from '..';
 import { ActivityService } from '@services/activity.service';
 import { Router } from '@angular/router';
@@ -9,25 +15,18 @@ import { ToastService } from '@services/toast.service';
 import { EMPTY, of, tap } from 'rxjs';
 import { switchMap } from 'rxjs';
 import { ActivityActions } from './activity.actions';
+import { selectLastRefresh } from './activity.selectors';
+import { addDays, isBefore, parseISO } from 'date-fns';
 
 @Injectable()
 export class ActivityEfffects {
   public readonly loadAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ActivityActions.loadall),
+      withLatestFrom(this.store.select(selectLastRefresh)),
+      map(([_, x]) => isBefore(parseISO(x), addDays(new Date(), -1))),
+      filter(Boolean),
       exhaustMap(() =>
-        this.activity
-          .getAll()
-          .pipe(map((payload) => ActivityActions.setall({ payload })))
-      )
-    )
-  );
-
-  public readonly refresh$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ActivityActions.refresh),
-      map((x) => x.payload),
-      exhaustMap((refresher) =>
         this.activity
           .getAll()
           .pipe(map((payload) => ActivityActions.setall({ payload })))
@@ -105,6 +104,7 @@ export class ActivityEfffects {
   );
 
   public constructor(
+    private readonly store: Store,
     private readonly router: Router,
     private readonly toast: ToastService,
     private readonly actions$: Actions,

@@ -29,6 +29,11 @@ export const selectActivitiesTotal = createSelector(
   selectTotal
 );
 
+export const selectLastRefresh = createSelector(
+  selectActivityFeature,
+  (state) => state.lastRefresh
+);
+
 export const matchesTitle = (a: WithId<Activity>, title: string) =>
   a.title.toLowerCase().includes(title.toLowerCase()) ||
   title.toLowerCase().includes(a.title.toLowerCase());

@@ -36,7 +36,11 @@ export class ModelService<T extends Partial<unknown>> {
   public getAll() {
     return this.auth.account().pipe(
       filter(Boolean),
-      switchMap((x) => of([]))
+      switchMap((x) =>
+        this.fs
+          .collection<Model<T>>(this.path, (q) => selectByUser(q, x))
+          .valueChanges()
+      )
     );
   }
 
