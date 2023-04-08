@@ -33,9 +33,10 @@ export class EventEfffects {
         this.event.addOne(payload).pipe(
           switchMap((x) => this.event.getOne(x.id)),
           map((payload) => EventActions.onaddone({ payload })),
-          tap(({ payload }) =>
-            this.router.navigate(['app', 'events', payload.id])
-          )
+          tap(async ({ payload }) => {
+            await this.toast.present({ message: 'Event Added' });
+            await this.router.navigate(['app', 'events', payload.id]);
+          })
         )
       )
     )
@@ -48,8 +49,10 @@ export class EventEfffects {
       exhaustMap((payload) =>
         this.event.addMany(payload).pipe(
           map((payload) => EventActions.onaddmany({ payload })),
-          tap(() => this.router.navigate(['app', 'events'])),
-          tap(() => this.toast.present({ message: 'Events Added' }))
+          tap(async () => {
+            await this.toast.present({ message: 'Events Added' });
+            await this.router.navigate(['app', 'events']);
+          })
         )
       )
     )
@@ -62,37 +65,13 @@ export class EventEfffects {
       exhaustMap((payload) =>
         this.event.updateOne(payload.id, payload).pipe(
           map(() => EventActions.onupdateone({ payload })),
-          tap(() => this.router.navigate(['app', 'events', payload.id]))
+          tap(async ({ payload }) => {
+            await this.toast.present({ message: 'Event Updated' });
+            await this.router.navigate(['app', 'events', payload.id]);
+          })
         )
       )
     )
-  );
-
-  public readonly onAddOne$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(EventActions.onaddone),
-        exhaustMap(() => this.toast.present({ message: 'Event Added' }))
-      ),
-    { dispatch: false }
-  );
-
-  public readonly onUpdateOne$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(EventActions.onupdateone),
-        exhaustMap(() => this.toast.present({ message: 'Event Updated' }))
-      ),
-    { dispatch: false }
-  );
-
-  public readonly onDeleteOne$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(EventActions.ondeleteone),
-        exhaustMap(() => this.toast.present({ message: 'Event Deleted' }))
-      ),
-    { dispatch: false }
   );
 
   public readonly deleteOne$ = createEffect(() =>
@@ -101,8 +80,11 @@ export class EventEfffects {
       map((x) => x.payload),
       exhaustMap((payload) =>
         this.event.deleteOne(payload).pipe(
-          tap((_) => this.router.navigate(['app', 'events'])),
-          map(() => EventActions.ondeleteone({ payload }))
+          map(() => EventActions.ondeleteone({ payload })),
+          tap(async ({ payload }) => {
+            await this.toast.present({ message: 'Event Delete' });
+            await this.router.navigate(['app', 'events']);
+          })
         )
       )
     )

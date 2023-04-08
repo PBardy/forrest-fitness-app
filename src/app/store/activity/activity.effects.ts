@@ -42,9 +42,10 @@ export class ActivityEfffects {
         this.activity.addOne(payload).pipe(
           switchMap((x) => this.activity.getOne(x.id)),
           map((payload) => ActivityActions.onaddone({ payload })),
-          tap(({ payload }) =>
-            this.router.navigate(['app', 'activities', payload.id])
-          )
+          tap(async ({ payload }) => {
+            await this.toast.present({ message: 'Activity Added' });
+            await this.router.navigate(['app', 'activities', payload.id]);
+          })
         )
       )
     )
@@ -57,37 +58,13 @@ export class ActivityEfffects {
       exhaustMap((payload) =>
         this.activity.updateOne(payload.id, payload).pipe(
           map(() => ActivityActions.onupdateone({ payload })),
-          tap(() => this.router.navigate(['app', 'activities', payload.id]))
+          tap(async ({ payload }) => {
+            await this.toast.present({ message: 'Activity Updated' });
+            await this.router.navigate(['app', 'activities', payload.id]);
+          })
         )
       )
     )
-  );
-
-  public readonly onAddOne$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ActivityActions.onaddone),
-        exhaustMap(() => this.toast.present({ message: 'Activity Added' }))
-      ),
-    { dispatch: false }
-  );
-
-  public readonly onUpdateOne$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ActivityActions.onupdateone),
-        exhaustMap(() => this.toast.present({ message: 'Activity Updated' }))
-      ),
-    { dispatch: false }
-  );
-
-  public readonly onDeleteOne$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ActivityActions.ondeleteone),
-        exhaustMap(() => this.toast.present({ message: 'Activity Delete' }))
-      ),
-    { dispatch: false }
   );
 
   public readonly deleteOne$ = createEffect(() =>
@@ -96,8 +73,11 @@ export class ActivityEfffects {
       map((x) => x.payload),
       exhaustMap((payload) =>
         this.activity.deleteOne(payload).pipe(
-          tap((_) => this.router.navigate(['app', 'activities'])),
-          map(() => ActivityActions.ondeleteone({ payload }))
+          map(() => ActivityActions.ondeleteone({ payload })),
+          tap(async () => {
+            await this.toast.present({ message: 'Activity Delete' });
+            await this.router.navigate(['app', 'activities']);
+          })
         )
       )
     )

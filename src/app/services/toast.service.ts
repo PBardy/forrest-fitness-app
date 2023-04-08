@@ -8,9 +8,13 @@ import { from, of, switchMap } from 'rxjs';
 export class ToastService {
   public constructor(private readonly toastController: ToastController) {}
 
-  public present(opts?: ToastOptions) {
-    return from(
-      this.toastController.create({ ...opts, position: 'top', duration: 2000 })
-    ).pipe(switchMap((t) => of(t.present())));
+  public async present(opts?: ToastOptions) {
+    const toast = await this.toastController.create({
+      ...opts,
+      position: 'top',
+      duration: 2000,
+    });
+
+    await toast.present();
   }
 }
