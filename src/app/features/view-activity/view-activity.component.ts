@@ -8,6 +8,7 @@ import { map, switchMap } from 'rxjs';
 import { selectActivitiesById } from '@app/store/activity/activity.selectors';
 import { LetModule } from '@ngrx/component';
 import { Activity, WithId } from '@types';
+import { DurationPipe } from '@pipes/duration.pipe';
 
 @Component({
   selector: 'app-view-activity',
@@ -18,6 +19,7 @@ import { Activity, WithId } from '@types';
     FontAwesomeModule,
     RouterModule,
     LetModule,
+    DurationPipe,
   ],
   templateUrl: './view-activity.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

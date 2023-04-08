@@ -122,7 +122,19 @@
                 <fa-icon class="text-primary" [icon]="item.icon"></fa-icon>
               </ion-thumbnail>
               <ion-label class="px-4">
-                {{ item.label }}
+                <div class="mb-1">{{ item.label }}</div>
+                <div class="flex items-center gap-4 text-xs">
+                  <div class="flex items-center gap-1">
+                    <fa-icon class="text-primary" icon="heart"></fa-icon>
+                    <span class="text-medium">
+                      {{ item.intensity }} pts/min
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <fa-icon class="text-primary" icon="fire"></fa-icon>
+                    <span class="text-medium"> {{ item.energy }} cal/min </span>
+                  </div>
+                </div>
               </ion-label>
             </ion-item>
           </ng-container>

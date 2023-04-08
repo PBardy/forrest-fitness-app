@@ -18,38 +18,54 @@
       <main>
         <article class="flex flex-col gap-4">
           <ion-list class="rounded-3xl" lines="none">
-            <ion-item>
-              <ion-label>
-                <span class="text-base text-dark">Intensity</span>
-              </ion-label>
-              <ion-label slot="end">
-                <span class="text-sm text-medium">15 pts</span>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <span class="text-base text-dark">Distance</span>
-              </ion-label>
-              <ion-label slot="end">
-                <span class="text-sm text-medium">5.50 km</span>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <span class="text-base text-dark">Calories</span>
-              </ion-label>
-              <ion-label slot="end">
-                <span class="text-sm text-medium">250 cal</span>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <span class="text-base text-dark">Duration</span>
-              </ion-label>
-              <ion-label slot="end">
-                <span class="text-sm text-medium">17 mins 34 secs</span>
-              </ion-label>
-            </ion-item>
+            <ng-container *ngIf="activity.intensity">
+              <ion-item>
+                <ion-label>
+                  <span class="text-base text-dark">Intensity</span>
+                </ion-label>
+                <ion-label slot="end">
+                  <span class="text-sm text-medium">
+                    {{ activity.intensity }} pts
+                  </span>
+                </ion-label>
+              </ion-item>
+            </ng-container>
+            <ng-container *ngIf="activity.distance">
+              <ion-item>
+                <ion-label>
+                  <span class="text-base text-dark">Distance</span>
+                </ion-label>
+                <ion-label slot="end">
+                  <span class="text-sm text-medium"
+                    >{{ activity.distance }} km
+                  </span>
+                </ion-label>
+              </ion-item>
+            </ng-container>
+            <ng-container *ngIf="activity.energy">
+              <ion-item>
+                <ion-label>
+                  <span class="text-base text-dark">Calories</span>
+                </ion-label>
+                <ion-label slot="end">
+                  <span class="text-sm text-medium">
+                    {{ activity.energy | number }} cal
+                  </span>
+                </ion-label>
+              </ion-item>
+            </ng-container>
+            <ng-container *ngIf="activity.duration">
+              <ion-item>
+                <ion-label>
+                  <span class="text-base text-dark">Duration</span>
+                </ion-label>
+                <ion-label slot="end">
+                  <span class="text-sm text-medium">
+                    {{ activity.duration | duration }}
+                  </span>
+                </ion-label>
+              </ion-item>
+            </ng-container>
           </ion-list>
         </article>
       </main>
