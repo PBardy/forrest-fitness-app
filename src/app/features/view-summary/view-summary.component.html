@@ -5,6 +5,19 @@
     alerts: alerts$
   } as vm"
 >
+  <ion-header class="ion-no-border" translucent>
+    <ion-toolbar class="bg-transparent px-4">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button shape="round" routerLink="/app/settings">
+          <fa-icon class="text-dark text-lg" icon="cog"></fa-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
   <ion-content fullscreen>
     <main class="flex flex-col">
       <header class="flex flex-col items-center gap-3 py-8">

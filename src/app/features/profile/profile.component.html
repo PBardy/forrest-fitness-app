@@ -1,76 +1,107 @@
-<ion-content class="ion-padding" fullscreen>
-  <header class="flex flex-col items-center gap-4 py-8">
-    <ion-thumbnail class="w-20 h-20 rounded-full">
-      <fa-icon class="text-primary text-3xl" icon="user"></fa-icon>
-    </ion-thumbnail>
-    <div clas="flex flex-col items-center text-center">
-      <h5 class="font-bold mb-1 text-xl">Your profile</h5>
-      <ng-container *ngrxLet="profile$ as profile">
-        <ng-container *ngIf="profile">
-          <h6 class="text-medium text-lg text-center">
-            {{ profile.dob | date }}
-          </h6>
+<ng-container>
+  <ion-header class="ion-no-border" translucent>
+    <ion-toolbar class="bg-transparent px-4">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button shape="round" routerLink="/app/settings">
+          <fa-icon class="text-dark text-lg" icon="cog"></fa-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" fullscreen>
+    <header class="flex flex-col items-center gap-4 py-8">
+      <ion-thumbnail class="w-20 h-20 rounded-full">
+        <fa-icon class="text-primary text-3xl" icon="user"></fa-icon>
+      </ion-thumbnail>
+      <div clas="flex flex-col items-center text-center">
+        <h5 class="font-bold mb-1 text-xl">Your profile</h5>
+        <ng-container *ngrxLet="profile$ as profile">
+          <ng-container *ngIf="profile">
+            <h6 class="text-medium text-lg text-center">
+              {{ profile.dob | date }}
+            </h6>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </div>
-  </header>
-  <main>
-    <article>
-      <ng-container *ngrxLet="profile$ as profile">
-        <ng-container *ngIf="profile">
-          <ion-list class="rounded-3xl" lines="none">
-            <ion-item>
-              <ion-label>
-                <span class="text-base">Height</span>
-              </ion-label>
-              <ion-label slot="end">
-                <span class="text-sm text-medium">{{ profile.height }} cm</span>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <span class="text-base">Weight</span>
-              </ion-label>
-              <ion-label slot="end">
-                <span class="text-sm text-medium">{{ profile.weight }} kg</span>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <span class="text-base">Sex</span>
-              </ion-label>
-              <ion-label slot="end">
-                <span class="text-sm text-medium">{{ profile.sex.label }}</span>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <span class="text-base">Age</span>
-              </ion-label>
-              <ion-label slot="end">
-                <span class="text-sm text-medium">
-                  {{ profile.dob | age }} yr
-                </span>
-              </ion-label>
-            </ion-item>
-            <ion-item>
-              <ion-label>
-                <span class="text-base">Activity Level</span>
-              </ion-label>
-              <ion-label slot="end">
-                <span class="text-sm text-medium">
-                  {{ profile.activityLevel.label }}
-                </span>
-              </ion-label>
-            </ion-item>
-            <ion-item detail routerLink="/app/profile/edit">
-              <ion-label>
-                <span class="text-secondary">Edit Profile</span>
-              </ion-label>
-            </ion-item>
-          </ion-list>
+      </div>
+    </header>
+    <main>
+      <article>
+        <ng-container *ngrxLet="profile$ as profile">
+          <ng-container *ngIf="profile">
+            <ion-list class="rounded-3xl" lines="none">
+              <ion-item>
+                <ion-icon color="primary" slot="start" name="body"></ion-icon>
+                <span class="px-4">Height</span>
+                <ion-label slot="end">
+                  <span class="text-sm text-medium">
+                    {{ profile.height }} cm
+                  </span>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon color="primary" slot="start" name="scale"></ion-icon>
+                <span class="px-4">Weight</span>
+                <ion-label slot="end">
+                  <span class="text-sm text-medium">
+                    {{ profile.weight }} kg
+                  </span>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon
+                  color="primary"
+                  slot="start"
+                  name="male-female"
+                ></ion-icon>
+                <span class="px-4">Sex</span>
+                <ion-label slot="end">
+                  <span class="text-sm text-medium">
+                    {{ profile.sex.label }}
+                  </span>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon
+                  color="primary"
+                  name="calendar-number"
+                  slot="start"
+                ></ion-icon>
+                <span class="px-4">Age</span>
+                <ion-label slot="end">
+                  <span class="text-sm text-medium">
+                    {{ profile.dob | age }} yr
+                  </span>
+                </ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-icon
+                  color="primary"
+                  slot="start"
+                  name="trending-up"
+                ></ion-icon>
+                <span class="px-4">Activity Level</span>
+                <ion-label slot="end">
+                  <span class="text-sm text-medium">
+                    {{ profile.activityLevel.label }}
+                  </span>
+                </ion-label>
+              </ion-item>
+              <ion-item class="mt-8" detail routerLink="/app/profile/edit">
+                <ion-icon
+                  slot="start"
+                  color="secondary"
+                  name="create"
+                ></ion-icon>
+                <span class="px-4 text-secondary">Edit Profile</span>
+              </ion-item>
+            </ion-list>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </article>
-  </main>
-</ion-content>
+      </article>
+    </main>
+  </ion-content>
+</ng-container>

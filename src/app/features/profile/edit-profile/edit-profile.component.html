@@ -10,10 +10,9 @@
   <main>
     <form [formGroup]="form" #ngForm="ngForm">
       <ion-list class="rounded-3xl" lines="none">
-        <ion-item>
-          <ion-label>
-            <span class="text-base">Height</span>
-          </ion-label>
+        <ion-item lines="none">
+          <ion-icon color="primary" slot="start" name="body"></ion-icon>
+          <span class="px-4">Height</span>
           <ion-input
             id="height"
             name="height"
@@ -26,10 +25,9 @@
             required
           ></ion-input>
         </ion-item>
-        <ion-item>
-          <ion-label>
-            <span class="text-base">Weight</span>
-          </ion-label>
+        <ion-item lines="none">
+          <ion-icon color="primary" slot="start" name="scale"></ion-icon>
+          <span class="px-4">Weight</span>
           <ion-label slot="end">
             <ion-input
               id="weight"
@@ -47,7 +45,12 @@
         <ion-accordion-group>
           <ion-accordion>
             <ion-item slot="header">
-              <ion-label>Sex</ion-label>
+              <ion-icon
+                color="primary"
+                slot="start"
+                name="male-female"
+              ></ion-icon>
+              <span class="px-4">Sex</span>
               <ng-container *ngIf="form.controls.sex.value">
                 <ion-label slot="end">
                   <span class="text-medium text-sm px-2">
@@ -69,7 +72,13 @@
           </ion-accordion>
           <ion-accordion>
             <ion-item slot="header">
-              <ion-label>Activity Level</ion-label>
+              <ion-icon
+                color="primary"
+                slot="start"
+                name="trending-up"
+              ></ion-icon>
+
+              <span class="px-4">Activity Level</span>
               <ng-container *ngIf="form.controls.activityLevel.value">
                 <ion-label slot="end">
                   <span class="text-medium text-sm px-2">
@@ -91,7 +100,12 @@
           </ion-accordion>
           <ion-accordion>
             <ion-item slot="header">
-              <ion-label>Date of Birth</ion-label>
+              <ion-icon
+                color="primary"
+                name="calendar-number"
+                slot="start"
+              ></ion-icon>
+              <span class="px-4">Date of Birth</span>
               <ion-label slot="end">
                 <span class="text-medium text-sm px-2">
                   {{ form.controls.dob.value | date }}

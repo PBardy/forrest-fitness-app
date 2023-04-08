@@ -5,6 +5,19 @@
     eventRepeats: eventRepeats$
   } as vm"
 >
+  <ion-header class="ion-no-border" translucent>
+    <ion-toolbar class="bg-transparent px-4">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button shape="round" routerLink="/app/settings">
+          <fa-icon class="text-dark text-lg" icon="cog"></fa-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
   <ion-content class="ion-padding" fullscreen>
     <header class="flex flex-col items-center gap-4 py-8">
       <ion-thumbnail class="w-20 h-20 rounded-full">
@@ -107,7 +120,6 @@
                 <ion-item
                   color="none"
                   class="bg-step100"
-                  button
                   detail
                   (click)="onAddWorkout()"
                 >
