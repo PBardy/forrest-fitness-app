@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, exhaustMap } from 'rxjs/operators';
+import { map, exhaustMap, withLatestFrom, filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastService } from '@services/toast.service';
 import { tap } from 'rxjs';
 import { switchMap } from 'rxjs';
 import { EventActions } from './event.actions';
 import { EventService } from '@services/event.service';
+import { Store } from '@ngrx/store';
+import { selectEventsTotal } from './event.selectors';
 
 @Injectable()
 export class EventEfffects {
   public readonly loadAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EventActions.loadall),
+      withLatestFrom(this.store.select(selectEventsTotal)),
+      filter(([_, x]) => x < 1),
       exhaustMap(() =>
         this.event
           .getAll()
@@ -32,6 +36,20 @@ export class EventEfffects {
           tap(({ payload }) =>
             this.router.navigate(['app', 'events', payload.id])
           )
+        )
+      )
+    )
+  );
+
+  public readonly addMany$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EventActions.addmany),
+      map((x) => x.payload),
+      exhaustMap((payload) =>
+        this.event.addMany(payload).pipe(
+          map((payload) => EventActions.onaddmany({ payload })),
+          tap(() => this.router.navigate(['app', 'events'])),
+          tap(() => this.toast.present({ message: 'Events Added' }))
         )
       )
     )
@@ -92,6 +110,7 @@ export class EventEfffects {
 
   public constructor(
     private readonly router: Router,
+    private readonly store: Store,
     private readonly toast: ToastService,
     private readonly actions$: Actions,
     private readonly event: EventService

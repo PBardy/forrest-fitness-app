@@ -1,3 +1,9 @@
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 import { ScheduleEvery } from '@capacitor/local-notifications';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
@@ -11,11 +17,20 @@ export type WithUser<T> = T & {
 
 export type Model<T> = WithId<WithUser<T>>;
 
+export type FormGroupOf<T> = {
+  [key in keyof T]: FormControl<T[key]>;
+};
+
+export type NullableFormGroupOf<T> = {
+  [key in keyof T]: FormControl<T[key] | null>;
+};
+
 export type Workout = {
   icon: IconProp;
   label: string;
   energy: number;
   intensity: number;
+  duration: number;
 };
 
 export type Activity = {

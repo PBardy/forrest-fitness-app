@@ -70,11 +70,13 @@ export class ViewScheduleComponent {
 
   public onAdd() {
     const date = this.current$.getValue().toISOString();
+    this.modal.dismiss();
     this.router.navigate(['app', 'events', 'new', date]);
   }
 
   public onPlanDay() {
     const date = this.current$.getValue().toISOString();
+    this.modal.dismiss();
     this.router.navigate(['app', 'events', 'plan', date]);
   }
 }

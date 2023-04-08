@@ -17,6 +17,7 @@ export const initialSettingsState: SettingsState = {
         icon: 'a',
         energy: 1,
         intensity: 1,
+        duration: 15,
       },
     },
   },

@@ -137,7 +137,11 @@ export const routes: Route[] = [
           },
         ],
       },
-      { path: '', pathMatch: 'full', redirectTo: '/app/summary/view' },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/app/events/plan/2023-04-08T18:07:48.348Z',
+      },
     ],
   },
   {

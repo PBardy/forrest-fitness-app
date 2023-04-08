@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ActivityActions } from '@app/store/activity/activity.actions';
+import { EventActions } from '@app/store/event/event.actions';
 
 @Component({
   selector: 'app-tabs',
@@ -32,6 +33,7 @@ export class TabsComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.store.dispatch(EventActions.loadall());
     this.store.dispatch(ActivityActions.loadall());
   }
 }

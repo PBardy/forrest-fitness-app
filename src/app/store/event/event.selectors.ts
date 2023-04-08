@@ -9,11 +9,16 @@ import {
 } from 'date-fns';
 import * as _ from 'underscore';
 
-const { selectAll } = eventAdapter.getSelectors();
+const { selectAll, selectTotal } = eventAdapter.getSelectors();
 
 export const selectEventFeature = createFeatureSelector<EventState>('event');
 
 export const selectEvents = createSelector(selectEventFeature, selectAll);
+
+export const selectEventsTotal = createSelector(
+  selectEventFeature,
+  selectTotal
+);
 
 export const selectEventById = (id: string) =>
   createSelector(selectEvents, (events) =>

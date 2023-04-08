@@ -37,6 +37,9 @@ export class AddWorkoutComponent {
     intensity: this.fb.nonNullable.control<number | null>(null, [
       Validators.required,
     ]),
+    duration: this.fb.nonNullable.control<number | null>(null, [
+      Validators.required,
+    ]),
   });
 
   public constructor(

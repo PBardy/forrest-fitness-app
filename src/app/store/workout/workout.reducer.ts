@@ -26,6 +26,7 @@ export const initialWorkouts: WithId<Workout>[] = [
     icon: 'a',
     energy: 1,
     intensity: 1,
+    duration: 15,
   },
   {
     id: '2',
@@ -33,6 +34,7 @@ export const initialWorkouts: WithId<Workout>[] = [
     icon: 'c',
     energy: 1,
     intensity: 1,
+    duration: 15,
   },
   {
     id: '3',
@@ -40,6 +42,7 @@ export const initialWorkouts: WithId<Workout>[] = [
     icon: 't',
     energy: 1,
     intensity: 1,
+    duration: 15,
   },
   {
     id: '4',
@@ -47,6 +50,7 @@ export const initialWorkouts: WithId<Workout>[] = [
     icon: 'r',
     energy: 1,
     intensity: 1,
+    duration: 15,
   },
   {
     id: '5',
@@ -54,6 +58,7 @@ export const initialWorkouts: WithId<Workout>[] = [
     icon: 'walking',
     energy: 1,
     intensity: 1,
+    duration: 15,
   },
   {
     id: '6',
@@ -61,6 +66,7 @@ export const initialWorkouts: WithId<Workout>[] = [
     icon: 'w',
     energy: 1,
     intensity: 1,
+    duration: 15,
   },
   {
     id: '7',
@@ -68,6 +74,7 @@ export const initialWorkouts: WithId<Workout>[] = [
     icon: 'y',
     energy: 1,
     intensity: 1,
+    duration: 15,
   },
 ];
 

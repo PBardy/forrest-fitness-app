@@ -8,8 +8,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { StoreModule, provideStore } from '@ngrx/store';
-import { EffectsModule, provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
