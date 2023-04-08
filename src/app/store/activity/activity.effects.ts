@@ -1,12 +1,12 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, exhaustMap } from 'rxjs/operators';
+import { map, exhaustMap, catchError } from 'rxjs/operators';
 import { AppState } from '..';
 import { ActivityService } from '@services/activity.service';
 import { Router } from '@angular/router';
 import { ToastService } from '@services/toast.service';
-import { tap } from 'rxjs';
+import { EMPTY, of, tap } from 'rxjs';
 import { switchMap } from 'rxjs';
 import { ActivityActions } from './activity.actions';
 
@@ -16,6 +16,18 @@ export class ActivityEfffects {
     this.actions$.pipe(
       ofType(ActivityActions.loadall),
       exhaustMap(() =>
+        this.activity
+          .getAll()
+          .pipe(map((payload) => ActivityActions.setall({ payload })))
+      )
+    )
+  );
+
+  public readonly refresh$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ActivityActions.refresh),
+      map((x) => x.payload),
+      exhaustMap((refresher) =>
         this.activity
           .getAll()
           .pipe(map((payload) => ActivityActions.setall({ payload })))
@@ -95,7 +107,6 @@ export class ActivityEfffects {
   public constructor(
     private readonly router: Router,
     private readonly toast: ToastService,
-    private readonly store: Store<AppState>,
     private readonly actions$: Actions,
     private readonly activity: ActivityService
   ) {}

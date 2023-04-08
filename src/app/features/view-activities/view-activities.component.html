@@ -1,5 +1,9 @@
 <ng-container
-  *ngrxLet="{ activities: activities$, searchFocussed: searchFocussed$ } as vm"
+  *ngrxLet="{
+    activities: activities$,
+    activitiesTotal: activitiesTotal$,
+    searchFocussed: searchFocussed$
+  } as vm"
 >
   <ion-header class="ion-no-border" translucent>
     <ion-toolbar class="bg-transparent px-4">
@@ -15,37 +19,42 @@
   </ion-header>
 
   <ion-content fullscreen>
-    <main>
-      <header class="flex flex-col gap-4 px-4 py-8">
-        <ng-container *ngIf="!vm.searchFocussed">
-          <div class="flex flex-col items-center gap-4">
-            <ion-thumbnail class="w-20 h-20 rounded-full">
-              <fa-icon class="text-primary text-3xl" icon="walking"></fa-icon>
-            </ion-thumbnail>
-            <h5 class="font-bold mb-1 text-xl">Journal</h5>
-          </div>
-        </ng-container>
-        <ion-item class="rounded-full" lines="none">
-          <ion-input
-            id="search"
-            clearOnEdit
-            placeholder="Search"
-            [(ngModel)]="search"
-            (ionBlur)="searchFocussed$.next(false)"
-            (ionFocus)="searchFocussed$.next(true)"
-            (ngModelChange)="searchSub$.next($event)"
-          ></ion-input>
-          <ion-icon name="search" slot="end"></ion-icon>
-        </ion-item>
-      </header>
-      <article class="flex flex-col gap-4">
+    <header class="flex flex-col gap-4 px-4 py-8">
+      <ng-container *ngIf="!vm.searchFocussed">
+        <div class="flex flex-col items-center gap-4">
+          <ion-thumbnail class="w-20 h-20 rounded-full">
+            <fa-icon class="text-primary text-3xl" icon="walking"></fa-icon>
+          </ion-thumbnail>
+          <h5 class="font-bold mb-1 text-xl">Journal</h5>
+        </div>
+      </ng-container>
+      <ion-item class="rounded-full" lines="none">
+        <ion-input
+          id="search"
+          clearOnEdit
+          placeholder="Search"
+          [(ngModel)]="search"
+          (ionBlur)="searchFocussed$.next(false)"
+          (ionFocus)="searchFocussed$.next(true)"
+          (ngModelChange)="searchSub$.next($event)"
+        ></ion-input>
+        <ion-icon name="search" slot="end"></ion-icon>
+      </ion-item>
+    </header>
+    <article class="flex flex-col gap-4">
+      <ng-container *ngIf="vm.activitiesTotal; else empty">
         <ng-container *ngFor="let day of vm.activities | keyvalue">
           <ng-container
             *ngTemplateOutlet="activityDay; context: { day }"
           ></ng-container>
         </ng-container>
-      </article>
-    </main>
+      </ng-container>
+      <ng-template #empty>
+        <section class="flex justify-center py-32">
+          <span class="text-primary">No Activites</span>
+        </section>
+      </ng-template>
+    </article>
   </ion-content>
 
   <!-- Day -->

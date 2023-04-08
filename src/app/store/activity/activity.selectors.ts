@@ -14,7 +14,7 @@ import {
 } from 'date-fns';
 import { Activity, WithId } from '@types';
 
-const { selectAll } = activityAdapter.getSelectors();
+const { selectAll, selectTotal } = activityAdapter.getSelectors();
 
 export const selectActivityFeature =
   createFeatureSelector<ActivityState>('activity');
@@ -22,6 +22,11 @@ export const selectActivityFeature =
 export const selectActivities = createSelector(
   selectActivityFeature,
   selectAll
+);
+
+export const selectActivitiesTotal = createSelector(
+  selectActivityFeature,
+  selectTotal
 );
 
 export const matchesTitle = (a: WithId<Activity>, title: string) =>

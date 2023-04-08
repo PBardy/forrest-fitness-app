@@ -4,8 +4,18 @@ import {
   CollectionReference,
 } from '@angular/fire/compat/firestore';
 import { AuthService } from './auth.service';
-import { from, filter, switchMap, Observable, map } from 'rxjs';
-import type { Model, WithId, WithUser } from '@types';
+import {
+  from,
+  filter,
+  switchMap,
+  Observable,
+  map,
+  tap,
+  catchError,
+  of,
+  EMPTY,
+} from 'rxjs';
+import type { Model, WithUser } from '@types';
 import { Store } from '@ngrx/store';
 
 const selectByUser = (q: CollectionReference, u: firebase.default.User) =>
@@ -26,11 +36,7 @@ export class ModelService<T extends Partial<unknown>> {
   public getAll() {
     return this.auth.account().pipe(
       filter(Boolean),
-      switchMap((x) =>
-        this.fs
-          .collection<Model<T>>(this.path, (q) => selectByUser(q, x))
-          .valueChanges({ idField: 'id' })
-      )
+      switchMap((x) => of([]))
     );
   }
 

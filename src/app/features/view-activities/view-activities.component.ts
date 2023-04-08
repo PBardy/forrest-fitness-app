@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonRefresher, IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -11,6 +11,7 @@ import {
   selectActivitiesByDay,
   selectActivitiesByDayAndTitle,
   selectActivitiesByTitle,
+  selectActivitiesTotal,
 } from '@app/store/activity/activity.selectors';
 import { LetModule } from '@ngrx/component';
 import { ActivityEndPipe } from '@pipes/activity-end.pipe';
@@ -37,6 +38,7 @@ export class ViewActivitiesComponent {
   public searchSub$ = new Subject<string>();
   public searchFocussed$ = new BehaviorSubject<boolean>(false);
 
+  public activitiesTotal$ = this.store.select(selectActivitiesTotal);
   public activities$ = this.searchSub$.pipe(
     startWith(''),
     switchMap((title) =>
@@ -55,5 +57,9 @@ export class ViewActivitiesComponent {
 
   public onDelete(payload: Model<Activity>) {
     this.store.dispatch(ActivityActions.deleteone({ payload }));
+  }
+
+  public onRefresh() {
+    this.store.dispatch(ActivityActions.loadall());
   }
 }

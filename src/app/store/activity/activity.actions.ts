@@ -1,3 +1,4 @@
+import { IonRefresher } from '@ionic/angular';
 import { createActionGroup, props } from '@ngrx/store';
 import { Activity, Model, WithId } from '@types';
 
@@ -5,6 +6,7 @@ export const ActivityActions = createActionGroup({
   source: 'Activity',
   events: {
     LoadAll: props<any>(),
+    Refresh: props<{ payload: IonRefresher }>(),
     AddOne: props<{ payload: Activity }>(),
     UpdateOne: props<{ payload: WithId<Partial<Activity>> }>(),
     DeleteOne: props<{ payload: Model<Activity> }>(),
