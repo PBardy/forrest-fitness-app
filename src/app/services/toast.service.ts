@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ToastController, ToastOptions } from '@ionic/angular';
-import { from, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +12,7 @@ export class ToastService {
       ...opts,
       position: 'top',
       duration: 2000,
+      cssClass: 'top-4',
     });
 
     await toast.present();
