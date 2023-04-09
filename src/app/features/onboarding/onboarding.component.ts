@@ -19,6 +19,7 @@ import { ActivityLevel, Sex } from '@types';
 import { Store } from '@ngrx/store';
 import { ProfileActions } from '@app/store/profile/profile.actions';
 import { Profile } from '@types';
+import { OnboardingStep6Component } from './onboarding-step6/onboarding-step6.component';
 
 @Component({
   selector: 'app-onboarding',
@@ -35,6 +36,7 @@ import { Profile } from '@types';
     OnboardingStep3Component,
     OnboardingStep4Component,
     OnboardingStep5Component,
+    OnboardingStep6Component,
   ],
   templateUrl: './onboarding.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,6 +45,7 @@ export class OnboardingComponent {
   public step$ = new BehaviorSubject<number>(1);
 
   public readonly form = this.fb.nonNullable.group({
+    name: this.fb.nonNullable.control<string>('', [Validators.required]),
     height: this.fb.nonNullable.control<number | null>(null, [
       Validators.required,
       Validators.min(30),

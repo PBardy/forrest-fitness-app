@@ -8,33 +8,20 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { selectWorkouts } from '@app/store/workout/workout.selectors';
 import { selectEventDelays } from '@app/store/event-delay/event-delay.selectors';
 import { selectEventRepeats } from '@app/store/event-repeat/event-repeat.selectors';
 import { LetModule } from '@ngrx/component';
-import {
-  EventDelay,
-  EventRepeat,
-  Period,
-  Settings,
-  WithId,
-  Workout,
-} from '@types';
+import { EventDelay, EventRepeat, Settings, WithId, Workout } from '@types';
 import { selectSettings } from '@app/store/settings/settings.selectors';
-import { ReplaySubject, BehaviorSubject, takeUntil } from 'rxjs';
+import { ReplaySubject, takeUntil } from 'rxjs';
 import { SettingsActions } from '@app/store/settings/settings.actions';
 import { WorkoutActions } from '@app/store/workout/workout.actions';
 import { AuthService } from '@services/auth.service';
-import { addHours, addMinutes, setHours, setMinutes } from 'date-fns';
 import { ProfileActions } from '@app/store/profile/profile.actions';
+import { AuthActions } from '@app/store/auth/auth.actions';
 
 @Component({
   selector: 'app-settings',
@@ -106,12 +93,10 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   public onSignOut() {
-    this.auth.signOut().pipe(takeUntil(this.destroy$)).subscribe();
+    this.store.dispatch(AuthActions.signout());
   }
 
   public onDeleteAccount() {
     this.store.dispatch(ProfileActions.delete());
   }
-
-  public onSelectPeriod(index: number) {}
 }

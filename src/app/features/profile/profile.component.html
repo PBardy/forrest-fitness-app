@@ -49,6 +49,15 @@
             <ion-label class="text-medium px-4">Your info</ion-label>
           </ion-list-header>
           <ion-item>
+            <ion-icon color="primary" slot="start" name="person"></ion-icon>
+            <span class="px-4">Name</span>
+            <ion-label slot="end">
+              <span class="text-sm text-medium">
+                {{ vm.profile.name }}
+              </span>
+            </ion-label>
+          </ion-item>
+          <ion-item>
             <ion-icon color="primary" slot="start" name="body"></ion-icon>
             <span class="px-4">Height</span>
             <ion-label slot="end">

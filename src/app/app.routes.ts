@@ -31,6 +31,7 @@ import { AddWorkoutComponent } from '@features/add-workout/add-workout.component
 import { EditWorkoutComponent } from '@features/edit-workout/edit-workout.component';
 import { FriendsComponent } from '@features/profile/friends/friends.component';
 import { InvitesComponent } from '@features/profile/invites/invites.component';
+import { OnboardingStep6Component } from '@features/onboarding/onboarding-step6/onboarding-step6.component';
 
 export const routes: Route[] = [
   {
@@ -156,6 +157,7 @@ export const routes: Route[] = [
       { path: 'step3', component: OnboardingStep3Component },
       { path: 'step4', component: OnboardingStep4Component },
       { path: 'step5', component: OnboardingStep5Component },
+      { path: 'step6', component: OnboardingStep6Component },
       { path: '', component: OnboardingComponent },
     ],
   },

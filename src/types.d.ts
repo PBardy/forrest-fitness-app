@@ -77,6 +77,7 @@ export type Profile = {
   sex: WithId<Sex>;
   activityLevel: WithId<ActivityLevel>;
   dob: string;
+  name: string;
 };
 
 export type SexEnum = 'Male' | 'Female';

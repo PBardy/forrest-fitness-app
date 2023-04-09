@@ -7,38 +7,44 @@
           (click)="onPrev.emit($any($event).preventDefault())"
         ></ion-back-button>
       </ion-buttons>
-      <ion-title>Sex</ion-title>
+      <ion-title>Display Name</ion-title>
     </ion-toolbar>
   </ion-header>
-  <article class="flex flex-col ion-padding flex-1">
+  <article class="flex flex-col flex-1 ion-padding">
     <ion-item class="rounded-xl p-0">
       <ion-avatar class="bg-step100 grid place-items-center" slot="start">
         <fa-icon class="text-warning" icon="info"></fa-icon>
       </ion-avatar>
       <ion-label class="ion-text-wrap ml-4 py-2">
-        <p class="text-xs">This is used to tune recommended exercise levels.</p>
+        <p class="text-xs">
+          Doesn't need to be a real. Your friends will search for this when
+          adding you.
+        </p>
       </ion-label>
     </ion-item>
     <aside class="flex items-center justify-center flex-1">
-      <fa-icon class="text-primary text-7xl" icon="venus-mars"></fa-icon>
+      <fa-icon class="text-primary text-7xl" icon="user"></fa-icon>
     </aside>
     <article class="flex flex-col">
-      <h6 class="font-bold text-center mb-4">Enter Sex</h6>
+      <h6 class="font-bold text-center mb-4">Enter Display Name</h6>
       <form
         class="flex flex-col gap-4"
         [formGroup]="form"
         (ngSubmit)="onSubmit()"
         #ngForm="ngForm"
       >
-        <ion-radio-group formControlName="sex">
-          <ng-container *ngrxLet="sexes$ as sexes">
-            <ng-container *ngFor="let sex of sexes">
-              <ion-item class="rounded-full mb-3" button>
-                <ion-radio [value]="sex">{{ sex.label }}</ion-radio>
-              </ion-item>
-            </ng-container>
-          </ng-container>
-        </ion-radio-group>
+        <ion-item class="rounded-full" lines="none">
+          <ion-input
+            id="name"
+            name="name"
+            aria-label="name"
+            placeholder="Display name"
+            formControlName="name"
+            clearOnEdit
+            required
+          ></ion-input>
+          <fa-icon slot="end" icon="user"></fa-icon>
+        </ion-item>
         <ion-button shape="round" expand="full" (click)="onSubmit()">
           Continue
         </ion-button>

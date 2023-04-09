@@ -65,8 +65,7 @@
               <ion-radio-group formControlName="sex" slot="content">
                 <ng-container *ngFor="let sex of sexes">
                   <ion-item>
-                    <ion-label>{{ sex.label }}</ion-label>
-                    <ion-radio [value]="sex"></ion-radio>
+                    <ion-radio [value]="sex">{{ sex.label }}</ion-radio>
                   </ion-item>
                 </ng-container>
               </ion-radio-group>
@@ -93,8 +92,7 @@
               <ion-radio-group formControlName="activityLevel" slot="content">
                 <ng-container *ngFor="let level of levels">
                   <ion-item>
-                    <ion-label>{{ level.label }}</ion-label>
-                    <ion-radio [value]="level"></ion-radio>
+                    <ion-radio [value]="level">{{ level.label }}</ion-radio>
                   </ion-item>
                 </ng-container>
               </ion-radio-group>

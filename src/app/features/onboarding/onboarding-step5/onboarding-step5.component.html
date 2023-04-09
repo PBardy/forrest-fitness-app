@@ -33,23 +33,17 @@
         <ng-container *ngrxLet="activityLevels$ as levels">
           <ng-container *ngFor="let level of levels">
             <ion-item class="rounded-full mb-3" button>
-              <fa-icon
-                class="text-primary"
-                slot="start"
-                [icon]="level.icon"
-              ></fa-icon>
-              <ion-label class="py-2 px-4">
+              <ion-radio [value]="level">
                 <span class="font-bold text-sm mb-1">{{ level.label }}</span>
-                <p class="text-xs">{{ level.description }}</p>
-              </ion-label>
-              <ion-radio [value]="level"></ion-radio>
+                <p class="text-xs text-medium">{{ level.description }}</p>
+              </ion-radio>
             </ion-item>
           </ng-container>
         </ng-container>
       </ion-radio-group>
       <section class="flex flex-col gap-4 py-4">
         <ion-button shape="round" expand="full" (click)="onSubmit()">
-          Finish
+          Continue
         </ion-button>
       </section>
     </form>

@@ -37,8 +37,15 @@
         <app-onboarding-step5
           [form]="form"
           (onPrev)="step$.next(4)"
-          (onNext)="onSubmit()"
+          (onNext)="step$.next(6)"
         ></app-onboarding-step5>
+      </ng-container>
+      <ng-container *ngSwitchCase="6">
+        <app-onboarding-step6
+          [form]="form"
+          (onPrev)="step$.next(5)"
+          (onNext)="onSubmit()"
+        ></app-onboarding-step6>
       </ng-container>
     </form>
   </main>
