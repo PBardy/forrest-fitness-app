@@ -17,5 +17,8 @@ export const profileReducer = createReducer(
   }),
   on(ProfileActions.update, (state, { payload }) => {
     return { ...state, profile: payload };
+  }),
+  on(ProfileActions.delete, () => {
+    return initialProfileState;
   })
 );

@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { AuthService } from '@services/auth.service';
 import { ProfileActions } from '../profile/profile.actions';
-import { exhaustMap, catchError, tap } from 'rxjs';
+import { exhaustMap, tap, catchError } from 'rxjs';
 import { ActivityService } from '@services/activity.service';
 import { EventService } from '@services/event.service';
 import { AlertService } from '@services/alert.service';
@@ -16,16 +16,8 @@ export class AuthEffects {
         ofType(ProfileActions.delete),
         exhaustMap(() => this.events.deleteAll()),
         exhaustMap(() => this.activities.deleteAll()),
-        exhaustMap(() =>
-          this.auth
-            .deleteAccount()
-            .pipe(tap(() => this.router.navigate(['sign-up'])))
-        ),
-        catchError(() =>
-          this.alerts.present({
-            message: 'This requires a recent operation.',
-          })
-        )
+        exhaustMap(() => this.auth.deleteAccount()),
+        catchError(() => this.alerts.onDeleteAccountError())
       ),
     { dispatch: false }
   );
