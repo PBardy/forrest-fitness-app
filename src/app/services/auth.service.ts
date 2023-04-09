@@ -51,6 +51,13 @@ export class AuthService {
       tap((_) => this.router.navigate(['sign-in']))
     );
   }
+
+  public deleteAccount() {
+    return this.account().pipe(
+      filter(Boolean),
+      switchMap((user) => user.delete())
+    );
+  }
 }
 
 type SignIn = {

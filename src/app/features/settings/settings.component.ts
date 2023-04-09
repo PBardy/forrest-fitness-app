@@ -34,6 +34,7 @@ import { SettingsActions } from '@app/store/settings/settings.actions';
 import { WorkoutActions } from '@app/store/workout/workout.actions';
 import { AuthService } from '@services/auth.service';
 import { addHours, addMinutes, setHours, setMinutes } from 'date-fns';
+import { ProfileActions } from '@app/store/profile/profile.actions';
 
 @Component({
   selector: 'app-settings',
@@ -108,7 +109,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.auth.signOut().pipe(takeUntil(this.destroy$)).subscribe();
   }
 
-  public onDeleteAccount() {}
+  public onDeleteAccount() {
+    this.store.dispatch(ProfileActions.delete());
+  }
 
   public onSelectPeriod(index: number) {}
 }

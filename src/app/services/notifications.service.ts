@@ -20,8 +20,12 @@ export class NotificationsService {
   }
 
   public async setPending() {
-    const pending = await this.ln.getPending();
-    this.pending$.next(pending.notifications);
+    try {
+      const pending = await this.ln.getPending();
+      this.pending$.next(pending.notifications);
+    } catch {
+      // not implemented on the web
+    }
   }
 
   public schedule(event: WithId<Event>) {

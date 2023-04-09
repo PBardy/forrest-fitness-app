@@ -1,0 +1,26 @@
+<ng-container *ngIf="true">
+  <ion-header class="ion-no-border" translucent>
+    <ion-toolbar class="bg-transparent px-4">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button shape="round" routerLink="/app/settings">
+          <fa-icon class="text-dark text-lg" icon="cog"></fa-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" fullscreen>
+    <header class="flex flex-col items-center gap-4 py-8">
+      <ion-thumbnail class="w-20 h-20 rounded-full">
+        <fa-icon class="text-primary text-3xl" icon="user-plus"></fa-icon>
+      </ion-thumbnail>
+      <div clas="flex flex-col items-center text-center ">
+        <h5 class="font-bold text-xl mb-1">Invites</h5>
+      </div>
+    </header>
+    <main></main>
+  </ion-content>
+</ng-container>

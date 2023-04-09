@@ -6,5 +6,6 @@ export const ProfileActions = createActionGroup({
   events: {
     Set: props<{ payload: Profile }>(),
     Update: props<{ payload: Profile }>(),
+    Delete: props<any>(),
   },
 });

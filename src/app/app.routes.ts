@@ -29,6 +29,8 @@ import { EditActivityComponent } from '@features/edit-activity/edit-activity.com
 import { EditEventComponent } from '@features/edit-event/edit-event.component';
 import { AddWorkoutComponent } from '@features/add-workout/add-workout.component';
 import { EditWorkoutComponent } from '@features/edit-workout/edit-workout.component';
+import { FriendsComponent } from '@features/profile/friends/friends.component';
+import { InvitesComponent } from '@features/profile/invites/invites.component';
 
 export const routes: Route[] = [
   {
@@ -116,6 +118,8 @@ export const routes: Route[] = [
             children: [{ path: '', component: ProfileComponent }],
           },
           { path: 'edit', component: EditProfileComponent },
+          { path: 'friends', component: FriendsComponent },
+          { path: 'invites', component: InvitesComponent },
           { path: '', pathMatch: 'full', redirectTo: '/app/profile/view' },
         ],
       },
@@ -140,7 +144,7 @@ export const routes: Route[] = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/app/summary',
+        redirectTo: '/app/summary/view',
       },
     ],
   },

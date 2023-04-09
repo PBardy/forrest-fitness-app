@@ -21,6 +21,7 @@ import { ActivityEfffects } from '@app/store/activity/activity.effects';
 import { EventEfffects } from '@app/store/event/event.effects';
 import { NotificationEffects } from '@app/store/notifications/notification.effects';
 import { WorkoutEffects } from '@app/store/workout/workout.effects';
+import { AuthEffects } from '@app/store/auth/auth.effects';
 
 if (environment.production) {
   enableProdMode();
@@ -46,6 +47,7 @@ bootstrapApplication(AppComponent, {
       EventEfffects,
       NotificationEffects,
       WorkoutEffects,
+      AuthEffects,
     ]),
   ],
 });

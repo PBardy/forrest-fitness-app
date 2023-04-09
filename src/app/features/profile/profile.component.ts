@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { selectProfile } from '@app/store/profile/profile.selectors';
 import { LetModule } from '@ngrx/component';
 import { AgePipe } from '@pipes/age.pipe';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +24,7 @@ import { AgePipe } from '@pipes/age.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {
-  public profile$ = this.store.select(selectProfile);
+  public profile$ = this.store.select(selectProfile).pipe(filter(Boolean));
 
   public constructor(private readonly store: Store) {}
 }

@@ -11,6 +11,7 @@
         <ion-item class="rounded-full" lines="none">
           <ion-input
             id="search"
+            aria-label="search"
             autofocus
             clearOnEdit
             placeholder="Search"
@@ -47,6 +48,9 @@
         </div>
         <ion-item class="rounded-full" lines="none">
           <ion-input
+            id="search"
+            name="search"
+            aria-label="search"
             placeholder="Search"
             (ionFocus)="searchFocussed$.next(true)"
           ></ion-input>

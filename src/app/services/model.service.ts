@@ -99,4 +99,22 @@ export class ModelService<T extends Partial<unknown>> {
   public deleteOne(model: Model<T>) {
     return from(this.fs.doc<T>(`${this.path}/${model.id}`).delete());
   }
+
+  public deleteAll() {
+    return this.auth.account().pipe(
+      filter(Boolean),
+      switchMap(() => this.fs.collection<WithUser<T>>(this.path).get()),
+      switchMap(async (snapshot) => {
+        const docs: Model<T>[] = [];
+        const batch = this.fs.firestore.batch();
+        snapshot.docs.forEach((doc) => {
+          batch.delete(doc.ref);
+        });
+
+        await batch.commit();
+
+        return docs;
+      })
+    );
+  }
 }

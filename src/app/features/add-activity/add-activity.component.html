@@ -40,10 +40,7 @@
             <ion-radio-group formControlName="workout" slot="content">
               <ng-container *ngFor="let workout of vm.workouts">
                 <ion-item>
-                  <ion-label>
-                    <span>{{ workout.label }}</span>
-                  </ion-label>
-                  <ion-radio [value]="workout"></ion-radio>
+                  <ion-radio [value]="workout">{{ workout.label }}</ion-radio>
                 </ion-item>
               </ng-container>
             </ion-radio-group>

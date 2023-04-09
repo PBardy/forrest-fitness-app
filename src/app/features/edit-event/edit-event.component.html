@@ -41,8 +41,9 @@
                 <ion-radio-group slot="content" formControlName="workout">
                   <ng-container *ngFor="let workout of vm.workouts">
                     <ion-item>
-                      <ion-label>{{ workout.label }} </ion-label>
-                      <ion-radio [value]="workout"></ion-radio>
+                      <ion-radio [value]="workout">
+                        {{ workout.label }}
+                      </ion-radio>
                     </ion-item>
                   </ng-container>
                 </ion-radio-group>
@@ -105,8 +106,7 @@
                 <ion-radio-group slot="content" formControlName="delay">
                   <ng-container *ngFor="let delay of vm.eventDelays">
                     <ion-item>
-                      <ion-label>{{ delay.label }} </ion-label>
-                      <ion-radio [value]="delay"></ion-radio>
+                      <ion-radio [value]="delay">{{ delay.label }}</ion-radio>
                     </ion-item>
                   </ng-container>
                 </ion-radio-group>
@@ -127,8 +127,7 @@
                 <ion-radio-group slot="content" formControlName="repeat">
                   <ng-container *ngFor="let repeat of vm.eventRepeats">
                     <ion-item>
-                      <ion-label>{{ repeat.label }} </ion-label>
-                      <ion-radio [value]="repeat"></ion-radio>
+                      <ion-radio [value]="repeat">{{ repeat.label }}</ion-radio>
                     </ion-item>
                   </ng-container>
                 </ion-radio-group>
