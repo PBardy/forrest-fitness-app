@@ -1,1 +1,30 @@
-<p>friends works!</p>
+<ion-header class="ion-no-border" translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Friends</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" fullscreen>
+  <header>
+    <ion-item class="rounded-full" lines="none">
+      <ion-input
+        id="search"
+        name="search"
+        aria-label="search"
+        placeholder="Search"
+        [(ngModel)]="search"
+        (ngModelChange)="searchSub$.next($event)"
+      ></ion-input>
+      <ion-icon name="search" slot="end"></ion-icon>
+    </ion-item>
+  </header>
+  <main></main>
+  <ion-fab class="bottom-4" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" routerLink="/app/profile/friends/search">
+      <ion-icon class="text-light" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

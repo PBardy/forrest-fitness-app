@@ -119,7 +119,10 @@ export const routes: Route[] = [
             children: [{ path: '', component: ProfileComponent }],
           },
           { path: 'edit', component: EditProfileComponent },
-          { path: 'friends', component: FriendsComponent },
+          {
+            path: 'friends',
+            children: [{ path: '', component: FriendsComponent }],
+          },
           { path: 'invites', component: InvitesComponent },
           { path: '', pathMatch: 'full', redirectTo: '/app/profile/view' },
         ],

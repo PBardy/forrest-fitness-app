@@ -80,6 +80,10 @@ export type Profile = {
   name: string;
 };
 
+export type PublicProfile = {
+  name: string;
+};
+
 export type SexEnum = 'Male' | 'Female';
 
 export type ActivityLevelEnum =

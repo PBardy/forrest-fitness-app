@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { exhaustMap, map, switchMap } from 'rxjs/operators';
+import { exhaustMap, filter, map, switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ProfileActions } from './profile.actions';
 import { ToastService } from '@services/toast.service';
+import { ProfileService } from '@services/profile.service';
 
 @Injectable()
 export class ProfileEffects {
@@ -11,9 +12,11 @@ export class ProfileEffects {
     () =>
       this.actions$.pipe(
         ofType(ProfileActions.set),
-        map((x) => x.payload),
-        exhaustMap((x) =>
-          x ? this.router.navigate(['app']) : this.router.navigate(['sign-in'])
+        map((action) => action.payload),
+        tap((profile) =>
+          profile
+            ? this.router.navigate(['app'])
+            : this.router.navigate(['sign-in'])
         )
       ),
     { dispatch: false }
@@ -37,6 +40,7 @@ export class ProfileEffects {
   public constructor(
     private readonly router: Router,
     private readonly actions$: Actions,
-    private readonly toast: ToastService
+    private readonly toast: ToastService,
+    private readonly profile: ProfileService
   ) {}
 }
