@@ -36,7 +36,6 @@ import { BehaviorSubject, Subject, startWith, switchMap } from 'rxjs';
 export class ViewActivitiesComponent {
   public search = '';
   public searchSub$ = new Subject<string>();
-  public searchFocussed$ = new BehaviorSubject<boolean>(false);
 
   public activitiesTotal$ = this.store.select(selectActivitiesTotal);
   public activities$ = this.searchSub$.pipe(
