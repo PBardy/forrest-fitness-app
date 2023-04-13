@@ -19,6 +19,15 @@ export class WorkoutEffects {
     )
   );
 
+  public readonly updateOne$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(WorkoutActions.updateone),
+      map((x) => x.payload),
+      tap((_) => this.router.navigate(['app', 'settings'])),
+      switchMap((payload) => [WorkoutActions.onupdateone({ payload })])
+    )
+  );
+
   public constructor(
     private readonly store: Store,
     private readonly actions$: Actions,

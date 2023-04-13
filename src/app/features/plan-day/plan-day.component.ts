@@ -28,6 +28,7 @@ import {
   EventRepeat,
   FormGroupOf,
   NullableFormGroupOf,
+  Settings,
   WithId,
   Workout,
 } from '@types';
@@ -49,11 +50,8 @@ import { EventActions } from '@app/store/event/event.actions';
   templateUrl: './plan-day.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlanDayComponent implements OnInit, OnDestroy {
+export class PlanDayComponent {
   @ViewChild('modal') public modal: IonModal;
-
-  public selected: number | null = null;
-  public destroy$ = new ReplaySubject<boolean>(1);
 
   public workouts$ = this.store.select(selectWorkouts);
   public settings$ = this.store.select(selectSettings);
@@ -85,34 +83,6 @@ export class PlanDayComponent implements OnInit, OnDestroy {
     return this.form.controls.events;
   }
 
-  public ngOnInit(): void {
-    combineLatest({ date: this.date$, settings: this.settings$ }).subscribe(
-      ({ date, settings }) => {
-        this.form = this.fb.nonNullable.group({
-          date: this.fb.nonNullable.control<string>(date.toISOString()),
-          events: this.fb.array<FormGroup<NullableFormGroupOf<Event>>>(
-            new Array(96).fill(startOfDay(date)).map((x, i) =>
-              this.fb.group<NullableFormGroupOf<Event>>({
-                title: this.fb.control(''),
-                workout: this.fb.control(null),
-                end: this.fb.control(addMinutes(x, i * 15 + 15).toISOString()),
-                start: this.fb.control(addMinutes(x, i * 15).toISOString()),
-                delay: this.fb.control(settings.events.delay),
-                repeat: this.fb.control(settings.events.repeat),
-                completed: this.fb.control(false),
-              })
-            )
-          ),
-        });
-      }
-    );
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
-  }
-
   public onCancel() {
     this.router.navigate(['app', 'events']);
   }
@@ -129,20 +99,21 @@ export class PlanDayComponent implements OnInit, OnDestroy {
     this.store.dispatch(EventActions.addmany({ payload }));
   }
 
-  public onClick(index: number) {
-    this.selected = index;
-    this.modal.present();
-  }
-
-  public onChooseWorkout(workout: WithId<Workout>) {
-    this.modal.dismiss();
-
-    if (this.selected !== null) {
-      const group = this.events.at(this.selected);
-      const start = parseISO(group.value.start as string);
-      const end = addMinutes(start, workout.duration).toISOString();
-
-      group.patchValue({ workout, end });
-    }
+  public onAddWorkout(
+    workout: WithId<Workout>,
+    date: Date,
+    settings: Settings
+  ) {
+    this.events.push(
+      this.fb.group<NullableFormGroupOf<Event>>({
+        title: this.fb.control(''),
+        workout: this.fb.control(workout),
+        end: this.fb.control(addMinutes(date, 15).toISOString()),
+        start: this.fb.control(addMinutes(date, 0).toISOString()),
+        delay: this.fb.control(settings.events.delay),
+        repeat: this.fb.control(settings.events.repeat),
+        completed: this.fb.control(false),
+      })
+    );
   }
 }

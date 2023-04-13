@@ -141,7 +141,7 @@ export const routes: Route[] = [
           { path: 'new', component: AddWorkoutComponent },
           {
             path: ':id',
-            children: [{ path: '', component: EditWorkoutComponent }],
+            children: [{ path: 'edit', component: EditWorkoutComponent }],
           },
         ],
       },

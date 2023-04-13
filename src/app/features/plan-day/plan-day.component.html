@@ -1,76 +1,33 @@
-<ng-container *ngrxLet="{ date: date$, workouts: workouts$ } as vm">
-  <ion-content fullscreen>
-    <header class="flex flex-col items-center gap-3 py-12 relative">
+<ng-container
+  *ngrxLet="{ date: date$, workouts: workouts$, settings: settings$ } as vm"
+>
+  <ion-content class="ion-padding" fullscreen>
+    <header class="flex flex-col items-center gap-4 py-8 relative">
       <ion-thumbnail class="w-20 h-20 rounded-full">
         <fa-icon class="text-primary text-3xl" icon="calendar-day"></fa-icon>
       </ion-thumbnail>
       <h5 class="font-bold">{{ vm.date | date }}</h5>
     </header>
-    <main>
+    <ion-list class="rounded-3xl" lines="none">
       <ng-container *ngIf="events.controls.length">
-        <ion-list class="rounded-3xl">
-          <ng-container *ngFor="let slot of events.controls; let i = index">
-            <ng-container *ngIf="slot.value.workout as workout; else empty">
-              <ion-item button>
-                <ion-thumbnail class="rounded-full my-2">
-                  <fa-icon class="text-primary" [icon]="workout.icon"></fa-icon>
-                </ion-thumbnail>
-                <ion-label class="px-4">
-                  <div>{{ workout.label }}</div>
-                  <div class="flex items-center text-xs gap-2">
-                    <ng-container *ngIf="slot.value.delay!.by !== null">
-                      <div class="flex items-center gap-1">
-                        <fa-icon class="text-primary" icon="bell"></fa-icon>
-                        <span class="text-medium">
-                          {{ slot.value.delay!.by }} mins
-                        </span>
-                      </div>
-                    </ng-container>
-                    <ng-container *ngIf="slot.value.repeat!.every !== null">
-                      <div class="flex items-center gap-2">
-                        <fa-icon class="text-primary" icon="repeat"></fa-icon>
-                        <span class="text-medium">
-                          Every {{ slot.value.repeat!.every }} days
-                        </span>
-                      </div>
-                    </ng-container>
-                  </div>
-                </ion-label>
-                <ion-label slot="end">
-                  <div [style.paddingBottom.px]="workout.duration">
-                    <div class="text-xs text-primary pt-2">
-                      {{ slot.value.start | date : "HH:mm" }}
-                    </div>
-                  </div>
-                  <div class="text-xs text-medium pb-2">
-                    {{ slot.value.end | date : "HH:mm" }}
-                  </div>
-                </ion-label>
-              </ion-item>
-            </ng-container>
-            <ng-template #empty>
-              <ion-item (click)="onClick(i)" button>
-                <ion-label slot="start">
-                  <div class="text-xs text-primary">
-                    {{ slot.value.start | date : "HH:mm" }}
-                  </div>
-                  <div class="text-xs text-medium">
-                    {{ slot.value.end | date : "HH:mm" }}
-                  </div>
-                </ion-label>
-                <ng-container *ngIf="slot.value.workout as workout">
-                  <ion-label>{{ workout.label }}</ion-label>
-                </ng-container>
-                <ion-icon slot="end" name="add"></ion-icon>
-              </ion-item>
-            </ng-template>
-          </ng-container>
-        </ion-list>
+        <ng-container *ngFor="let control of events.controls">
+          <ion-item *ngIf="control.value.workout">
+            <ion-thumbnail class="w-14 h-14 rounded-full">
+              <fa-icon class="text-primary text-lg" icon="bell"></fa-icon>
+            </ion-thumbnail>
+            <ion-label class="px-4">
+              {{ control.value.workout.label }}
+            </ion-label>
+          </ion-item>
+        </ng-container>
       </ng-container>
-    </main>
-  </ion-content>
-
-  <ion-footer class="ion-padding">
+      <ion-item button id="workout">
+        <ion-thumbnail class="w-14 h-14 rounded-full">
+          <fa-icon class="text-warning text-lg" icon="add"></fa-icon>
+        </ion-thumbnail>
+        <ion-label class="px-4">Add Workout</ion-label>
+      </ion-item>
+    </ion-list>
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -85,7 +42,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-footer>
+  </ion-content>
 
   <ion-modal
     #modal
@@ -102,7 +59,7 @@
             </ion-label>
           </ion-list-header>
           <ng-container *ngFor="let item of vm.workouts">
-            <ion-item button detail (click)="onChooseWorkout(item)">
+            <ion-item button (click)="onAddWorkout(item, vm.date, vm.settings)">
               <ion-thumbnail class="rounded-full my-2" slot="start">
                 <fa-icon class="text-primary" [icon]="item.icon"></fa-icon>
               </ion-thumbnail>

@@ -1,1 +1,90 @@
-<p>edit-workout works!</p>
+<ng-container *ngrxLet="{ id: id$ } as vm">
+  <ion-content fullscreen>
+    <header class="flex flex-col items-center gap-4 py-8">
+      <ion-thumbnail class="w-20 h-20 rounded-full">
+        <fa-icon class="text-primary text-3xl" icon="add"></fa-icon>
+      </ion-thumbnail>
+      <h5 class="font-bold text-xl">Edit Workout</h5>
+    </header>
+    <form class="flex flex-col gap-4 ion-padding" [formGroup]="form">
+      <ion-list class="rounded-3xl" lines="none">
+        <ion-item>
+          <ion-input
+            id="label"
+            name="label"
+            aria-label="label"
+            type="text"
+            placeholder="Name"
+            formControlName="label"
+            clearOnEdit
+            class="text-xl"
+            required
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label> Intensity </ion-label>
+          <ion-input
+            id="intensity"
+            name="intensity"
+            type="number"
+            aria-label="intensity"
+            placeholder="Pts/min"
+            formControlName="intensity"
+            class="text-right font-sans"
+            slot="end"
+            clearOnEdit
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label> Energy </ion-label>
+          <ion-input
+            id="energy"
+            name="energy"
+            type="number"
+            aria-label="energy"
+            placeholder="Cal/min"
+            formControlName="energy"
+            class="text-right font-sans"
+            slot="end"
+            clearOnEdit
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label> Average Duration </ion-label>
+          <ion-input
+            id="duration"
+            name="duration"
+            type="number"
+            aria-label="duration"
+            placeholder="Avg/mins"
+            formControlName="duration"
+            class="text-right font-sans"
+            slot="end"
+            clearOnEdit
+          ></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ion-content>
+
+  <ion-footer>
+    <footer class="flex items-center ion-padding w-full">
+      <ion-button
+        class="flex-1"
+        fill="clear"
+        expand="full"
+        (click)="onCancel()"
+      >
+        <span class="text-danger">Cancel</span>
+      </ion-button>
+      <ion-button
+        class="flex-1"
+        fill="clear"
+        expand="full"
+        (click)="onSave(vm.id)"
+      >
+        <span class="text-primary">Save</span>
+      </ion-button>
+    </footer>
+  </ion-footer>
+</ng-container>
