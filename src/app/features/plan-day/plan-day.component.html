@@ -8,26 +8,144 @@
       </ion-thumbnail>
       <h5 class="font-bold">{{ vm.date | date }}</h5>
     </header>
-    <ion-list class="rounded-3xl" lines="none">
-      <ng-container *ngIf="events.controls.length">
-        <ng-container *ngFor="let control of events.controls">
-          <ion-item *ngIf="control.value.workout">
-            <ion-thumbnail class="w-14 h-14 rounded-full">
-              <fa-icon class="text-primary text-lg" icon="bell"></fa-icon>
-            </ion-thumbnail>
-            <ion-label class="px-4">
-              {{ control.value.workout.label }}
-            </ion-label>
-          </ion-item>
-        </ng-container>
-      </ng-container>
-      <ion-item button id="workout">
-        <ion-thumbnail class="w-14 h-14 rounded-full">
-          <fa-icon class="text-warning text-lg" icon="add"></fa-icon>
-        </ion-thumbnail>
-        <ion-label class="px-4">Add Workout</ion-label>
-      </ion-item>
-    </ion-list>
+    <ng-container *ngIf="slots.controls.length">
+      <main class="py-4">
+        <ion-list class="rounded-3xl overflow-hidden">
+          <ion-accordion-group>
+            <ng-container *ngFor="let control of slots.controls; let i = index">
+              <ion-accordion [formGroup]="control">
+                <ion-item slot="header">
+                  <div class="flex items-center gap-2" [id]="'a' + i">
+                    <fa-icon class="text-primary" icon="clock"></fa-icon>
+                    <div>{{ control.value.start | date : "HH:mm" }}</div>
+                  </div>
+                  <ion-popover [trigger]="'a' + i" show-backdrop="false">
+                    <ng-template>
+                      <ion-datetime
+                        presentation="time"
+                        formControlName="start"
+                      ></ion-datetime>
+                    </ng-template>
+                  </ion-popover>
+                </ion-item>
+                <ion-list slot="content" lines="none">
+                  <ng-container *ngFor="let item of control.value.workouts">
+                    <ion-item button>
+                      <ion-thumbnail class="rounded-full my-2" slot="start">
+                        <fa-icon
+                          class="text-primary"
+                          [icon]="item.icon"
+                        ></fa-icon>
+                      </ion-thumbnail>
+                      <ion-label class="px-4">
+                        <div class="mb-1">{{ item.label }}</div>
+                        <div class="flex items-center gap-4 text-xs">
+                          <div class="flex items-center gap-1">
+                            <fa-icon
+                              class="text-primary"
+                              icon="heart"
+                            ></fa-icon>
+                            <span class="text-medium">
+                              {{ item.intensity }} pts/min
+                            </span>
+                          </div>
+                          <div class="flex items-center gap-1">
+                            <fa-icon class="text-primary" icon="fire"></fa-icon>
+                            <span class="text-medium">
+                              {{ item.energy }} cal/min
+                            </span>
+                          </div>
+                        </div>
+                      </ion-label>
+                    </ion-item>
+                  </ng-container>
+                  <ion-item button [id]="'w' + i">
+                    <ion-thumbnail class="rounded-full my-2" slot="start">
+                      <fa-icon class="text-primary" icon="add"></fa-icon>
+                    </ion-thumbnail>
+                    <ion-label class="px-4">Add Workout</ion-label>
+                    <ion-icon name="add-outline" slot="end"></ion-icon>
+                  </ion-item>
+                  <ion-modal
+                    #modal
+                    [trigger]="'w' + i"
+                    [initialBreakpoint]="0.65"
+                    [breakpoints]="[0, 0.25, 0.45, 0.65]"
+                  >
+                    <ng-template>
+                      <ion-content>
+                        <ion-list class="h-full" lines="none">
+                          <ion-list-header class="bg-step50">
+                            <ion-label
+                              class="text-center text-lg font-bold py-2"
+                            >
+                              Choose Workout
+                            </ion-label>
+                          </ion-list-header>
+                          <ng-container *ngFor="let item of vm.workouts">
+                            <ion-item
+                              button
+                              (click)="onChooseWorkout(modal, control, item)"
+                            >
+                              <ion-thumbnail
+                                class="rounded-full my-2"
+                                slot="start"
+                              >
+                                <fa-icon
+                                  class="text-primary"
+                                  [icon]="item.icon"
+                                ></fa-icon>
+                              </ion-thumbnail>
+                              <ion-label class="px-4">
+                                <div class="mb-1">{{ item.label }}</div>
+                                <div class="flex items-center gap-4 text-xs">
+                                  <div class="flex items-center gap-1">
+                                    <fa-icon
+                                      class="text-primary"
+                                      icon="heart"
+                                    ></fa-icon>
+                                    <span class="text-medium">
+                                      {{ item.intensity }} pts/min
+                                    </span>
+                                  </div>
+                                  <div class="flex items-center gap-1">
+                                    <fa-icon
+                                      class="text-primary"
+                                      icon="fire"
+                                    ></fa-icon>
+                                    <span class="text-medium">
+                                      {{ item.energy }} cal/min
+                                    </span>
+                                  </div>
+                                </div>
+                              </ion-label>
+                            </ion-item>
+                          </ng-container>
+                        </ion-list>
+                      </ion-content>
+                    </ng-template>
+                  </ion-modal>
+                </ion-list>
+              </ion-accordion>
+            </ng-container>
+          </ion-accordion-group>
+        </ion-list>
+      </main>
+    </ng-container>
+    <footer class="flex items-center justify-center">
+      <ion-button
+        class="bg-step50 ion-activatable relative overflow-hidden rounded-full"
+        fill="clear"
+        shape="round"
+        (click)="onAddSlot()"
+      >
+        <ion-ripple-effect></ion-ripple-effect>
+        <span class="text-primary">Add Slot</span>
+      </ion-button>
+    </footer>
+  </ion-content>
+
+  <ion-footer class="ion-padding">
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -36,52 +154,11 @@
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button fill="clear" expand="full" (click)="onSave()">
+          <ion-button fill="clear" expand="full" (click)="onSave(vm.settings)">
             <span class="text-primary">Save</span>
           </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-content>
-
-  <ion-modal
-    #modal
-    trigger="workout"
-    [initialBreakpoint]="0.65"
-    [breakpoints]="[0, 0.25, 0.45, 0.65]"
-  >
-    <ng-template>
-      <ion-content>
-        <ion-list class="h-full" lines="none">
-          <ion-list-header class="bg-step50">
-            <ion-label class="text-center text-lg font-bold py-2">
-              Choose Workout
-            </ion-label>
-          </ion-list-header>
-          <ng-container *ngFor="let item of vm.workouts">
-            <ion-item button (click)="onAddWorkout(item, vm.date, vm.settings)">
-              <ion-thumbnail class="rounded-full my-2" slot="start">
-                <fa-icon class="text-primary" [icon]="item.icon"></fa-icon>
-              </ion-thumbnail>
-              <ion-label class="px-4">
-                <div class="mb-1">{{ item.label }}</div>
-                <div class="flex items-center gap-4 text-xs">
-                  <div class="flex items-center gap-1">
-                    <fa-icon class="text-primary" icon="heart"></fa-icon>
-                    <span class="text-medium">
-                      {{ item.intensity }} pts/min
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <fa-icon class="text-primary" icon="fire"></fa-icon>
-                    <span class="text-medium"> {{ item.energy }} cal/min </span>
-                  </div>
-                </div>
-              </ion-label>
-            </ion-item>
-          </ng-container>
-        </ion-list>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+  </ion-footer>
 </ng-container>

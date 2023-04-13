@@ -1,38 +1,24 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewChild,
-  OnDestroy,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonModal, IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import {
   FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { combineLatest, ReplaySubject, map } from 'rxjs';
+import { map, first } from 'rxjs';
 import { LetModule } from '@ngrx/component';
 import { addMinutes, parseISO, startOfDay } from 'date-fns';
 import { Store } from '@ngrx/store';
 import { selectWorkouts } from '@app/store/workout/workout.selectors';
-import {
-  Event,
-  EventDelay,
-  EventRepeat,
-  FormGroupOf,
-  NullableFormGroupOf,
-  Settings,
-  WithId,
-  Workout,
-} from '@types';
 import { selectSettings } from '@app/store/settings/settings.selectors';
+import { FormGroupOf, Settings, WithId, Workout } from '@types';
 import { EventActions } from '@app/store/event/event.actions';
 
 @Component({
@@ -65,7 +51,7 @@ export class PlanDayComponent {
     date: this.fb.nonNullable.control<string>(new Date().toISOString(), [
       Validators.required,
     ]),
-    events: this.fb.nonNullable.array<FormGroup>([]),
+    slots: this.fb.nonNullable.array<FormGroup<SlotGroup>>([]),
   });
 
   public constructor(
@@ -79,41 +65,71 @@ export class PlanDayComponent {
     return this.form.controls.date;
   }
 
-  public get events(): FormArray<FormGroup<NullableFormGroupOf<Event>>> {
-    return this.form.controls.events;
+  public get slots() {
+    return this.form.controls.slots;
   }
 
   public onCancel() {
     this.router.navigate(['app', 'events']);
   }
 
-  public onSave() {
-    if (this.events.invalid) {
-      this.events.markAllAsTouched();
-      return;
-    }
+  public onSave(settings: Settings) {
+    const payload = this.slots.value
+      .map((slot) => {
+        const value = slot as NonNullable<Slot>;
+        const end = value.start;
+        const start = value.start;
 
-    const events = this.events.getRawValue() as Event[];
-    const payload = events.filter((e) => e.workout !== null);
+        return value.workouts.map((workout) => ({
+          end,
+          start,
+          title: workout.label,
+          workout,
+          delay: settings.events.delay,
+          repeat: settings.events.repeat,
+          completed: false,
+        }));
+      })
+      .flat();
 
     this.store.dispatch(EventActions.addmany({ payload }));
   }
 
-  public onAddWorkout(
-    workout: WithId<Workout>,
-    date: Date,
-    settings: Settings
+  public onAddSlot() {
+    this.date$.pipe(first()).subscribe((date) => {
+      this.slots.push(
+        this.fb.nonNullable.group<SlotGroup>({
+          end: this.fb.nonNullable.control<string>(''),
+          start: this.fb.nonNullable.control<string>(
+            startOfDay(date).toISOString()
+          ),
+          workouts: this.fb.nonNullable.control<Array<WithId<Workout>>>([]),
+        })
+      );
+    });
+  }
+
+  public onChooseWorkout(
+    modal: IonModal,
+    control: FormGroup<SlotGroup>,
+    workout: WithId<Workout>
   ) {
-    this.events.push(
-      this.fb.group<NullableFormGroupOf<Event>>({
-        title: this.fb.control(''),
-        workout: this.fb.control(workout),
-        end: this.fb.control(addMinutes(date, 15).toISOString()),
-        start: this.fb.control(addMinutes(date, 0).toISOString()),
-        delay: this.fb.control(settings.events.delay),
-        repeat: this.fb.control(settings.events.repeat),
-        completed: this.fb.control(false),
-      })
-    );
+    modal.dismiss();
+
+    const controls = control.controls;
+    const workouts = controls.workouts;
+    controls.workouts.patchValue([...workouts.value, workout]);
   }
 }
+
+type Slot = {
+  end: string;
+  start: string;
+  workouts: Array<WithId<Workout>>;
+};
+
+type SlotGroup = {
+  end: FormControl<string>;
+  start: FormControl<string>;
+  workouts: FormControl<Array<WithId<Workout>>>;
+};
