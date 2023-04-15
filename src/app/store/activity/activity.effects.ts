@@ -42,10 +42,9 @@ export class ActivityEfffects {
         this.activity.addOne(payload).pipe(
           switchMap((x) => this.activity.getOne(x.id)),
           map((payload) => ActivityActions.onaddone({ payload })),
-          tap(async ({ payload }) => {
-            await this.toast.present({ message: 'Activity Added' });
-            await this.router.navigate(['app', 'activities', payload.id]);
-          })
+          tap(({ payload }) =>
+            this.router.navigate(['app', 'activities', payload.id])
+          )
         )
       )
     )

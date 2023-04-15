@@ -40,7 +40,7 @@ import { ReplaySubject, takeUntil } from 'rxjs';
 export class AddActivityComponent implements OnInit, OnDestroy {
   public destroy$ = new ReplaySubject<boolean>(1);
 
-  public workouts$ = this.store.select(selectWorkouts);
+  public readonly workouts$ = this.store.select(selectWorkouts);
 
   public form = this.fb.nonNullable.group({
     title: this.fb.nonNullable.control<string>('', [Validators.required]),

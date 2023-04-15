@@ -1,6 +1,6 @@
 <ng-container *ngrxLet="{ workouts: workouts$ } as vm">
   <ion-content fullscreen>
-    <header class="flex flex-col items-center gap-4 py-8">
+    <header class="flex flex-col items-center gap-4 pt-8 pb-4">
       <ion-thumbnail class="w-20 h-20 rounded-full">
         <fa-icon class="text-primary text-3xl" icon="walking"></fa-icon>
       </ion-thumbnail>
@@ -134,10 +134,7 @@
         </ion-item>
       </ion-list>
     </form>
-  </ion-content>
-
-  <ion-footer>
-    <footer class="flex items-center ion-padding w-full">
+    <footer class="flex items-center w-full">
       <ion-button
         class="flex-1"
         fill="clear"
@@ -150,5 +147,5 @@
         <span class="text-primary">Save</span>
       </ion-button>
     </footer>
-  </ion-footer>
+  </ion-content>
 </ng-container>
