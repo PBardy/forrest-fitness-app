@@ -70,10 +70,24 @@
   <ng-template let-day="day" #activityDay>
     <ion-list class="py-0 bg-transparent" lines="none">
       <ion-list-header class="px-4 bg-step100">
-        <fa-icon class="text-primary" icon="calendar"></fa-icon>
-        <span class="font-bold pl-2">
-          {{ day.key | date }}
-        </span>
+        <div class="flex items-center justify-between w-full">
+          <div class="flex items-center gap-1">
+            <fa-icon class="text-primary" icon="calendar"></fa-icon>
+            <span class="font-bold">
+              {{ day.key | date }}
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1">
+              <fa-icon class="text-primary" icon="heart"></fa-icon>
+              <span>{{ totalIntensity(day.value) }}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <fa-icon class="text-primary" icon="fire"></fa-icon>
+              <span>{{ totalEnergy(day.value) }}</span>
+            </div>
+          </div>
+        </div>
       </ion-list-header>
       <ng-container *ngFor="let activity of day.value">
         <ng-container

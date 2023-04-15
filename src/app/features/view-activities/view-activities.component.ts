@@ -4,19 +4,16 @@ import { IonRefresher, IonicModule } from '@ionic/angular';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Activity, Model } from '@types';
+import { Activity, Model, WithId } from '@types';
 import { ActivityActions } from '@app/store/activity/activity.actions';
 import {
-  selectActivities,
-  selectActivitiesByDay,
   selectActivitiesByDayAndTitle,
-  selectActivitiesByTitle,
   selectActivitiesTotal,
 } from '@app/store/activity/activity.selectors';
 import { LetModule } from '@ngrx/component';
 import { ActivityEndPipe } from '@pipes/activity-end.pipe';
 import { FormsModule } from '@angular/forms';
-import { BehaviorSubject, Subject, startWith, switchMap } from 'rxjs';
+import { Subject, startWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-view-activities',
@@ -64,5 +61,13 @@ export class ViewActivitiesComponent {
 
   public onRecord() {
     this.router.navigate(['app', 'activities', 'record']);
+  }
+
+  public totalEnergy(activities: WithId<Activity>[]) {
+    return activities.reduce((a, b) => a + (b.energy ?? 0), 0);
+  }
+
+  public totalIntensity(activities: WithId<Activity>[]) {
+    return activities.reduce((a, b) => a + (b.intensity ?? 0), 0);
   }
 }
