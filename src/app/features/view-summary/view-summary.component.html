@@ -22,16 +22,32 @@
     <main class="flex flex-col">
       <header class="flex flex-col items-center gap-3 py-8">
         <ion-thumbnail class="w-20 h-20 rounded-full">
-          <fa-icon class="text-primary text-3xl" icon="chart-simple"></fa-icon>
+          <fa-icon
+            class="text-3xl text-danger"
+            icon="chart-simple"
+            [class.text-primary]="vm.summary.percentage > 99"
+            [class.text-secondary]="vm.summary.percentage > 66"
+            [class.text-warning]="vm.summary.percentage > 33"
+          ></fa-icon>
         </ion-thumbnail>
         <h5 class="font-bold text-xl">Summary</h5>
       </header>
       <article class="flex flex-col gap-8">
         <section class="flex flex-col items-center gap-4">
           <div class="flex items-center justify-center">
-            <div class="rounded-full w-36 h-36 border-4 border-primary">
+            <div
+              class="rounded-full w-36 h-36 border-4 border-danger"
+              [class.border-primary]="vm.summary.percentage > 99"
+              [class.border-secondary]="vm.summary.percentage > 66"
+              [class.border-warning]="vm.summary.percentage > 33"
+            >
               <div class="grid place-items-center w-full h-full">
-                <span class="font-bold text-2xl text-primary">
+                <span
+                  class="font-bold text-2xl text-danger"
+                  [class.text-primary]="vm.summary.percentage > 99"
+                  [class.text-secondary]="vm.summary.percentage > 66"
+                  [class.text-warning]="vm.summary.percentage > 33"
+                >
                   {{ vm.summary.percentage | number : "1.0-0" }}%
                 </span>
               </div>
@@ -43,26 +59,37 @@
             shape="round"
             id="range"
           >
-            <span class="text-primary">{{ vm.range }}</span>
+            <span
+              class="text-danger"
+              [class.text-primary]="vm.summary.percentage > 99"
+              [class.text-secondary]="vm.summary.percentage > 66"
+              [class.text-warning]="vm.summary.percentage > 33"
+              >{{ vm.range }}</span
+            >
           </ion-button>
         </section>
         <section class="ion-padding">
           <ion-grid>
-            <ion-row>
+            <ion-row
+              class="text-danger"
+              [class.text-primary]="vm.summary.percentage > 99"
+              [class.text-secondary]="vm.summary.percentage > 66"
+              [class.text-warning]="vm.summary.percentage > 33"
+            >
               <ion-col class="flex flex-col items-center">
-                <h4 class="font-bold text-primary">
+                <h4 class="font-bold">
                   {{ vm.summary.intensity | number }}
                 </h4>
                 <span class="text-medium text-sm">mins</span>
               </ion-col>
               <ion-col class="flex flex-col items-center">
-                <h4 class="font-bold text-primary">
+                <h4 class="font-bold">
                   {{ vm.summary.distance | number }}
                 </h4>
                 <span class="text-medium text-sm">km</span>
               </ion-col>
               <ion-col class="flex flex-col items-center">
-                <h4 class="font-bold text-primary">
+                <h4 class="font-bold">
                   {{ vm.summary.energy | number }}
                 </h4>
                 <span class="text-medium text-sm">cal</span>
@@ -144,8 +171,8 @@
       </ion-thumbnail>
       <ion-label class="ion-text-wrap pl-4 py-2">
         <span class="font-bold text-dark text-sm">{{ alert.title }}</span>
-        <div class="flex items-center text-sm text-medium">
-          <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 text-sm text-medium">
+          <div class="flex items-center gap-1">
             <fa-icon
               class="text-primary text-xs"
               [icon]="alert.extra.workout.icon"
@@ -153,7 +180,7 @@
             <span>{{ alert.extra.workout.label }}</span>
           </div>
           <ng-container *ngIf="alert.schedule.every">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1">
               <fa-icon class="text-primary text-xs" icon="repeat"></fa-icon>
               <span>{{ alert.schedule.every }}</span>
             </div>
