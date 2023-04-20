@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   Output,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -13,6 +14,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { selectSexes } from '@app/store/sex/sex.selectors';
 import { LetModule } from '@ngrx/component';
+import { ToastService } from '@services/toast.service';
 
 @Component({
   selector: 'app-onboarding-step3',
@@ -34,17 +36,19 @@ export class OnboardingStep3Component {
   @Output() public onPrev = new EventEmitter<void>();
   @Output() public onNext = new EventEmitter<void>();
 
-  public sexes$ = this.store.select(selectSexes);
+  private readonly store = inject(Store);
+  private readonly toast = inject(ToastService);
 
-  public constructor(private readonly store: Store) {}
+  public sexes$ = this.store.select(selectSexes);
 
   public get sex() {
     return this.form.controls['sex'];
   }
 
-  public onSubmit() {
+  public async onSubmit() {
     if (this.sex.invalid) {
       this.sex.markAsTouched();
+      await this.toast.present({ message: 'Invalid sex' });
       return;
     }
 

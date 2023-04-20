@@ -24,6 +24,7 @@
     "paths": {
       "@types": ["./src/types"],
       "@enums": ["./src/enums"],
+      "@util/*": ["./src/enums/*"],
       "@pipes/*": ["./src/app/pipes/*"],
       "@services/*": ["./src/app/services/*"],
       "@animations/*": ["./src/app/animations/*"],

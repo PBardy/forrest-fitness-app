@@ -20,6 +20,8 @@ import { Store } from '@ngrx/store';
 import { ProfileActions } from '@app/store/profile/profile.actions';
 import { Profile } from '@types';
 import { OnboardingStep6Component } from './onboarding-step6/onboarding-step6.component';
+import { addYears } from 'date-fns';
+import { validateDOB } from '@app/util/validators';
 
 @Component({
   selector: 'app-onboarding',
@@ -57,9 +59,10 @@ export class OnboardingComponent {
       Validators.max(400),
     ]),
     sex: this.fb.nonNullable.control<Sex | null>(null, [Validators.required]),
-    dob: this.fb.nonNullable.control<string | null>(null, [
-      Validators.required,
-    ]),
+    dob: this.fb.nonNullable.control<string | null>(
+      addYears(new Date(), -18).toISOString(),
+      [Validators.required, validateDOB]
+    ),
     activityLevel: this.fb.nonNullable.control<ActivityLevel | null>(null, [
       Validators.required,
     ]),
