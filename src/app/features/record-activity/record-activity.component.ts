@@ -14,6 +14,7 @@ import {
   BehaviorSubject,
   NEVER,
   ReplaySubject,
+  combineLatest,
   dematerialize,
   filter,
   interval,
@@ -24,7 +25,7 @@ import {
   tap,
 } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Activity, WithId, Workout } from '@types';
+import { Activity, Profile, WithId, Workout } from '@types';
 import { LetModule } from '@ngrx/component';
 import { StopwatchPipe } from '@pipes/stopwatch.pipe';
 import { Store } from '@ngrx/store';
@@ -33,6 +34,8 @@ import {
   selectWorkoutById,
   selectWorkouts,
 } from '@app/store/workout/workout.selectors';
+import { selectProfile } from '@app/store/profile/profile.selectors';
+import { ToFixedPipe } from '@pipes/to-fixed.pipe';
 
 @Component({
   selector: 'app-record-activity',
@@ -44,6 +47,7 @@ import {
     LetModule,
     FontAwesomeModule,
     StopwatchPipe,
+    ToFixedPipe,
   ],
   templateUrl: './record-activity.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -70,8 +74,10 @@ export class RecordActivityComponent
   public id$ = this.route.paramMap.pipe(map((x) => x.get('id') as string));
   public destroy$ = new ReplaySubject<boolean>(1);
   public workouts$ = this.store.select(selectWorkouts);
+  public profile$ = this.store.select(selectProfile);
 
   // State
+  public weight$ = new BehaviorSubject<number>(0);
 
   public source$ = interval(1000);
   public started$ = new BehaviorSubject<boolean>(false);
@@ -97,8 +103,18 @@ export class RecordActivityComponent
       // Update workout values
       const workout = this.workout.value;
       if (workout) {
-        this.energy$.next(this.energy$.getValue() + workout.energy);
-        this.intensity$.next(this.intensity$.getValue() + workout.intensity);
+        const weight = this.weight$.getValue();
+        const energy = this.energy$.getValue();
+        const intensity = this.intensity$.getValue();
+
+        // Determine calories per second
+        const calps = (0.0175 * workout.energy * weight) / 60;
+
+        // Determine active minutes (health points)
+        const hps = workout.intensity / 60;
+
+        this.energy$.next(energy + calps);
+        this.intensity$.next(intensity + hps);
       }
     }),
     switchMap((_) => this.count$)
@@ -123,7 +139,15 @@ export class RecordActivityComponent
     return this.form.controls.workout;
   }
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.profile$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(Boolean),
+        tap((x) => this.onLoadProfile(x))
+      )
+      .subscribe();
+  }
 
   public ngAfterViewInit(): void {
     this.id$
@@ -177,6 +201,10 @@ export class RecordActivityComponent
     const payload = this.form.getRawValue() as NonNullable<Activity>;
 
     this.store.dispatch(ActivityActions.addone({ payload }));
+  }
+
+  public onLoadProfile(profile: Profile) {
+    this.weight$.next(profile.weight);
   }
 
   public async onChooseWorkout(workout: WithId<Workout>) {

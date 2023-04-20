@@ -26,8 +26,12 @@
             class="text-3xl text-danger"
             icon="chart-simple"
             [class.text-primary]="vm.summary.percentage > 99"
-            [class.text-secondary]="vm.summary.percentage > 66"
-            [class.text-warning]="vm.summary.percentage > 33"
+            [class.text-secondary]="
+              vm.summary.percentage > 66 && vm.summary.percentage < 99
+            "
+            [class.text-warning]="
+              vm.summary.percentage > 33 && vm.summary.percentage < 66
+            "
           ></fa-icon>
         </ion-thumbnail>
         <h5 class="font-bold text-xl">Summary</h5>
@@ -38,15 +42,23 @@
             <div
               class="rounded-full w-36 h-36 border-4 border-danger"
               [class.border-primary]="vm.summary.percentage > 99"
-              [class.border-secondary]="vm.summary.percentage > 66"
-              [class.border-warning]="vm.summary.percentage > 33"
+              [class.border-secondary]="
+                vm.summary.percentage > 66 && vm.summary.percentage < 99
+              "
+              [class.border-warning]="
+                vm.summary.percentage > 33 && vm.summary.percentage < 66
+              "
             >
               <div class="grid place-items-center w-full h-full">
                 <span
                   class="font-bold text-2xl text-danger"
                   [class.text-primary]="vm.summary.percentage > 99"
-                  [class.text-secondary]="vm.summary.percentage > 66"
-                  [class.text-warning]="vm.summary.percentage > 33"
+                  [class.text-secondary]="
+                    vm.summary.percentage > 66 && vm.summary.percentage < 99
+                  "
+                  [class.text-warning]="
+                    vm.summary.percentage > 33 && vm.summary.percentage < 66
+                  "
                 >
                   {{ vm.summary.percentage | number : "1.0-0" }}%
                 </span>
@@ -62,8 +74,12 @@
             <span
               class="text-danger"
               [class.text-primary]="vm.summary.percentage > 99"
-              [class.text-secondary]="vm.summary.percentage > 66"
-              [class.text-warning]="vm.summary.percentage > 33"
+              [class.text-secondary]="
+                vm.summary.percentage > 66 && vm.summary.percentage < 99
+              "
+              [class.text-warning]="
+                vm.summary.percentage > 33 && vm.summary.percentage < 66
+              "
               >{{ vm.range }}</span
             >
           </ion-button>
@@ -73,24 +89,28 @@
             <ion-row
               class="text-danger"
               [class.text-primary]="vm.summary.percentage > 99"
-              [class.text-secondary]="vm.summary.percentage > 66"
-              [class.text-warning]="vm.summary.percentage > 33"
+              [class.text-secondary]="
+                vm.summary.percentage > 66 && vm.summary.percentage < 99
+              "
+              [class.text-warning]="
+                vm.summary.percentage > 33 && vm.summary.percentage < 66
+              "
             >
               <ion-col class="flex flex-col items-center">
                 <h4 class="font-bold">
-                  {{ vm.summary.intensity | number }}
+                  {{ vm.summary.intensity | number : "1.2-2" }}
                 </h4>
-                <span class="text-medium text-sm">mins</span>
+                <span class="text-medium text-sm">pts</span>
               </ion-col>
               <ion-col class="flex flex-col items-center">
                 <h4 class="font-bold">
-                  {{ vm.summary.distance | number }}
+                  {{ vm.summary.distance | number : "1.2-2" }}
                 </h4>
                 <span class="text-medium text-sm">km</span>
               </ion-col>
               <ion-col class="flex flex-col items-center">
                 <h4 class="font-bold">
-                  {{ vm.summary.energy | number }}
+                  {{ vm.summary.energy | number : "1.2-2" }}
                 </h4>
                 <span class="text-medium text-sm">cal</span>
               </ion-col>

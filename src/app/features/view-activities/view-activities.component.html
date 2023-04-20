@@ -80,11 +80,11 @@
           <div class="flex items-center gap-2">
             <div class="flex items-center gap-1">
               <fa-icon class="text-primary" icon="heart"></fa-icon>
-              <span>{{ totalIntensity(day.value) }}</span>
+              <span>{{ totalIntensity(day.value) | number : "1.2-2" }}</span>
             </div>
             <div class="flex items-center gap-1">
               <fa-icon class="text-primary" icon="fire"></fa-icon>
-              <span>{{ totalEnergy(day.value) }}</span>
+              <span>{{ totalEnergy(day.value) | number : "1.2-2" }}</span>
             </div>
           </div>
         </div>
@@ -113,14 +113,18 @@
             <ng-container *ngIf="activity.intensity">
               <div class="flex items-center gap-1 text-xs">
                 <fa-icon class="text-primary" icon="heart"></fa-icon>
-                <span class="text-medium">{{ activity.intensity }} pts</span>
+                <span class="text-medium">
+                  {{ activity.intensity | number : "1.2-2" }} pts
+                </span>
               </div>
             </ng-container>
             <div class="text-medium">&middot;</div>
             <ng-container *ngIf="activity.energy">
               <div class="flex items-center gap-1 text-xs">
                 <fa-icon class="text-primary" icon="fire"></fa-icon>
-                <span class="text-medium">{{ activity.energy }} cal</span>
+                <span class="text-medium">
+                  {{ activity.energy | number : "1.2-2" }} cal
+                </span>
               </div>
             </ng-container>
           </div>

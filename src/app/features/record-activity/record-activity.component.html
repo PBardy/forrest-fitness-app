@@ -70,7 +70,7 @@
                   [class.text-warning]="!vm.started"
                   [class.text-secondary]="vm.paused && !vm.stopped"
                 >
-                  {{ vm.intensity }}
+                  {{ vm.intensity | toFixed : 0 : "up" }}
                 </span>
                 <span class="text-medium text-xs">pts</span>
               </ion-col>
@@ -80,7 +80,7 @@
                   [class.text-warning]="!vm.started"
                   [class.text-secondary]="vm.paused && !vm.stopped"
                 >
-                  {{ vm.distance }}
+                  {{ vm.distance | toFixed : 0 : "up" }}
                 </span>
                 <span class="text-medium text-xs">km</span>
               </ion-col>
@@ -90,7 +90,7 @@
                   [class.text-warning]="!vm.started"
                   [class.text-secondary]="vm.paused && !vm.stopped"
                 >
-                  {{ vm.energy }}
+                  {{ vm.energy | toFixed : 0 : "up" }}
                 </span>
                 <span class="text-medium text-xs">cal</span>
               </ion-col>
@@ -127,12 +127,14 @@
                   <div class="flex items-center gap-1">
                     <fa-icon class="text-primary" icon="heart"></fa-icon>
                     <span class="text-medium">
-                      {{ item.intensity }} pts/min
+                      {{ item.intensity | number : "1.2-2" }} pts/min
                     </span>
                   </div>
                   <div class="flex items-center gap-1">
                     <fa-icon class="text-primary" icon="fire"></fa-icon>
-                    <span class="text-medium"> {{ item.energy }} cal/min </span>
+                    <span class="text-medium">
+                      {{ item.energy | number : "1.2-2" }} MET
+                    </span>
                   </div>
                 </div>
               </ion-label>

@@ -46,13 +46,13 @@
                               icon="heart"
                             ></fa-icon>
                             <span class="text-medium">
-                              {{ item.intensity }} pts/min
+                              {{ item.intensity | number : "1.2-2" }} pts/min
                             </span>
                           </div>
                           <div class="flex items-center gap-1">
                             <fa-icon class="text-primary" icon="fire"></fa-icon>
                             <span class="text-medium">
-                              {{ item.energy }} cal/min
+                              {{ item.energy | number : "1.2-2" }} MET
                             </span>
                           </div>
                         </div>
@@ -114,7 +114,7 @@
                                       icon="fire"
                                     ></fa-icon>
                                     <span class="text-medium">
-                                      {{ item.energy }} cal/min
+                                      {{ item.energy }} MET
                                     </span>
                                   </div>
                                 </div>
