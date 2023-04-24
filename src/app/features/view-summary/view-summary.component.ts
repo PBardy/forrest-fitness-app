@@ -48,26 +48,7 @@ export class ViewSummaryComponent implements OnDestroy {
   );
 
   public destroy$ = new ReplaySubject<boolean>(1);
-  public alerts$: Observable<PendingLocalNotificationSchema[]> = of([
-    {
-      id: 1,
-      title: 'Calisthenics',
-      body: '',
-      schedule: {
-        every: 'week',
-      },
-      extra: {
-        workout: {
-          id: '2',
-          label: 'Calisthenics',
-          icon: 'c',
-          energy: 1,
-          intensity: 1,
-          duration: 15,
-        },
-      },
-    },
-  ]); //this.notifications.pending$;
+  public alerts$ = this.notifications.pending$;
 
   public constructor(
     private readonly store: Store,
