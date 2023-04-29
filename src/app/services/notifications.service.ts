@@ -12,7 +12,7 @@ import { BehaviorSubject, from, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class NotificationsService {
-  public ln = registerPlugin<LocalNotificationsPlugin>('LocalNotifications');
+  public ln: LocalNotificationsPlugin;
   public pending$ = new BehaviorSubject<PendingLocalNotificationSchema[]>([]);
 
   public constructor() {
@@ -21,6 +21,7 @@ export class NotificationsService {
 
   public async setPending() {
     try {
+      this.ln = registerPlugin<LocalNotificationsPlugin>('LocalNotifications');
       const pending = await this.ln.getPending();
       this.pending$.next(pending.notifications);
     } catch {
